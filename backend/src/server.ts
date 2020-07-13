@@ -33,11 +33,11 @@ export class ParadiceServer {
     });
 
     this._app.get("/", (req: any, res: any) => {
-      res.sendFile(path.resolve("../client/public/index.html"));
+      res.sendFile(path.resolve("./client/public/index.html"));
     });
 
     this._app.get("/*", (req: any, res: any) => {
-        res.sendFile(path.resolve("../client/public" + req.url));
+        res.sendFile(path.resolve("./client/public" + req.url));
       });
 
     this.io.on(Event.CONNECT, (socket: any) => {
