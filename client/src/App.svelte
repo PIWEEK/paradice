@@ -29,6 +29,8 @@
   let rolls = [];
   let mylatestroll = 0;
   let diceinput;
+  let modinput;
+  $: diceandmodinput = {dice: diceinput, mod: modinput};
 
   function roll() {
   	socket.emit("roll");
@@ -275,8 +277,8 @@
 
   <Player playername={username} latestroll={mylatestroll}/>
   <Table/>
-  <DiceInput bind:dice={diceinput}/>
-  <h3>Objeto diceinput en App para poder pasar a roll en algún momento</h3>
-  <p>{JSON.stringify(diceinput, null, 2)}</p>
+  <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+  <h3>Objeto diceandmodinput en App para poder pasar a roll en algún momento</h3>
+  <p>{JSON.stringify(diceandmodinput, null, 2)}</p>
 
 </div>
