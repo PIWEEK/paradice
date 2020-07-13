@@ -28,6 +28,7 @@
   let userList = [];
   let rolls = [];
   let mylatestroll = 0;
+  let diceinput;
 
   function roll() {
   	socket.emit("roll");
@@ -271,8 +272,11 @@
     {/each}
   </ul>
 
+
   <Player playername={username} latestroll={mylatestroll}/>
   <Table/>
-  <DiceInput/>
+  <DiceInput bind:dice={diceinput}/>
+  <h3>Objeto diceinput en App para poder pasar a roll en algún momento</h3>
+  <p>{JSON.stringify(diceinput, null, 2)}</p>
 
 </div>
