@@ -276,8 +276,8 @@ function render() {
     {/each}
   </ul>
 
-</div>
+  <Player playername={username} latestroll={mylatestroll}/>
+  <Table/>
+  <DiceInput/>
 
-<Player playername={username} latestroll={mylatestroll}/>
-<Table/>
-<DiceInput/>
+</div>
