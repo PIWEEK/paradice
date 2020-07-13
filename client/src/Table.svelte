@@ -21,14 +21,26 @@
 img {
     padding: 0.5em;
 }
+
+.selectedtexture {
+  padding: 0.5em;
+  border-radius: 5%;  
+}
+
+.texturesample {
+  padding: 0.5em;
+  border-radius: 10%;
+  width: 100px;
+}
+
 </style>
 
 <h1>Choose your game table texture</h1>
 
 {#each tabletextures as { id, path }, i}
-<img on:click|preventDefault={() => setImage(i)} width="100px" src="{path}" alt="{id}"/>
+<img on:click|preventDefault={() => setImage(i)} class="texturesample"  src="{path}" alt="{id}"/>
 {/each}
 <br/>
-<img src="{selectedImage}" alt="Table texture #1"/>
+<img src="{selectedImage}" class="selectedtexture" alt="Table texture #1"/>
 <p>{text}</p>
 
