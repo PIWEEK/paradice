@@ -2,6 +2,7 @@
   import io from 'socket.io-client';
   import Table from './Table.svelte';
   import Player from './Player.svelte';
+  import DiceInput from './DiceInput.svelte';
 
 
   const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
@@ -63,3 +64,4 @@
 
 <Player playername={username} latestroll={mylatestroll}/>
 <Table/>
+<DiceInput/>
