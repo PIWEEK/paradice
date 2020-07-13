@@ -16,6 +16,7 @@
 </style>
 
 <script>
+
   import io from 'socket.io-client';
   import Table from './Table.svelte';
   import Player from './Player.svelte';
@@ -25,6 +26,7 @@
 
   const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
   const username = prompt("Please enter your user name", "");
+  //const username = "p";
 
   const socket = io(apiURL + "/?username=" + username);
   let userDict = {};
@@ -79,6 +81,8 @@
     stats,
     world,
     dice = [];
+
+  let texturepath;
 
   // FUNCTIONS
   onMount(() => {
@@ -146,12 +150,15 @@
                     side: THREE.DoubleSide
     });
 
-	var floorGeometry = new THREE.PlaneGeometry(120, 120, 60, 60);
+  var floorGeometry = new THREE.PlaneGeometry(120, 120, 60, 60);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+    floor.name = "Floor";
     floor.receiveShadow = true;
     floor.rotation.x = Math.PI / 2;
     scene.add(floor);
-    // SKYBOX/FOG
+
+	
+  // SKYBOX/FOG
     var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
     var skyBoxMaterial = new THREE.MeshPhongMaterial({
       color: 0x9999ff,
@@ -177,7 +184,8 @@
       mass: 0,
       shape: new CANNON.Plane(),
       material: DiceManager.floorBodyMaterial
-	});
+  });
+  
     floorBody.quaternion.setFromAxisAngle(
       new CANNON.Vec3(1, 0, 0),
       -Math.PI / 2
@@ -262,7 +270,19 @@
     renderer.render(scene, camera);
   }
 
-
+	function changeTexture() {
+    
+    var repeats = 10;
+    var index = 0;
+	  var loader = new THREE.TextureLoader();
+	  var floorTexture = loader.load(texturepath);
+	  floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+	  floorTexture.repeat.set(repeats, repeats);
+		//change of floor texture on the fly
+    let f = scene.getObjectByName("Floor");
+    f.material.map = floorTexture;
+    f.material.needsUpdate = true;
+	}
 
 </script>
 
@@ -294,10 +314,14 @@
 
 
   <Player playername={username} latestroll={mylatestroll}/>
-  <Table bind:matchingcolor={floorcolor}/>
+  <Table bind:selectedImage={texturepath}/>
+  <br/>
+    <button on:click={changeTexture}>
+  Click to change texture
+  </button>
 
   <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
   <h3 class="test">Objeto diceandmodinput en App para poder pasar a roll en algún momento</h3>
   <p class="test">{JSON.stringify(diceandmodinput, null, 2)}</p>
-  
+
 </div>
