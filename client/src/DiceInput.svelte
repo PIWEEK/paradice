@@ -34,12 +34,20 @@ let latestroll = 0;
 
 </script>
 
+<style>
+
+.test {
+  color: white;
+}
+</style>
+
+
 {#each dice as die}
-<label>
+<label class="test">
 	{die.label} <input type=number bind:value={die.qty} min=0 max=20>
 </label>
 {/each}
-<label>
+<label class="test">
 	Mod <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}> {modValidator(modifier)}
 
 </label>

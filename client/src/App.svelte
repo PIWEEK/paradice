@@ -10,6 +10,9 @@
     left: 0px;
     top: 0px;
   }
+  .test {
+  color: white;
+}
 </style>
 
 <script>
@@ -31,6 +34,8 @@
   let diceinput;
   let modinput;
   $: diceandmodinput = {dice: diceinput, mod: modinput};
+  let floorcolor;
+  floorcolor = "#00aa00";
 
   function roll() {
   	socket.emit("roll");
@@ -66,7 +71,7 @@
   import Stats from "stats.js";
 
   // standard global variables
-  var container,
+  let container,
     scene,
     camera,
     renderer,
@@ -78,7 +83,8 @@
   // FUNCTIONS
   onMount(() => {
     // SCENE
-    scene = new THREE.Scene();
+	scene = new THREE.Scene();
+	scene.name = "ESCENA";
     // CAMERA
     var SCREEN_WIDTH = window.innerWidth,
       SCREEN_HEIGHT = window.innerHeight;
@@ -127,11 +133,20 @@
     scene.add(light);
 
     // FLOOR
-    var floorMaterial = new THREE.MeshPhongMaterial({
-      color: "#00aa00",
-      side: THREE.DoubleSide
+
+	var texturepath = 'table/img/table00.jpg';
+    var repeats = 10;
+    var index = 0;
+	var loader = new THREE.TextureLoader();
+	var floorTexture = loader.load(texturepath);
+	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+	floorTexture.repeat.set(repeats, repeats);
+	var floorMaterial = new THREE.MeshBasicMaterial({
+                    map: floorTexture,
+                    side: THREE.DoubleSide
     });
-    var floorGeometry = new THREE.PlaneGeometry(30, 30, 10, 10);
+
+	var floorGeometry = new THREE.PlaneGeometry(120, 120, 60, 60);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.receiveShadow = true;
     floor.rotation.x = Math.PI / 2;
@@ -162,7 +177,7 @@
       mass: 0,
       shape: new CANNON.Plane(),
       material: DiceManager.floorBodyMaterial
-    });
+	});
     floorBody.quaternion.setFromAxisAngle(
       new CANNON.Vec3(1, 0, 0),
       -Math.PI / 2
@@ -189,6 +204,7 @@
     // randomDiceThrow();
     requestAnimationFrame(animate);
   });
+
 
   function randomDiceThrow(result) {
     var diceValues = [];
@@ -246,6 +262,8 @@
     renderer.render(scene, camera);
   }
 
+
+
 </script>
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
@@ -276,9 +294,10 @@
 
 
   <Player playername={username} latestroll={mylatestroll}/>
-  <Table/>
-  <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
-  <h3>Objeto diceandmodinput en App para poder pasar a roll en algún momento</h3>
-  <p>{JSON.stringify(diceandmodinput, null, 2)}</p>
+  <Table bind:matchingcolor={floorcolor}/>
 
+  <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+  <h3 class="test">Objeto diceandmodinput en App para poder pasar a roll en algún momento</h3>
+  <p class="test">{JSON.stringify(diceandmodinput, null, 2)}</p>
+  
 </div>

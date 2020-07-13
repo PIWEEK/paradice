@@ -1,18 +1,21 @@
 <script>
 
     let tabletextures = [
-		{ id: 0, name: "Tavern #1", path: 'table/img/table00.jpg'},
-		{ id: 1, name: "Tavern #2", path: 'table/img/table01.jpg'},
-		{ id: 2, name: "Tavern #3", path: 'table/img/table02.jpg'},
+		{ id: 0, name: "Tavern #1", path: 'table/img/table00.jpg', color:"#761CEC"},
+		{ id: 1, name: "Tavern #2", path: 'table/img/table01.jpg', color:"#FC8EAC"},
+		{ id: 2, name: "Tavern #3", path: 'table/img/table02.jpg', color:"#A60570"},
     ];
     
+
     let textureindex = 2; 
     let text = "Game table selected by default";
-    export let selectedImage = tabletextures[textureindex]['path'];
+    let selectedImage = tabletextures[textureindex]['path'];
+    export let matchingcolor;
 
     function setImage(i) {
         selectedImage = tabletextures[i]['path'];
         text = "You chose "+tabletextures[i]['name'];
+        matchingcolor = tabletextures[i]['color'];
     }
 
 </script>
@@ -20,6 +23,8 @@
 <style>
 img {
     padding: 0.5em;
+    border: 0.1em solid aquamarine;
+
 }
 
 .selectedtexture {
