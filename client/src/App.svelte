@@ -1,6 +1,8 @@
 <script>
   import io from 'socket.io-client';
   import Table from './Table.svelte';
+  import Player from './Player.svelte';
+
 
   const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
   const username = prompt("Please enter your user name", "");
@@ -9,6 +11,7 @@
   let userDict = {};
   let userList = [];
   let rolls = [];
+  let mylatestroll = 0;
 
   function roll() {
   	socket.emit("roll");
@@ -16,7 +19,10 @@
 
   // listen for roll event
   socket.on("roll", (userId, result) => {
-  	console.log("received roll", userId, result);
+	  console.log("received roll", userId, result);
+	  if (userDict[userId]==username){
+		  mylatestroll = result;
+	  }
 	rolls = [{
 		user: userDict[userId],
 		result: result
@@ -55,4 +61,5 @@
 	{/each}
 </ul>
 
+<Player playername={username} latestroll={mylatestroll}/>
 <Table/>

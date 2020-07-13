@@ -7,8 +7,8 @@
     ];
     
     let textureindex = 2; 
-    let selectedImage = tabletextures[textureindex]['path'];
     let text = "Game table selected by default";
+    export let selectedImage = tabletextures[textureindex]['path'];
 
     function setImage(i) {
         selectedImage = tabletextures[i]['path'];
