@@ -1,5 +1,6 @@
 <script>
   import io from 'socket.io-client';
+  import Table from './Table.svelte';
 
   const username = prompt("Please enter your user name", "");
   const socket = io("https://guarded-stream-90676.herokuapp.com/?username=" + username);
@@ -51,3 +52,5 @@
 		</li>
 	{/each}
 </ul>
+
+<Table/>
