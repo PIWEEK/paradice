@@ -2,7 +2,7 @@
   import io from 'socket.io-client';
 
   const username = prompt("Please enter your user name", "");
-  const socket = io("/?username=" + username);
+  const socket = io("https://guarded-stream-90676.herokuapp.com/?username=" + username);
   let userDict = {};
   let userList = [];
   let rolls = [];
