@@ -2,8 +2,10 @@
   import io from 'socket.io-client';
   import Table from './Table.svelte';
 
+  const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
   const username = prompt("Please enter your user name", "");
-  const socket = io("https://guarded-stream-90676.herokuapp.com/?username=" + username);
+
+  const socket = io(apiURL + "/?username=" + username);
   let userDict = {};
   let userList = [];
   let rolls = [];
