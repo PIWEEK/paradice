@@ -48,7 +48,7 @@ export class ParadiceServer {
 
       socket.on(Event.ROLL, () => {
         console.log('ROLL: %s', this.connectedUsers[socket.id]);
-        this.io.emit(Event.ROLL, socket.id, Math.floor(Math.random() * 100));
+        this.io.emit(Event.ROLL, socket.id, Math.floor(Math.random() * 20) + 1);
       });
 
       socket.on(Event.DISCONNECT, () => {
