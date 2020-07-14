@@ -145,13 +145,9 @@
 
   export function rollDice(diceInput) {
     var diceValues = [];
-
-    console.log("rollDice", diceInput)
-
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die;
-        console.log("----", diceIt.label)
         if (diceIt.label == "D4") {
           die = new DiceD4({ size: 1.5, backColor: "#ff0000" });
         } else if (diceIt.label == "D6") {
