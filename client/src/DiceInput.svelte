@@ -11,23 +11,20 @@
     ]
     export let modifier = '';
 
-
     function randomInt(dieid, qty){
-        let range = dice[dieid]['range'];
-        let res = 0;
-        if (qty > 0){
+      let range = dice[dieid]['range'];
+      let res = 0;
+      if (qty > 0){
         for (let index = 0; index < qty; index++) {
-            let r = Math.random() * 100;
-            let mod = range/100;
-            let d = Math.round(r*mod);
-            res = res + d;
-           
+        let r = Math.random() * 100;
+        let mod = range/100;
+        let d = Math.round(r*mod);
+        res = res + d;
         }
-        }
-        modifier = res;
-        console.log("modifier",modifier);
-        return res;
-
+      }
+      modifier = res;
+      console.log("modifier",modifier);
+      return res;
     }
 
 let latestroll = 0;
