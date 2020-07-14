@@ -50,7 +50,6 @@
   });
 
   function roll() {
-    //socket.to(params.gameId).emit("roll", diceandmodinput);
     socket.emit("roll", diceandmodinput);
   }
 

@@ -148,20 +148,46 @@
     requestAnimationFrame(animate);
   }
 
+  class CustomDiceD6 extends DiceD6 {
+    constructor(options) {
+        super(options);
+        this.customTextTextureFunction = (text, color, backColor) => {
+          let canvas = document.createElement("canvas");
+          let context = canvas.getContext("2d");
+          let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
+          canvas.width = canvas.height = ts;
+          context.font = ts / (1 + 2 * this.textMargin) + "pt Arial";
+          var image = new Image();
+          image.src = 'table/img/table01.jpg';
+          const pFill = context.createPattern(image, "repeat");
+          context.fillStyle = pFill;
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+          context.fillStyle = color;
+          context.fillText(text, canvas.width / 2, canvas.height / 2);
+          let texture = new THREE.Texture(canvas);
+          texture.needsUpdate = true;
+          return texture;
+        };
+        this.create();
+    }
+  }
+
   export function rollDice(diceInput) {
     dice.forEach((d) => {
-      console.log("Removing", d)
       scene.remove(d.getObject());
     });
 
     var diceValues = [];
+    var diceResults = [];
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
         if (diceIt.label == "D4") {
           die = new DiceD4({ size: 1.5, backColor: "#ff0000" });
         } else if (diceIt.label == "D6") {
-          die = new DiceD6({ size: 1.5, backColor: "#ff0000" });
+          die = new CustomDiceD6({ size: 2.5, fontColor: "#FFFFFF", backColor: "#ff0000" });
         } else if (diceIt.label == "D8") {
           die = new DiceD8({ size: 1.5, backColor: "#ff0000" });
         } else if (diceIt.label == "D10") {
@@ -171,13 +197,14 @@
         } else if (diceIt.label == "D20") {
           die = new DiceD20({ size: 1.5, backColor: "#ff0000" });
         }
-          die.castShadow = true;
-          die.receiveShadow = true;
+
+        die.castShadow = true;
+        die.receiveShadow = true;
 
         if (die) {
           scene.add(die.getObject());
           dice.push(die);
-          diceValues.push({ dice: die, value: diceIt.result[i]});
+          diceResults.push(diceIt.result[i]);
         }
       });
     });
@@ -204,10 +231,8 @@
           20 * Math.random() - 10
         );
 
-      //diceValues.push({ dice: dice[i], value: i + 1 });
-      // diceValues.push({ dice: dice[i], value: result});
+      diceValues.push({ dice: dice[i], value: diceResults[i]});
     }
-
     DiceManager.prepareValues(diceValues);
   }
 
