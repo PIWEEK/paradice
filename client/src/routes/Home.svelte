@@ -37,6 +37,6 @@
     PARADICE
   </h1>
 
-  <a class="btn-primary" href="/game/paradice-testing-game" use:link>Start Paradice</a>
+  <a class="btn-primary" href="/create" use:link>Start Paradice</a>
 
 </div>

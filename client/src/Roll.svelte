@@ -7,6 +7,7 @@
   import Stats from "stats.js";
 	import { onMount } from 'svelte';
 
+  
   // standard global variables
   let container,
     scene,
@@ -17,7 +18,11 @@
     world,
     dice = [];
 
+    let dicetexture = '/table/img/table00.jpg';
+    dicetexture = localStorage.getItem("dicetexture");
   export function initRollDice() {
+
+  
     // SCENE
     scene = new THREE.Scene();
     scene.name = "ESCENA";
@@ -156,18 +161,23 @@
     // randomDiceThrow();
     requestAnimationFrame(animate);
   }
-
+ 
   class CustomDiceD6 extends DiceD6 {
+
     constructor(options) {
         super(options);
         this.customTextTextureFunction = (text, color, backColor) => {
+          
           let canvas = document.createElement("canvas");
           let context = canvas.getContext("2d");
           let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
           canvas.width = canvas.height = ts;
           context.font = ts / (1 + 2 * this.textMargin) + "pt Arial";
+          console.log("HA!");
+          console.log(localStorage.getItem("dicetexture"));
+
           var image = new Image();
-          image.src = 'table/img/table01.jpg';
+          image.src = dicetexture;
           const pFill = context.createPattern(image, "repeat");
           context.fillStyle = pFill;
           context.fillRect(0, 0, canvas.width, canvas.height);

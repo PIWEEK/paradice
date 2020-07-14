@@ -33,6 +33,10 @@
     localStorage.setItem("username", username);
   }
 
+  let dicetexture = localStorage.getItem("dicetexture");
+  let tabletexture = localStorage.getItem("tabletexture");
+  
+
   const socket = io(`${apiURL}/?username=${username}&game=${  params.gameId}`);
 
   let userDict = {};
@@ -47,10 +51,13 @@
 
   onMount(()=> {
     initRollDice();
+    changeTexture(tabletexture);
+
   });
 
   function roll() {
     socket.emit("roll", diceandmodinput);
+    new Audio('sounds/dice.mp3').play()
   }
 
   function handleTextureUpdated(event) {
@@ -74,6 +81,7 @@
     userDict = data;
     userList = Object.values(data);
   });
+
 
 </script>
 
@@ -101,9 +109,6 @@
     {/each}
   </ul>
 
-  <Table on:textureSelected={handleTextureUpdated}/>
   <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
-  <h3 class="test">Objeto diceandmodinput en App para poder pasar a roll en algún momento</h3>
-  <p class="test">{JSON.stringify(diceandmodinput, null, 2)}</p>
-
+  
 </div>
