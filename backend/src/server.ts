@@ -13,7 +13,11 @@ export class ParadiceServer {
   private server: Server;
   private io: SocketIO.Server;
   private port: string | number;
-  private connectedUsers: { [id: string] : string; } = {};
+  private connectedUsers: {
+    [id: string]: {
+      [id: string] : string; 
+    }
+  } = {};
 
   constructor () {
     this._app = express();
@@ -45,12 +49,21 @@ export class ParadiceServer {
     this.io.on(Event.CONNECT, (socket: any) => {
       console.log('Connected client %s on port %s.', socket.id, this.port);
       const username = socket.handshake.query.username;
-      this.connectedUsers[socket.id] = username;
-      this.io.emit(Event.USERS_LIST, this.connectedUsers);
+      const gameId = socket.handshake.query.game;
+
+      if(!this.connectedUsers[gameId]) {
+        this.connectedUsers[gameId] = {};
+      }
+      this.connectedUsers[gameId][socket.id] = username;
+
+      console.log(username, gameId);
+      socket.join(gameId);
+
+      this.io.in(gameId).emit(Event.USERS_LIST, this.connectedUsers[gameId]);
 
       socket.on(Event.ROLL, (diceInput: DiceInput) => {
         console.log(diceInput)
-        console.log('ROLL: %s', this.connectedUsers[socket.id]);
+        console.log('ROLL: %s', this.connectedUsers[gameId][socket.id]);
 
         const diceOutput: DiceOutput = {
           dice: [],
@@ -71,13 +84,13 @@ export class ParadiceServer {
         diceOutput.mod = diceInput.mod;
         console.log(diceOutput);
 
-        this.io.emit(Event.ROLL, socket.id, diceOutput);
+        this.io.in(gameId).emit(Event.ROLL, socket.id, diceOutput);
       });
 
       socket.on(Event.DISCONNECT, () => {
         console.log('Client disconnected');
-        delete(this.connectedUsers[socket.id]);
-        this.io.emit(Event.USERS_LIST, this.connectedUsers);
+        delete(this.connectedUsers[gameId][socket.id]);
+        this.io.in(gameId).emit(Event.USERS_LIST, this.connectedUsers[gameId]);
       });
     });
   }

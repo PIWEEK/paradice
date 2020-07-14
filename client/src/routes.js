@@ -8,7 +8,7 @@ const routes = {
     '/': Home,
     '/how-it-works': HowItWorks,
     '/player': Player,
-    '/game/:id': Game,
+    '/game/:gameId': Game,
     '*': NotFound
 }
 

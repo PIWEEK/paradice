@@ -23,6 +23,8 @@
   import DiceInput from '../DiceInput.svelte';
   import Roll, { initRollDice, rollDice, changeTexture } from '../Roll.svelte';
 
+  export let params = {};
+
   const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
 
   let username = localStorage.getItem("username");
@@ -31,7 +33,8 @@
     localStorage.setItem("username", username);
   }
 
-  const socket = io(apiURL + "/?username=" + username);
+  const socket = io(`${apiURL}/?username=${username}&game=${  params.gameId}`);
+
   let userDict = {};
   let userList = [];
   let rolls = [];
@@ -47,7 +50,8 @@
   });
 
   function roll() {
-  	socket.emit("roll", diceandmodinput);
+    //socket.to(params.gameId).emit("roll", diceandmodinput);
+    socket.emit("roll", diceandmodinput);
   }
 
   function handleTextureUpdated(event) {
@@ -78,7 +82,6 @@
 
 <div id="foreground">
   <Player playername={username} latestroll={mylatestroll}/>
-
   <h2>Rollers</h2>
   <ul>
     {#each userList as user, i}
