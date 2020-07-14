@@ -23,7 +23,6 @@
         }
       }
       modifier = res;
-      console.log("modifier",modifier);
       return res;
     }
 

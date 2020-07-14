@@ -24,8 +24,12 @@
   import Roll, { initRollDice, rollDice, changeTexture } from './Roll.svelte';
 
   const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
-  const username = prompt("Please enter your user name", "");
-  //const username = "p";
+
+  let username = localStorage.getItem("username");
+  if (!username) {
+    username = prompt("Please enter your user name", "");
+    localStorage.setItem("username", username);
+  }
 
   const socket = io(apiURL + "/?username=" + username);
   let userDict = {};
