@@ -146,8 +146,9 @@
   export function rollDice(diceInput) {
     var diceValues = [];
     diceInput.dice.forEach((diceIt) => {
+      console.log("ASDASDASDASD", diceIt.label, diceIt.qty)
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
-        var die;
+        var die = null;
         if (diceIt.label == "D4") {
           die = new DiceD4({ size: 1.5, backColor: "#ff0000" });
         } else if (diceIt.label == "D6") {
@@ -158,15 +159,19 @@
           die = new DiceD10({ size: 1.5, backColor: "#ff0000" });
         } else if (diceIt.label == "D12") {
           die = new DiceD12({ size: 1.5, backColor: "#ff0000" });
-        }else if (diceIt.label == "D20") {
+        } else if (diceIt.label == "D20") {
           die = new DiceD20({ size: 1.5, backColor: "#ff0000" });
         }
 
-        scene.add(die.getObject());
-        dice.push(die);
-        diceValues.push({ dice: die, value: diceIt.result[i]});
+        if (die) {
+          scene.add(die.getObject());
+          dice.push(die);
+          diceValues.push({ dice: die, value: diceIt.result[i]});
+        }
       });
     });
+
+    console.log("DICE", dice)
 
     for (var i = 0; i < dice.length; i++) {
       let yRand = Math.random() * 20;
