@@ -22,6 +22,7 @@
     scene = new THREE.Scene();
     scene.name = "ESCENA";
     // CAMERA
+ 
     var SCREEN_WIDTH = window.innerWidth,
       SCREEN_HEIGHT = window.innerHeight;
     var VIEW_ANGLE = 45,
@@ -29,8 +30,9 @@
       NEAR = 0.01,
       FAR = 20000;
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+    camera.position.set(0, 40, 10);
+ 
     scene.add(camera);
-    camera.position.set(0, 30, 30);
     // RENDERER
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -49,28 +51,29 @@
     // stats.domElement.style.zIndex = 100;
     // container.appendChild(stats.domElement);
 
-    let ambient = new THREE.AmbientLight("#ffffff", 0.3);
-    scene.add(ambient);
+    let ambient = new THREE.AmbientLight("#ffffff", 0.2);
+    //scene.add(ambient);
 
-    let directionalLight = new THREE.DirectionalLight("#ffffff", 0.5);
-    directionalLight.position.x = -1000;
-    directionalLight.position.y = 1000;
-    directionalLight.position.z = 1000;
-    scene.add(directionalLight);
+    let directionalLight = new THREE.DirectionalLight("#ffffff", 0.2);
+    directionalLight.position.x = -5;
+    directionalLight.position.y = 50;
+    directionalLight.position.z = 5;
+    //scene.add(directionalLight);
 
     let light = new THREE.SpotLight(0xefdfd5, 1.3);
     light.position.y = 100;
-    light.target.position.set(0, 0, 0);
+    light.position.x = -50;
+    light.target.position.set(10, 10, 10);
     light.castShadow = true;
-    light.shadow.camera.near = 50;
-    light.shadow.camera.far = 110;
-    light.shadow.mapSize.width = 1024;
-    light.shadow.mapSize.height = 1024;
+    light.shadow.camera.near = 5;
+    light.shadow.camera.far = 11;
+    light.shadow.mapSize.width = 512;
+    light.shadow.mapSize.height = 512;
     scene.add(light);
 
     // FLOOR
     var texturepath = 'table/img/table00.jpg';
-    var repeats = 10;
+    var repeats = 5;
     var index = 0;
     var loader = new THREE.TextureLoader();
     var floorTexture = loader.load(texturepath);
@@ -78,14 +81,15 @@
     floorTexture.repeat.set(repeats, repeats);
     var floorMaterial = new THREE.MeshBasicMaterial({
       map: floorTexture,
-      side: THREE.DoubleSide
+      side: THREE.BackSide
     });
+    floorTexture.receiveShadow = true;
 
-    var floorGeometry = new THREE.PlaneGeometry(120, 120, 60, 60);
+    var floorGeometry = new THREE.PlaneGeometry(120, 120);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.name = "Floor";
     floor.receiveShadow = true;
-    floor.rotation.x = Math.PI / 2;
+    floor.rotation.x += Math.PI/2;
     scene.add(floor);
 
 
@@ -115,7 +119,8 @@
       mass: 0,
       shape: new CANNON.Plane(),
       material: DiceManager.floorBodyMaterial
-	  });
+    });
+    floorBody.receiveShadow = true;
     floorBody.quaternion.setFromAxisAngle(
       new CANNON.Vec3(1, 0, 0),
       -Math.PI / 2
@@ -162,6 +167,8 @@
         } else if (diceIt.label == "D20") {
           die = new DiceD20({ size: 1.5, backColor: "#ff0000" });
         }
+          die.castShadow = true;
+          die.receiveShadow = true;
 
         if (die) {
           scene.add(die.getObject());
@@ -227,7 +234,7 @@
   }
 
   export function changeTexture(texturepath) {
-    var repeats = 10;
+    var repeats = 5;
     var index = 0;
 	  var loader = new THREE.TextureLoader();
 	  var floorTexture = loader.load(texturepath);
