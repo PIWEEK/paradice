@@ -46,6 +46,11 @@
   	socket.emit("roll");
   }
 
+  function handleTextureUpdated(event) {
+    console.log("handleTextureUpdated", event)
+    changeTexture(event.detail.path);
+  }
+
   // listen for roll event
   socket.on("roll", (userId, result) => {
     console.log("received roll", userId, result);
@@ -66,6 +71,7 @@
     userDict = data;
     userList = Object.values(data);
   });
+
 
 </script>
 
@@ -94,11 +100,7 @@
     {/each}
   </ul>
 
-  <Table bind:selectedImage={texturepath}/>
-  <br/>
-  <button on:click={changeTexture(texturepath)}>
-    Click to change texture
-  </button>
+  <Table on:textureSelected={handleTextureUpdated}/>
   <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
   <h3 class="test">Objeto diceandmodinput en App para poder pasar a roll en algún momento</h3>
   <p class="test">{JSON.stringify(diceandmodinput, null, 2)}</p>
