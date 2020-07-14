@@ -180,7 +180,6 @@
     });
 
     var diceValues = [];
-    var diceResults = [];
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
@@ -194,45 +193,37 @@
           die = new DiceD10({ size: 1.5, backColor: "#ff0000" });
         } else if (diceIt.label == "D12") {
           die = new DiceD12({ size: 1.5, backColor: "#ff0000" });
-        } else if (diceIt.label == "D20") {
+        } else { //if (diceIt.label == "D20") {
           die = new DiceD20({ size: 1.5, backColor: "#ff0000" });
         }
+
+        die.getObject().name = `${diceIt.label}-${i}`;
+        scene.add(die.getObject());
 
         die.castShadow = true;
         die.receiveShadow = true;
 
-        if (die) {
-          scene.add(die.getObject());
-          dice.push(die);
-          diceResults.push(diceIt.result[i]);
-        }
+        let yRand = Math.random() * 20;
+        die.getObject().position.x = -15 - (i % 3) * 1.5;
+        die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
+        die.getObject().position.z = -15 + (i % 3) * 1.5;
+        die.getObject().quaternion.x = ((Math.random() * 90 - 45) * Math.PI) / 180;
+        die.getObject().quaternion.z = ((Math.random() * 90 - 45) * Math.PI) / 180;
+        die.updateBodyFromMesh();
+        let rand = Math.random() * 5;
+        die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
+        die.getObject().body.angularVelocity.set(
+            20 * Math.random() - 10,
+            20 * Math.random() - 10,
+            20 * Math.random() - 10
+          );
+
+        dice.push(die);
+        diceValues.push({ dice: die, value: diceIt.result[i]});
       });
     });
 
-    for (var i = 0; i < dice.length; i++) {
-      let yRand = Math.random() * 20;
-      dice[i].getObject().position.x = -15 - (i % 3) * 1.5;
-      dice[i].getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
-      dice[i].getObject().position.z = -15 + (i % 3) * 1.5;
-      dice[i].getObject().quaternion.x =
-        ((Math.random() * 90 - 45) * Math.PI) / 180;
-      dice[i].getObject().quaternion.z =
-        ((Math.random() * 90 - 45) * Math.PI) / 180;
-      dice[i].updateBodyFromMesh();
-      let rand = Math.random() * 5;
-      dice[i]
-        .getObject()
-        .body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-      dice[i]
-        .getObject()
-        .body.angularVelocity.set(
-          20 * Math.random() - 10,
-          20 * Math.random() - 10,
-          20 * Math.random() - 10
-        );
-
-      diceValues.push({ dice: dice[i], value: diceResults[i]});
-    }
+    console.log(diceValues);
     DiceManager.prepareValues(diceValues);
   }
 
