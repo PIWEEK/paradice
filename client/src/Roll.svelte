@@ -16,7 +16,7 @@
     stats,
     world,
     dice = [];
-  
+
   export function initRollDice() {
     // SCENE
     scene = new THREE.Scene();
@@ -149,9 +149,13 @@
   }
 
   export function rollDice(diceInput) {
+    dice.forEach((d) => {
+      console.log("Removing", d)
+      scene.remove(d.getObject());
+    });
+
     var diceValues = [];
     diceInput.dice.forEach((diceIt) => {
-      console.log("ASDASDASDASD", diceIt.label, diceIt.qty)
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
         if (diceIt.label == "D4") {
@@ -177,8 +181,6 @@
         }
       });
     });
-
-    console.log("DICE", dice)
 
     for (var i = 0; i < dice.length; i++) {
       let yRand = Math.random() * 20;
