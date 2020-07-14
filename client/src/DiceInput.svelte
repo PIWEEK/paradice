@@ -1,5 +1,6 @@
 <script>
   import { modValidator } from './validators.js';
+  import Player from './Player.svelte';
 
   import { writable } from "svelte/store";
 
@@ -41,9 +42,10 @@
 
 <style>
 
-.test {
+:global(.test) {
   color: white;
 }
+
 </style>
 
 
@@ -56,3 +58,4 @@
 	Mod <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}> {modValidator(modifier)}
 
 </label>
+

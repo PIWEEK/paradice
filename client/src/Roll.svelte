@@ -38,6 +38,7 @@
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.physicallyCorrectLights = true;
 
     container = document.getElementById("ThreeJS");
     container.appendChild(renderer.domElement);
@@ -51,14 +52,14 @@
     // stats.domElement.style.zIndex = 100;
     // container.appendChild(stats.domElement);
 
-    let ambient = new THREE.AmbientLight("#ffffff", 0.2);
-    //scene.add(ambient);
+    let ambient = new THREE.AmbientLight("#ffffff", 0.8);
+    scene.add(ambient);
 
-    let directionalLight = new THREE.DirectionalLight("#ffffff", 0.2);
+    let directionalLight = new THREE.DirectionalLight("#ffffff", 0.8);
     directionalLight.position.x = -5;
     directionalLight.position.y = 50;
     directionalLight.position.z = 5;
-    //scene.add(directionalLight);
+    scene.add(directionalLight);
 
     let light = new THREE.SpotLight(0xefdfd5, 1.3);
     light.position.y = 100;
@@ -77,19 +78,27 @@
     var index = 0;
     var loader = new THREE.TextureLoader();
     var floorTexture = loader.load(texturepath);
+    floorTexture.receiveShadow = true;
+    floorTexture.needsUpdate = true;
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.set(repeats, repeats);
+
     var floorMaterial = new THREE.MeshBasicMaterial({
       map: floorTexture,
       side: THREE.BackSide
     });
-    floorTexture.receiveShadow = true;
-
+    
+    floorMaterial.castShadow = true;
+   
+    floorMaterial.needsUpdate = true;
+  
     var floorGeometry = new THREE.PlaneGeometry(120, 120);
+    floorGeometry.receiveShadow = true;
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.name = "Floor";
     floor.receiveShadow = true;
     floor.rotation.x += Math.PI/2;
+    floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
 
 

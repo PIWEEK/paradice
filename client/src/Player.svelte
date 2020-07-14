@@ -9,7 +9,7 @@
 
 .playername {
 
-    background-color: rgb(172, 100, 190);
+    background-color: rgb(0, 100, 190);
     border: 1em;
     padding: 0.2em;
 }
