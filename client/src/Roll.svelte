@@ -3,7 +3,7 @@
   import OrbitControls from 'orbit-controls-es6';
 
   import CANNON from "cannon";
-  import { DiceManager, DiceD6, DiceD20 } from "threejs-dice/lib/dice";
+  import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20 } from "threejs-dice/lib/dice";
   import Stats from "stats.js";
 	import { onMount } from 'svelte';
 
@@ -131,9 +131,9 @@
     // 	dice.push(die);
     // }
 
-    var die = new DiceD20({ size: 3.5, backColor: "#ff0000" });
-    scene.add(die.getObject());
-    dice.push(die);
+    // var die = new DiceD20({ size: 3.5, backColor: "#ff0000" });
+    // scene.add(die.getObject());
+    // dice.push(die);
 
     document
       .querySelector("#ThreeJS")
@@ -143,8 +143,34 @@
     requestAnimationFrame(animate);
   }
 
-  export function rollDice(result) {
+  export function rollDice(diceInput) {
     var diceValues = [];
+
+    console.log("rollDice", diceInput)
+
+    diceInput.dice.forEach((diceIt) => {
+      Array.from(Array(diceIt.qty)).forEach((x, i) => {
+        var die;
+        console.log("----", diceIt.label)
+        if (diceIt.label == "D4") {
+          die = new DiceD4({ size: 1.5, backColor: "#ff0000" });
+        } else if (diceIt.label == "D6") {
+          die = new DiceD6({ size: 1.5, backColor: "#ff0000" });
+        } else if (diceIt.label == "D8") {
+          die = new DiceD8({ size: 1.5, backColor: "#ff0000" });
+        } else if (diceIt.label == "D10") {
+          die = new DiceD10({ size: 1.5, backColor: "#ff0000" });
+        } else if (diceIt.label == "D12") {
+          die = new DiceD12({ size: 1.5, backColor: "#ff0000" });
+        }else if (diceIt.label == "D20") {
+          die = new DiceD20({ size: 1.5, backColor: "#ff0000" });
+        }
+
+        scene.add(die.getObject());
+        dice.push(die);
+        diceValues.push({ dice: die, value: diceIt.result[i]});
+      });
+    });
 
     for (var i = 0; i < dice.length; i++) {
       let yRand = Math.random() * 20;
@@ -169,7 +195,7 @@
         );
 
       //diceValues.push({ dice: dice[i], value: i + 1 });
-      diceValues.push({ dice: dice[i], value: result});
+      // diceValues.push({ dice: dice[i], value: result});
     }
 
     DiceManager.prepareValues(diceValues);

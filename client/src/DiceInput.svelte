@@ -1,13 +1,13 @@
 <script>
     import { modValidator } from './validators.js';
     export let dice = [
-    {id:0, label:"D4", range:4, qty:0, result:0},
-    {id:1, label:"D6", range:6, qty:0, result:0},
-    {id:2, label:"D8", range:8, qty:0, result:0},
-    {id:3, label:"D10", range:10, qty:0, result:0},
-    {id:4, label:"D12", range:12, qty:0, result:0},
-    {id:5, label:"D20", range:20, qty:0, result:0},
-    {id:6, label:"D100", range:100, qty:0, result:0},
+      {id:0, label:"D4", range:4, qty:1, result:0},
+      {id:1, label:"D6", range:6, qty:1, result:0},
+      {id:2, label:"D8", range:8, qty:1, result:0},
+      {id:3, label:"D10", range:10, qty:1, result:0},
+      {id:4, label:"D12", range:12, qty:1, result:0},
+      {id:5, label:"D20", range:20, qty:1, result:0},
+      {id:6, label:"D100", range:100, qty:0, result:0},
     ]
     export let modifier = '';
 

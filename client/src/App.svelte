@@ -43,35 +43,30 @@
   });
 
   function roll() {
-  	socket.emit("roll");
+  	socket.emit("roll", diceandmodinput);
   }
 
   function handleTextureUpdated(event) {
-    console.log("handleTextureUpdated", event)
     changeTexture(event.detail.path);
   }
 
   // listen for roll event
-  socket.on("roll", (userId, result) => {
-    console.log("received roll", userId, result);
-    rollDice(result);
+  socket.on("roll", (userId, diceInput) => {
+    rollDice(diceInput);
 	  if (userDict[userId]==username){
-		  mylatestroll = result;
+		  mylatestroll = diceInput.result;
 	  }
     rolls = [{
       user: userDict[userId],
-      result: result
+      result: diceInput.result
     }, ...rolls];
-    console.log(rolls);
   });
 
   // listen for user list event
   socket.on("users-list", (data) => {
-    console.log("received users-list", data);
     userDict = data;
     userList = Object.values(data);
   });
-
 
 </script>
 

@@ -3,6 +3,8 @@ import * as socketIo from 'socket.io';
 import { Event } from './constants';
 import * as path from "path";
 import { createServer, Server } from 'http';
+import { DiceInput, DiceOutput, DiceResult } from "./types";
+
 var cors = require('cors');
 
 export class ParadiceServer {
@@ -46,9 +48,30 @@ export class ParadiceServer {
       this.connectedUsers[socket.id] = username;
       this.io.emit(Event.USERS_LIST, this.connectedUsers);
 
-      socket.on(Event.ROLL, () => {
+      socket.on(Event.ROLL, (diceInput: DiceInput) => {
+        console.log(diceInput)
         console.log('ROLL: %s', this.connectedUsers[socket.id]);
-        this.io.emit(Event.ROLL, socket.id, Math.floor(Math.random() * 20) + 1);
+
+        const diceOutput: DiceOutput = {
+          dice: [],
+          mod: diceInput.mod,
+          result: 0
+        }
+
+        diceInput.dice.forEach((dice) => {
+          const values = Array.from({length: dice.qty}, () => 1 + Math.floor(Math.random() * dice.range))
+          const diceResult: DiceResult = {
+            ...dice,
+            result: values
+          };
+          diceOutput.dice.push(diceResult);
+          diceOutput.result = diceOutput.result + values.reduce((a, b) => a + b, 0);
+        });
+
+        diceOutput.mod = diceInput.mod;
+        console.log(diceOutput);
+
+        this.io.emit(Event.ROLL, socket.id, diceOutput);
       });
 
       socket.on(Event.DISCONNECT, () => {
