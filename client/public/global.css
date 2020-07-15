@@ -1,5 +1,7 @@
 html, body {
+	box-sizing: border-box;
 	position: relative;
+	height: 100%;
 	width: 100%;
 }
 
@@ -9,8 +11,8 @@ body {
 	background-size: 106%;
 	background-position: center;
 	color: #371B3E;
+	display: flex;
 	margin: 0;
-	box-sizing: border-box;
 	font-family: 'Staatliches', cursive, sans-serif;
 }
 

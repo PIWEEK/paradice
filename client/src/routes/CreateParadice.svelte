@@ -16,6 +16,12 @@
     { id: 0, name: "Dice #1", path: 'dice/img/dice00.jpg', color:"#761CEC", selected:true},
     { id: 1, name: "Dice #2", path: 'dice/img/dice01.jpg', color:"#FC8EAC", selected:false},
     { id: 2, name: "Dice #3", path: 'dice/img/dice02.jpg', color:"#A60570", selected:false},
+    { id: 3, name: "Dice #4", path: 'dice/img/dice03.jpg', color:"#A60570", selected:false},
+    { id: 4, name: "Dice #5", path: 'dice/img/dice04.jpg', color:"#A60570", selected:false},
+    { id: 5, name: "Dice #6", path: 'dice/img/dice05.jpg', color:"#A60570", selected:false},
+    { id: 6, name: "Dice #7", path: 'dice/img/dice06.jpg', color:"#A60570", selected:false},
+    { id: 7, name: "Dice #8", path: 'dice/img/dice07.jpg', color:"#A60570", selected:false},
+    { id: 8, name: "Dice #9", path: 'dice/img/dice08.jpg', color:"#A60570", selected:false},
   ];
 
 
