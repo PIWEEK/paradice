@@ -57,11 +57,6 @@
   const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
 
   let username = localStorage.getItem("username");
-  if (!username) {
-    username = prompt("Please enter your user name", "");
-    localStorage.setItem("username", username);
-  }
-
   let dicetexture = localStorage.getItem("dicetexture");
   let tabletexture = localStorage.getItem("tabletexture");
 

@@ -1,12 +1,23 @@
 <script>
-  let username = localStorage.getItem("username");
-  import { createEventDispatcher } from 'svelte';
   import { TABLE_TEXTURES, DICE_TEXTURES } from '../constants';
 
-  const dispatch = createEventDispatcher();
+  let username = localStorage.getItem("username");
+  if (!username) {
+    username = "Your name";
+  }
 
-  let selectedTable = localStorage.getItem("tabletexture") || TABLE_TEXTURES[0].path;
-  let selectedDice = localStorage.getItem("dicetexture") || TABLE_TEXTURES[0].path;
+  $: {
+    localStorage.setItem("username", username);
+  }
+
+  let selectedTable = localStorage.getItem("tabletexture");
+  if (!selectedTable) {
+    setTableImage(TABLE_TEXTURES[0].path);
+  }
+  let selectedDice = localStorage.getItem("dicetexture");
+  if (!selectedDice) {
+    setDiceImage(DICE_TEXTURES[0].path);
+  }
 
   function setTableImage(path) {
     selectedTable = path;
