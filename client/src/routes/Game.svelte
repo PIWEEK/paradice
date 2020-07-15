@@ -94,14 +94,7 @@
 
 <div id="foreground">
   <Player playername={username} latestroll={mylatestroll}/>
-  <h2>Rollers</h2>
-  <ul>
-    {#each userList as user, i}
-      <li>
-        {user}
-      </li>
-    {/each}
-  </ul>
+
 
   <button on:click={roll}>Roll dice</button>
 
@@ -115,7 +108,7 @@
   </ul>
 
   <ParadiceLogo/>
-<LatestRolls/>
+<LatestRolls bind:latestrolls={userList}/>
 <RollLog/>
   <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
 
