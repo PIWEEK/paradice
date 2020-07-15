@@ -146,48 +146,45 @@
     });
 
     var imageTexture = new Image();
-    imageTexture.onload = () => {
-      diceInput.dice.forEach((diceIt) => {
-        Array.from(Array(diceIt.qty)).forEach((x, i) => {
-          var die = null;
-          if (diceIt.label == "D4") {
-            die = new DiceD4({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-          } else if (diceIt.label == "D6") {
-            die = new DiceD6({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-          } else if (diceIt.label == "D8") {
-            die = new DiceD8({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-          } else if (diceIt.label == "D10") {
-            die = new DiceD10({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-          } else if (diceIt.label == "D12") {
-            die = new DiceD12({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-          } else { //if (diceIt.label == "D20") {
-            die = new DiceD20({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-          }
-
-          die.getObject().name = `${diceIt.label}-${i}`;
-          die.castShadow = true;
-          die.receiveShadow = true;
-
-          scene.add(die.getObject());
-          dice.push(die);
-          let yRand = Math.random() * 20
-          die.getObject().position.x = -15 - (i % 3) * 1.5;
-          die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
-          die.getObject().position.z = -15 + (i % 3) * 1.5;
-          die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
-          die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
-          die.updateBodyFromMesh();
-          let rand = Math.random() * 5;
-          die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-          die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
-
-          diceValues.push({dice: die, value: diceIt.result[i]});
-        });
-      });
-    };
     imageTexture.src = diceInput.texture;
 
+    diceInput.dice.forEach((diceIt) => {
+      Array.from(Array(diceIt.qty)).forEach((x, i) => {
+        var die = null;
+        if (diceIt.label == "D4") {
+          die = new DiceD4({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+        } else if (diceIt.label == "D6") {
+          die = new DiceD6({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+        } else if (diceIt.label == "D8") {
+          die = new DiceD8({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+        } else if (diceIt.label == "D10") {
+          die = new DiceD10({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+        } else if (diceIt.label == "D12") {
+          die = new DiceD12({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+        } else { //if (diceIt.label == "D20") {
+          die = new DiceD20({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+        }
 
+        die.getObject().name = `${diceIt.label}-${i}`;
+        die.castShadow = true;
+        die.receiveShadow = true;
+
+        scene.add(die.getObject());
+        dice.push(die);
+        let yRand = Math.random() * 20
+        die.getObject().position.x = -15 - (i % 3) * 1.5;
+        die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
+        die.getObject().position.z = -15 + (i % 3) * 1.5;
+        die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
+        die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
+        die.updateBodyFromMesh();
+        let rand = Math.random() * 5;
+        die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
+        die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
+
+        diceValues.push({dice: die, value: diceIt.result[i]});
+      });
+    });
 
     DiceManager.prepareValues(diceValues);
   }

@@ -98,7 +98,7 @@
     rollDice(diceInput);
     latestplayer = userDict[userId];
     latestroll = diceInput.result;
-	  
+
     rolls = [{
       user: userDict[userId],
       result: diceInput.result
