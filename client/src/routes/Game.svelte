@@ -22,6 +22,8 @@
   import Player from '../Player.svelte';
   import DiceInput from '../DiceInput.svelte';
   import Roll, { initRollDice, rollDice, changeTexture } from '../Roll.svelte';
+  import SideBar from '../SideBar.svelte';
+ 
 
   export let params = {};
 
@@ -110,5 +112,5 @@
   </ul>
 
   <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
-  
+  <SideBar/>
 </div>
