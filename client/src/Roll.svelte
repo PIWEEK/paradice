@@ -128,9 +128,9 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 30, 0);
+    world.gravity.set(0, -9.82 * 100, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
-    world.solver.iterations = 32;
+    world.solver.iterations = 16;
 
     DiceManager.setWorld(world);
 
@@ -147,6 +147,15 @@
       -Math.PI / 2
     );
     world.add(floorBody);
+
+
+
+    var bodyShape = new CANNON.Box(new CANNON.Vec3(200, 200, 400));
+    var bodyMass = 5.0;
+    var body = new CANNON.Body(bodyMass, bodyShape);
+    body.position.set(0, 1000, 50);
+    world.add(body);
+
 
     requestAnimationFrame(animate);
   }
@@ -185,14 +194,14 @@
         scene.add(die.getObject());
         dice.push(die);
         let yRand = Math.random() * 20
-        die.getObject().position.x = -15 - (i % 3) * 1.5;
+        die.getObject().position.x = -10 - (i % 3) * 1.5;
         die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
-        die.getObject().position.z = -15 + (i % 3) * 1.5;
+        die.getObject().position.z = -10 + (i % 3) * 1.5;
         die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
         let rand = Math.random() * 8;
-        die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
+        die.getObject().body.velocity.set(50 + rand, 30 + yRand, 15 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
         diceValues.push({dice: die, value: diceIt.result[i]});

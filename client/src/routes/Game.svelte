@@ -130,20 +130,13 @@
       <LatestRolls bind:latestrolls={latestplayerandrolls}/>
     </div>
   
-    <button on:click={roll}>Roll dice</button>
+   
 
-    <h2>Rolls</h2>
-    <ul>
-      {#each rolls as {user, result}, i}
-        <li>
-          {user}: {result}
-        </li>
-      {/each}
-    </ul>
 
-    <RollLog/>
+    <RollLog bind:rolls={rolls}/>
       <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
 
-    <RollDice/>
+  
+     <button on:click={roll}>Roll dice</button>
   </div>
 </div>
