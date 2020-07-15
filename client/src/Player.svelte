@@ -14,5 +14,3 @@
 
 </style>
 
-<h2 class="playername">Welcome {playername}!</h2>
-<p class="latestroll">Your latest roll was: {latestroll}</p>

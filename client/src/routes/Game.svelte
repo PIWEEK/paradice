@@ -77,6 +77,7 @@
   let texturepath;
   let latestplayer;
   let latestroll;
+  let latestplayerandrolls = {};
 
   onMount(()=> {
     initRollDice();
@@ -98,6 +99,8 @@
     rollDice(diceInput);
     latestplayer = userDict[userId];
     latestroll = diceInput.result;
+    latestplayerandrolls[latestplayer] = latestroll;
+    console.log(Object.keys(latestplayerandrolls));
 
     rolls = [{
       user: userDict[userId],
@@ -122,11 +125,9 @@
   <ParadiceLogo/>
   <div class="sidebar-content">
     <div class="sidebar-item">
-      <LatestRolls bind:latestrolls={userList}/>
+      <LatestRolls bind:latestrolls={latestplayerandrolls}/>
     </div>
-    <Player playername={username} latestroll={mylatestroll}/>
-
-
+  
     <button on:click={roll}>Roll dice</button>
 
     <h2>Rolls</h2>
