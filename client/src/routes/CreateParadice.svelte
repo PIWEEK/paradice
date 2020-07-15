@@ -28,7 +28,7 @@
   let text = "Game table selected by default";
 
   export let selectedImage = tabletextures[selectedtable]['path'];
-  export let selectedDiceImage = dicetextures[selecteddice]['path'];
+  export const selectedDiceImage = dicetextures[selecteddice]['path'];
 
   export let matchingcolor;
 

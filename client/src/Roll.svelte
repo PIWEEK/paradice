@@ -3,7 +3,7 @@
   import OrbitControls from 'orbit-controls-es6';
 
   import CANNON from "cannon";
-  import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20 } from "threejs-dice/lib/dice";
+  import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20 } from "./dice";
   import Stats from "stats.js";
 	import { onMount } from 'svelte';
 
@@ -15,12 +15,13 @@
     controls,
     stats,
     world,
-    dice = [];
+    dice = [],
+    diceResults = [],
+    diceValues = [];
 
   let dicetexture = '/table/img/table00.jpg';
   const imageTexture = new Image();
   imageTexture.src = localStorage.getItem("dicetexture");
-
 
   export function initRollDice() {
     // SCENE
@@ -152,93 +153,56 @@
     // scene.add(die.getObject());
     // dice.push(die);
 
-    document
-      .querySelector("#ThreeJS")
-      // .addEventListener("click", randomDiceThrow);
-    // setInterval(randomDiceThrow, 3000);
-    // randomDiceThrow();
     requestAnimationFrame(animate);
-  }
-
-  class CustomDiceD6 extends DiceD6 {
-
-    constructor(options) {
-        super(options);
-        this.customTextTextureFunction = (text, color, backColor) => {
-
-          let canvas = document.createElement("canvas");
-          let context = canvas.getContext("2d");
-          let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
-          canvas.width = canvas.height = ts;
-          context.font = ts / (1 + 2 * this.textMargin) + "pt Arial";
-          const pFill = context.createPattern(imageTexture, "repeat");
-          context.fillStyle = pFill;
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          context.textAlign = "center";
-          context.textBaseline = "middle";
-          context.fillStyle = color;
-          context.fillText(text, canvas.width / 2, canvas.height / 2);
-          let texture = new THREE.Texture(canvas);
-          texture.needsUpdate = true;
-          return texture;
-        };
-        this.create();
-    }
   }
 
   export function rollDice(diceInput) {
     dice.forEach((d) => {
-      // console.log("delete", d.getObject())
-      // d.getObject().geometry.dispose();
-      // d.getObject().material.dispose();
       scene.remove(d.getObject());
+      world.remove(d.getObject());
     });
 
-    var diceValues = [];
+    // dice = [];
+
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
         if (diceIt.label == "D4") {
-          die = new DiceD4({ size: 1.5, backColor: "#ff0000" });
+          die = new DiceD4({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
         } else if (diceIt.label == "D6") {
-          die = new CustomDiceD6({ size: 2.5, fontColor: "#FFFFFF", backColor: "#ff0000" });
+          die = new DiceD6({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
         } else if (diceIt.label == "D8") {
-          die = new DiceD8({ size: 1.5, backColor: "#ff0000" });
+          die = new DiceD8({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
         } else if (diceIt.label == "D10") {
-          die = new DiceD10({ size: 1.5, backColor: "#ff0000" });
+          die = new DiceD10({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
         } else if (diceIt.label == "D12") {
-          die = new DiceD12({ size: 1.5, backColor: "#ff0000" });
+          die = new DiceD12({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
         } else { //if (diceIt.label == "D20") {
-          die = new DiceD20({ size: 1.5, backColor: "#ff0000" });
+          die = new DiceD20({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
         }
 
         die.getObject().name = `${diceIt.label}-${i}`;
-        scene.add(die.getObject());
-
         die.castShadow = true;
         die.receiveShadow = true;
 
-        let yRand = Math.random() * 20;
+        scene.add(die.getObject());
+        dice.push(die);
+        let yRand = Math.random() * 20
         die.getObject().position.x = -15 - (i % 3) * 1.5;
         die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
         die.getObject().position.z = -15 + (i % 3) * 1.5;
-        die.getObject().quaternion.x = ((Math.random() * 90 - 45) * Math.PI) / 180;
-        die.getObject().quaternion.z = ((Math.random() * 90 - 45) * Math.PI) / 180;
+        die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
+        die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
         let rand = Math.random() * 5;
         die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-        die.getObject().body.angularVelocity.set(
-            20 * Math.random() - 10,
-            20 * Math.random() - 10,
-            20 * Math.random() - 10
-          );
+        die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
-        dice.push(die);
-        diceValues.push({ dice: die, value: diceIt.result[i]});
+        diceValues.push({dice: die, value: diceIt.result[i]});
+        console.log("dice", dice, diceIt.result[i])
       });
     });
 
-    console.log(diceValues);
     DiceManager.prepareValues(diceValues);
   }
 
