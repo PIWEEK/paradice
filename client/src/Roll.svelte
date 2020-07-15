@@ -5,7 +5,7 @@
   import CANNON from "cannon";
   import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20 } from "./dice";
   import Stats from "stats.js";
-	import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
 
   // standard global variables
   let container,
@@ -18,10 +18,6 @@
     dice = [],
     diceResults = [],
     diceValues = [];
-
-  let dicetexture = '/table/img/table00.jpg';
-  const imageTexture = new Image();
-  imageTexture.src = localStorage.getItem("dicetexture");
 
   export function initRollDice() {
     // SCENE
@@ -140,19 +136,6 @@
     );
     world.add(floorBody);
 
-    //Walls
-
-    // var colors = ["#ff0000", "#ffff00", "#00ff00", "#0000ff", "#ff00ff"];
-    // for (var i = 0; i < 5; i++) {
-    // 	var die = new DiceD6({ size: 1.5, backColor: colors[i] });
-    // 	scene.add(die.getObject());
-    // 	dice.push(die);
-    // }
-
-    // var die = new DiceD20({ size: 3.5, backColor: "#ff0000" });
-    // scene.add(die.getObject());
-    // dice.push(die);
-
     requestAnimationFrame(animate);
   }
 
@@ -162,46 +145,49 @@
       world.remove(d.getObject());
     });
 
-    // dice = [];
+    var imageTexture = new Image();
+    imageTexture.onload = () => {
+      diceInput.dice.forEach((diceIt) => {
+        Array.from(Array(diceIt.qty)).forEach((x, i) => {
+          var die = null;
+          if (diceIt.label == "D4") {
+            die = new DiceD4({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          } else if (diceIt.label == "D6") {
+            die = new DiceD6({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          } else if (diceIt.label == "D8") {
+            die = new DiceD8({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          } else if (diceIt.label == "D10") {
+            die = new DiceD10({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          } else if (diceIt.label == "D12") {
+            die = new DiceD12({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          } else { //if (diceIt.label == "D20") {
+            die = new DiceD20({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          }
 
-    diceInput.dice.forEach((diceIt) => {
-      Array.from(Array(diceIt.qty)).forEach((x, i) => {
-        var die = null;
-        if (diceIt.label == "D4") {
-          die = new DiceD4({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-        } else if (diceIt.label == "D6") {
-          die = new DiceD6({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-        } else if (diceIt.label == "D8") {
-          die = new DiceD8({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-        } else if (diceIt.label == "D10") {
-          die = new DiceD10({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-        } else if (diceIt.label == "D12") {
-          die = new DiceD12({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-        } else { //if (diceIt.label == "D20") {
-          die = new DiceD20({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
-        }
+          die.getObject().name = `${diceIt.label}-${i}`;
+          die.castShadow = true;
+          die.receiveShadow = true;
 
-        die.getObject().name = `${diceIt.label}-${i}`;
-        die.castShadow = true;
-        die.receiveShadow = true;
+          scene.add(die.getObject());
+          dice.push(die);
+          let yRand = Math.random() * 20
+          die.getObject().position.x = -15 - (i % 3) * 1.5;
+          die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
+          die.getObject().position.z = -15 + (i % 3) * 1.5;
+          die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
+          die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
+          die.updateBodyFromMesh();
+          let rand = Math.random() * 5;
+          die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
+          die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
-        scene.add(die.getObject());
-        dice.push(die);
-        let yRand = Math.random() * 20
-        die.getObject().position.x = -15 - (i % 3) * 1.5;
-        die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
-        die.getObject().position.z = -15 + (i % 3) * 1.5;
-        die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
-        die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
-        die.updateBodyFromMesh();
-        let rand = Math.random() * 5;
-        die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-        die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
-
-        diceValues.push({dice: die, value: diceIt.result[i]});
-        console.log("dice", dice, diceIt.result[i])
+          diceValues.push({dice: die, value: diceIt.result[i]});
+        });
       });
-    });
+    };
+    imageTexture.src = diceInput.texture;
+
+
 
     DiceManager.prepareValues(diceValues);
   }

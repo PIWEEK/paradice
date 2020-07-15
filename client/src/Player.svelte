@@ -1,8 +1,6 @@
 <script>
-
-    export let playername = 'Anonymous player';
-    export let latestroll = 0;
-
+  export let playername = 'Anonymous player';
+  export let latestroll = 0;
 </script>
 
 <style>

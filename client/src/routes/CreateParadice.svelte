@@ -39,9 +39,6 @@
     tabletextures[i].selected = true;
     selectedtable = i;
 
-		dispatch('textureSelected', {
-			path: tabletextures[i]['path']
-        });
     localStorage.setItem("tabletexture", tabletextures[i]['path']);
   }
 
@@ -52,10 +49,7 @@
     dicetextures[i].selected = true;
     selecteddice = i;
 
-		dispatch('textureDiceSelected', {
-			path: dicetextures[i]['path']
-        });
-     localStorage.setItem("dicetexture", dicetextures[i]['path']);
+    localStorage.setItem("dicetexture", dicetextures[i]['path']);
   }
 </script>
 

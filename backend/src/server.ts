@@ -68,6 +68,7 @@ export class ParadiceServer {
         const diceOutput: DiceOutput = {
           dice: [],
           mod: diceInput.mod,
+          texture: diceInput.texture,
           result: 0
         }
 

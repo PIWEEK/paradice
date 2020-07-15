@@ -50,7 +50,6 @@
   import RollLog from '../RollLog.svelte';
   import RollDice from '../RollDice.svelte';
   import ResultBanner from '../ResultBanner.svelte';
- 
 
   export let params = {};
 
@@ -64,7 +63,6 @@
 
   let dicetexture = localStorage.getItem("dicetexture");
   let tabletexture = localStorage.getItem("tabletexture");
-  
 
   const socket = io(`${apiURL}/?username=${username}&game=${  params.gameId}`);
 
@@ -74,7 +72,7 @@
   let mylatestroll = 0;
   let diceinput;
   let modinput;
-  $: diceandmodinput = {dice: diceinput, mod: modinput};
+  $: diceandmodinput = {dice: diceinput, mod: modinput, texture: localStorage.getItem("dicetexture")};
   let floorcolor = "#00aa00";
   let texturepath;
   let latestplayer;
