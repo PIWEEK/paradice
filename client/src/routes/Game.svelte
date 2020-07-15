@@ -50,6 +50,7 @@
   import RollLog from '../RollLog.svelte';
   import RollDice from '../RollDice.svelte';
   import ResultBanner from '../ResultBanner.svelte';
+  import { DICE_TEXTURES } from '../constants';
 
   export let params = {};
 
@@ -72,7 +73,14 @@
   let mylatestroll = 0;
   let diceinput;
   let modinput;
-  $: diceandmodinput = {dice: diceinput, mod: modinput, texture: localStorage.getItem("dicetexture")};
+
+  $: diceandmodinput = {
+    dice: diceinput,
+    mod: modinput,
+    fontColor: DICE_TEXTURES.find((texture) => texture.path == localStorage.getItem("dicetexture")).fontColor,
+    texture: localStorage.getItem("dicetexture")
+  };
+
   let floorcolor = "#00aa00";
   let texturepath;
   let latestplayer;
@@ -100,7 +108,6 @@
     latestplayer = userDict[userId];
     latestroll = diceInput.result;
     latestplayerandrolls[latestplayer] = latestroll;
-    console.log(Object.keys(latestplayerandrolls));
 
     rolls = [{
       user: userDict[userId],

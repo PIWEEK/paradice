@@ -6,6 +6,16 @@
   import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20 } from "./dice";
   import Stats from "stats.js";
   import { onMount } from 'svelte';
+  import { DICE_TEXTURES } from './constants';
+
+  const imageTextures = {};
+  // Preload dice textures
+  DICE_TEXTURES.forEach(texture => {
+    imageTextures[texture.path] = new Image();
+    imageTextures[texture.path].src = texture.path;
+  });
+
+  console.log("DICE_TEXTURES", imageTextures)
 
   // standard global variables
   let container,
@@ -138,8 +148,6 @@
     );
     world.add(floorBody);
 
-
-
     requestAnimationFrame(animate);
   }
 
@@ -149,39 +157,25 @@
       world.remove(d.getObject());
     });
 
-    var imageTexture = new Image();
-    imageTexture.src = diceInput.texture;
+    const imageTexture = imageTextures[diceInput.texture]
 
+    console.log("diceInput.fontColor", diceInput.fontColor)
 
-    let dt = localStorage.getItem("dicetexturecolors");
-    let dicetextures = JSON.parse(dt);
-    
-    let matchingdice;
-    let dicefontcolor = dicetextures.find(obj => {
-    return obj.path == diceInput.texture
-    })
-    console.log(dicefontcolor);
-   
-    matchingdice = dicefontcolor["color"];
-     console.log(matchingdice);
-
-
-    
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
         if (diceIt.label == "D4") {
-          die = new DiceD4({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
+          die = new DiceD4({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         } else if (diceIt.label == "D6") {
-          die = new DiceD6({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
+          die = new DiceD6({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         } else if (diceIt.label == "D8") {
-          die = new DiceD8({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
+          die = new DiceD8({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         } else if (diceIt.label == "D10") {
-          die = new DiceD10({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
+          die = new DiceD10({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         } else if (diceIt.label == "D12") {
-          die = new DiceD12({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
+          die = new DiceD12({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         } else { //if (diceIt.label == "D20") {
-          die = new DiceD20({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
+          die = new DiceD20({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         }
 
         die.getObject().name = `${diceIt.label}-${i}`;

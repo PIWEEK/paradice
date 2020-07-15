@@ -69,6 +69,7 @@ export class ParadiceServer {
           dice: [],
           mod: diceInput.mod,
           texture: diceInput.texture,
+          fontColor: diceInput.fontColor,
           result: 0
         }
 

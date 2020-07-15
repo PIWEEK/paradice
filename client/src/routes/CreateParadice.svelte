@@ -1,63 +1,21 @@
 <script>
   let username = localStorage.getItem("username");
   import { createEventDispatcher } from 'svelte';
+  import { TABLE_TEXTURES, DICE_TEXTURES } from '../constants';
 
   const dispatch = createEventDispatcher();
 
-  let tabletextures = [
-    { id: 0, name: "Skin #1", path: 'table/img/table00.jpg', color:"#761CEC", selected:true},
-    { id: 1, name: "Skin #2", path: 'table/img/table01.jpg', color:"#FC8EAC", selected:false},
-    { id: 2, name: "Skin #3", path: 'table/img/table02.jpg', color:"#A60570", selected:false},
-    { id: 3, name: "Skin #4", path: 'table/img/table03.jpg', color:"#A60570", selected:false},
-    { id: 4, name: "Skin #5", path: 'table/img/table04.jpg', color:"#000000", selected:false},
-  ];
+  let selectedTable = localStorage.getItem("tabletexture") || TABLE_TEXTURES[0].path;
+  let selectedDice = localStorage.getItem("dicetexture") || TABLE_TEXTURES[0].path;
 
-  let dicetextures = [
-    { id: 0, name: "Dice #1", path: 'dice/img/dice00.jpg', color:"#761CEC", selected:true},
-    { id: 1, name: "Dice #2", path: 'dice/img/dice01.jpg', color:"#FC8EAC", selected:false},
-    { id: 2, name: "Dice #3", path: 'dice/img/dice02.jpg', color:"#A60570", selected:false},
-    { id: 3, name: "Dice #4", path: 'dice/img/dice03.jpg', color:"#A60570", selected:false},
-    { id: 4, name: "Dice #5", path: 'dice/img/dice04.jpg', color:"#A60570", selected:false},
-    { id: 5, name: "Dice #6", path: 'dice/img/dice05.jpg', color:"#A60570", selected:false},
-    { id: 6, name: "Dice #7", path: 'dice/img/dice06.jpg', color:"#A60570", selected:false},
-    { id: 7, name: "Dice #8", path: 'dice/img/dice07.jpg', color:"#A60570", selected:false},
-    { id: 8, name: "Dice #9", path: 'dice/img/dice08.jpg', color:"#A60570", selected:false},
-  ];
-
-
-  let selectedtable = 0;
-  let selecteddice = 0;
-
-  localStorage.setItem("dicetexture", dicetextures[selecteddice]['path']);
-  localStorage.setItem("tabletexture", tabletextures[selectedtable]['path']);
-  localStorage.setItem("dicetexturecolors", JSON.stringify(dicetextures));
-
-  let textureindex = 2;
-  let text = "Game table selected by default";
-
-  export let selectedImage = tabletextures[selectedtable]['path'];
-  export const selectedDiceImage = dicetextures[selecteddice]['path'];
-
-  export let matchingcolor;
-
-  function setTableImage(i) {
-    selectedImage = tabletextures[i]['path'];
-    matchingcolor = tabletextures[i]['color'];
-    tabletextures[selectedtable].selected = false;
-    tabletextures[i].selected = true;
-    selectedtable = i;
-
-    localStorage.setItem("tabletexture", tabletextures[i]['path']);
+  function setTableImage(path) {
+    selectedTable = path;
+    localStorage.setItem("tabletexture", path);
   }
 
-  function setDiceImage(i) {
-    selectedImage = dicetextures[i]['path'];
-    matchingcolor = dicetextures[i]['color'];
-    dicetextures[selecteddice].selected = false;
-    dicetextures[i].selected = true;
-    selecteddice = i;
-
-    localStorage.setItem("dicetexture", dicetextures[i]['path']);
+  function setDiceImage(path) {
+    selectedDice = path;
+    localStorage.setItem("dicetexture", path);
   }
 </script>
 
@@ -116,11 +74,11 @@
   <p>Table Skin</p>
 
   <div class="row-flex">
-    {#each tabletextures as { id, path, selected }, i}
-    {#if selected}
-    <img on:click|preventDefault={() => setTableImage(i)} class="selectedtexture"  src="{path}" alt="{id}"/>
+    {#each TABLE_TEXTURES as { id, path }, i}
+    {#if path == selectedTable}
+    <img on:click|preventDefault={() => setTableImage(path)} class="selectedtexture"  src="{path}" alt="{id}"/>
     {:else}
-    <img on:click|preventDefault={() => setTableImage(i)} class="texturesample"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setTableImage(path)} class="texturesample"  src="{path}" alt="{id}"/>
     {/if}
     {/each}
   </div>
@@ -128,11 +86,11 @@
   <p>Dice Skin</p>
 
   <div class="row-flex">
-    {#each dicetextures as { id, path, selected }, i}
-    {#if selected}
-    <img on:click|preventDefault={() => setDiceImage(i)} class="selectedtexture"  src="{path}" alt="{id}"/>
+    {#each DICE_TEXTURES as { id, path }, i}
+    {#if path == selectedDice}
+    <img on:click|preventDefault={() => setDiceImage(path)} class="selectedtexture"  src="{path}" alt="{id}"/>
     {:else}
-    <img on:click|preventDefault={() => setDiceImage(i)} class="texturesample"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setDiceImage(path)} class="texturesample"  src="{path}" alt="{id}"/>
     {/if}
     {/each}
   </div>

@@ -14,6 +14,7 @@ export interface DiceInput {
   dice: Dice[];
   mod: number;
   texture: string;
+  fontColor: string;
 }
 
 export interface DiceResult extends Dice {
@@ -24,5 +25,6 @@ export interface DiceOutput {
   dice: DiceResult[];
   mod: number;
   texture: string;
+  fontColor: string;
   result: number;
 }
