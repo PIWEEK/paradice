@@ -4,6 +4,7 @@ export const TABLE_TEXTURES = [
   { id: 2, name: "Skin #3", path: 'table/img/table02.jpg', color: "#A60570"},
   { id: 3, name: "Skin #4", path: 'table/img/table03.jpg', color: "#A60570"},
   { id: 4, name: "Skin #5", path: 'table/img/table04.jpg', color: "#000000"},
+  { id: 5, name: "Skin #6", path: 'table/img/table05.jpg', color: "#000000"},
 ];
 
 export const DICE_TEXTURES = [
