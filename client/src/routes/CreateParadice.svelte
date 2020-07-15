@@ -1,4 +1,3 @@
-
 <script>
   let username = localStorage.getItem("username");
   import { createEventDispatcher } from 'svelte';
@@ -60,69 +59,93 @@
 </script>
 
 <style>
-img {
-    padding: 0.5em;
-    border: 0.1em solid aquamarine;
+  h1 {
+    margin-top: 0;
+  }
 
-}
+  .logo-small {
+    display: flex;
+    max-width: 330px;
+    margin: 2rem auto;
+    width: 100%;
+  }
 
-.selectedtabletexture {
+  .row-flex {
+    margin-bottom: 2rem;
+  }
+
+  .selectedtabletexture {
+    border: 0.1em solid #371B3E;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    flex-shrink: 0;
+    margin: 0 .2rem;
+    padding: 0.1em;
+    width: 40px;
+  }
+
+  .texturetablesample {
+    border: 0.1em solid #CDB4CF;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    flex-shrink: 0;
+    margin: 0 .2rem;
+    padding: 0.1em;
+    width: 40px;
+  }
+
+  .texturetablesample:hover {
+    border-color:#CF4AD9 ;
+  }
+
+  .selecteddicetexture {
     padding: 0.1em;
     border-radius: 50%;
     width: 20px;
     border: 0.1em solid red;
+  }
 
-}
-
-.texturetablesample {
-  padding: 0.1em;
-  border-radius: 50%;
-  width: 20px;
-}
-
-
-.selecteddicetexture {
+  .texturedicesample {
     padding: 0.1em;
     border-radius: 50%;
     width: 20px;
-    border: 0.1em solid red;
-
-}
-
-.texturedicesample {
-  padding: 0.1em;
-  border-radius: 50%;
-  width: 20px;
-}
+  }
 
 </style>
 
 
-<h1>You're the Host!</h1>
-<label class="hostsname">
-	<input type=text bind:value={username} max=40>
-</label>
+<img class="logo-small" src="/images/logo-small.png" alt="PARADICE" border="0">
+<div class="content-center">
 
-<p>Table Skin</p>
+  <h1>You're the Host!</h1>
+  <label>YOUR NAME</label>
+  <input class="input-center" type=text bind:value={username} max=40>
 
-{#each tabletextures as { id, path, selected }, i}
-{#if selected}
-<img on:click|preventDefault={() => setTableImage(i)} class="selectedtabletexture"  src="{path}" alt="{id}"/>
-{:else}
-<img on:click|preventDefault={() => setTableImage(i)} class="texturetablesample"  src="{path}" alt="{id}"/>
-{/if}
-{/each}
+  <p>Table Skin</p>
 
-<p>Dice Skin</p>
+  <div class="row-flex">
+    {#each tabletextures as { id, path, selected }, i}
+    {#if selected}
+    <img on:click|preventDefault={() => setTableImage(i)} class="selectedtabletexture"  src="{path}" alt="{id}"/>
+    {:else}
+    <img on:click|preventDefault={() => setTableImage(i)} class="texturetablesample"  src="{path}" alt="{id}"/>
+    {/if}
+    {/each}
+  </div>
 
-{#each dicetextures as { id, path, selected }, i}
-{#if selected}
-<img on:click|preventDefault={() => setDiceImage(i)} class="selecteddicetexture"  src="{path}" alt="{id}"/>
-{:else}
-<img on:click|preventDefault={() => setDiceImage(i)} class="texturedicesample"  src="{path}" alt="{id}"/>
-{/if}
-{/each}
+  <p>Dice Skin</p>
 
+  <div class="row-flex">
+    {#each dicetextures as { id, path, selected }, i}
+    {#if selected}
+    <img on:click|preventDefault={() => setDiceImage(i)} class="selecteddicetexture"  src="{path}" alt="{id}"/>
+    {:else}
+    <img on:click|preventDefault={() => setDiceImage(i)} class="texturedicesample"  src="{path}" alt="{id}"/>
+    {/if}
+    {/each}
+  </div>
 
-<br/><br/><br/><br/>
-<a class="btn-primary" href="/#/game/paradice-testing-game">Start Playing</a>
+  <a class="btn-primary" href="/#/game/paradice-testing-game">Start Playing</a>
+</div>
