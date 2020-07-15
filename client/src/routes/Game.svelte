@@ -3,13 +3,36 @@
     position: absolute;
     left: 0px;
     top: 0px;
-	}
-  #foreground {
-    z-index: 1000;
-    position: absolute;
-    left: 0px;
-    top: 0px;
   }
+
+  #foreground {
+    box-sizing: border-box;
+    left: 1rem;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .sidebar-content {
+    background-color: #ffffff;
+    box-sizing: border-box;
+	  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    max-width: 230px;
+    padding: .5rem;
+    width: 100%;    
+  }
+
+  .sidebar-item {
+    align-items: center;
+    border: 1px solid #CDB4CF;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: .5rem 0;
+  }
+
   .test {
   color: white;
 }
@@ -98,23 +121,28 @@
 <div id="foreground">
 
   <ResultBanner playername={latestplayer} latestroll={latestroll}/>
-
-
-  <button on:click={roll}>Roll dice</button>
-
-  <h2>Rolls</h2>
-  <ul>
-    {#each rolls as {user, result}, i}
-      <li>
-        {user}: {result}
-      </li>
-    {/each}
-  </ul>
-
   <ParadiceLogo/>
-<LatestRolls bind:latestrolls={userList}/>
-<RollLog/>
-<DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+  <div class="sidebar-content">
+    <div class="sidebar-item">
+      <LatestRolls bind:latestrolls={userList}/>
+    </div>
+    <Player playername={username} latestroll={mylatestroll}/>
 
-<RollDice/>
+
+    <button on:click={roll}>Roll dice</button>
+
+    <h2>Rolls</h2>
+    <ul>
+      {#each rolls as {user, result}, i}
+        <li>
+          {user}: {result}
+        </li>
+      {/each}
+    </ul>
+
+    <RollLog/>
+      <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+
+    <RollDice/>
+  </div>
 </div>
