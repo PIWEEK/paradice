@@ -7,7 +7,6 @@
   import Stats from "stats.js";
 	import { onMount } from 'svelte';
 
-  
   // standard global variables
   let container,
     scene,
@@ -18,16 +17,17 @@
     world,
     dice = [];
 
-    let dicetexture = '/table/img/table00.jpg';
-    dicetexture = localStorage.getItem("dicetexture");
-  export function initRollDice() {
+  let dicetexture = '/table/img/table00.jpg';
+  const imageTexture = new Image();
+  imageTexture.src = localStorage.getItem("dicetexture");
 
-  
+
+  export function initRollDice() {
     // SCENE
     scene = new THREE.Scene();
     scene.name = "ESCENA";
+
     // CAMERA
- 
     var SCREEN_WIDTH = window.innerWidth,
       SCREEN_HEIGHT = window.innerHeight;
     var VIEW_ANGLE = 45,
@@ -36,8 +36,8 @@
       FAR = 20000;
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
     camera.position.set(0, 40, 10);
- 
     scene.add(camera);
+
     // RENDERER
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -92,11 +92,10 @@
       map: floorTexture,
       side: THREE.BackSide
     });
-    
+
     floorMaterial.castShadow = true;
-   
     floorMaterial.needsUpdate = true;
-  
+
     var floorGeometry = new THREE.PlaneGeometry(120, 120);
     floorGeometry.receiveShadow = true;
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -105,7 +104,6 @@
     floor.rotation.x += Math.PI/2;
     floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
-
 
     // SKYBOX/FOG
     var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
@@ -161,24 +159,19 @@
     // randomDiceThrow();
     requestAnimationFrame(animate);
   }
- 
+
   class CustomDiceD6 extends DiceD6 {
 
     constructor(options) {
         super(options);
         this.customTextTextureFunction = (text, color, backColor) => {
-          
+
           let canvas = document.createElement("canvas");
           let context = canvas.getContext("2d");
           let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
           canvas.width = canvas.height = ts;
           context.font = ts / (1 + 2 * this.textMargin) + "pt Arial";
-          console.log("HA!");
-          console.log(localStorage.getItem("dicetexture"));
-
-          var image = new Image();
-          image.src = dicetexture;
-          const pFill = context.createPattern(image, "repeat");
+          const pFill = context.createPattern(imageTexture, "repeat");
           context.fillStyle = pFill;
           context.fillRect(0, 0, canvas.width, canvas.height);
           context.textAlign = "center";
@@ -195,6 +188,9 @@
 
   export function rollDice(diceInput) {
     dice.forEach((d) => {
+      // console.log("delete", d.getObject())
+      // d.getObject().geometry.dispose();
+      // d.getObject().material.dispose();
       scene.remove(d.getObject());
     });
 
