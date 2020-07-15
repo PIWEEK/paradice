@@ -22,7 +22,10 @@
   import Player from '../Player.svelte';
   import DiceInput from '../DiceInput.svelte';
   import Roll, { initRollDice, rollDice, changeTexture } from '../Roll.svelte';
-  import SideBar from '../SideBar.svelte';
+  import ParadiceLogo from '../ParadiceLogo.svelte';
+  import LatestRolls from '../LatestRolls.svelte';
+  import RollLog from '../RollLog.svelte';
+  import RollDice from '../RollDice.svelte';
  
 
   export let params = {};
@@ -111,6 +114,10 @@
     {/each}
   </ul>
 
+  <ParadiceLogo/>
+<LatestRolls/>
+<RollLog/>
   <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
-  <SideBar/>
+
+<RollDice/>
 </div>
