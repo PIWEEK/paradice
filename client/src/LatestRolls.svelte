@@ -41,7 +41,6 @@
 
     .color-otheruser {
         background-color: aqua;
-        background-image: url({dicetexture}); 
         border: 1px solid #333333;
         border-radius: 50%;
         flex-shrink: 0;
@@ -62,7 +61,7 @@
     {:else}
         <li>
             <div class="color-otheruser"></div>
-            <span>{p}</span>
+            <span>{p}: {latestrolls[p]}</span>
         </li>
 
     {/if}

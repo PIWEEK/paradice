@@ -55,12 +55,14 @@
     // container.appendChild(stats.domElement);
 
     let ambient = new THREE.AmbientLight("#ffffff", 0.8);
+    ambient.castShadow = true;
     scene.add(ambient);
 
     let directionalLight = new THREE.DirectionalLight("#ffffff", 0.8);
     directionalLight.position.x = -5;
     directionalLight.position.y = 50;
     directionalLight.position.z = 5;
+    directionalLight.castShadow = true;
     scene.add(directionalLight);
 
     let light = new THREE.SpotLight(0xefdfd5, 1.3);
