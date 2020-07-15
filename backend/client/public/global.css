@@ -1,15 +1,19 @@
 html, body {
+	box-sizing: border-box;
 	position: relative;
-	width: 100%;
 	height: 100%;
+	width: 100%;
 }
 
 body {
 	background-image: url("/images/bg-dice.jpg");
-	background-size: cover;
+	background-repeat: no-repeat;
+	background-size: 106%;
+	background-position: center;
 	color: #371B3E;
+	display: flex;
+	flex-direction: column;
 	margin: 0;
-	box-sizing: border-box;
 	font-family: 'Staatliches', cursive, sans-serif;
 }
 
