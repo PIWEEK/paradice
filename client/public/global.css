@@ -12,6 +12,7 @@ body {
 	background-position: center;
 	color: #371B3E;
 	display: flex;
+	flex-direction: column;
 	margin: 0;
 	font-family: 'Staatliches', cursive, sans-serif;
 }
