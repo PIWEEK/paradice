@@ -42,21 +42,51 @@
 
 <style>
 
-:global(.test) {
-  color: white;
+  .sidebar-item {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: .7rem .5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-top: 0;
+  }
+
+.dice-input {
+  align-items: center;
+  display: flex;
 }
 
+.dice-input span {
+  width: 35px;
+}
+
+.dice-input input,
+.mod-input input {
+  border-color: #CDB4CF;
+  color: #CF4AD9;
+}
+
+.mod-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
 </style>
 
-<p>Soy DiceInput</p>
-
-{#each dice as die}
-<label class="test">
-	{die.label} <input type=number bind:value={die.qty} min=0 max=20 size=4>
-</label>
-{/each}
-<label class="test">
-	Mod <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}> {modValidator(modifier)}
-
-</label>
+<div class="sidebar-item">
+  <h2>Select your dice!</h2>
+  {#each dice as die}
+  <label class="dice-input">
+    <span>{die.label}</span>
+    <input type=number bind:value={die.qty} min=0 max=20 size=4>
+  </label>
+  {/each}
+  <label class="mod-input">
+    <span>{modValidator(modifier)}</span>
+    <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
+  </label>
+</div>
 
