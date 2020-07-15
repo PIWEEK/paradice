@@ -172,6 +172,27 @@
     scene.add(skyBox);
 
 
+    var bodyShape = new CANNON.Box(new CANNON.Vec3(10, 10, 0.1));
+    var bodyMass = 5.0;
+    var body = new CANNON.Body({
+      mass: 0,
+      shape: bodyShape,
+      material: DiceManager.floorBodyMaterial
+    });
+    body.position.set(0, 5.1, 10.1);
+    world.add(body);
+
+    // barrier in threejs
+    var skyBoxGeometry = new THREE.CubeGeometry(20, 10, 0.2);
+    var skyBoxMaterial = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      side: THREE.BackSide
+    });
+    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
+    skyBox.position.y = 5.1;
+    skyBox.position.z = 10.1;
+    scene.add(skyBox);
+
 
     requestAnimationFrame(animate);
   }
