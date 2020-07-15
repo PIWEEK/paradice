@@ -101,10 +101,7 @@
     floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
 
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-var cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+
 
     // SKYBOX/FOG
     var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
@@ -141,16 +138,6 @@ scene.add( cube );
     );
     world.add(floorBody);
 
-    //Floor
-    let size = 20;
-    let wallBody = new CANNON.Body({
-      mass: 0,
-      shape: new CANNON.Box(new CANNON.Vec3(size,size,size)),
-      material: floorMaterial // floorMaterial???
-    });
-    wallBody.receiveShadow = true;
-    wallBody.position.set(20,20,20*2);
-    world.add(wallBody);
 
 
     requestAnimationFrame(animate);
