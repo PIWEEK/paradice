@@ -9,6 +9,7 @@
     { id: 1, name: "Skin #2", path: 'table/img/table01.jpg', color:"#FC8EAC", selected:false},
     { id: 2, name: "Skin #3", path: 'table/img/table02.jpg', color:"#A60570", selected:false},
     { id: 3, name: "Skin #4", path: 'table/img/table03.jpg', color:"#A60570", selected:false},
+    { id: 4, name: "Skin #5", path: 'table/img/table04.jpg', color:"#000000", selected:false},
   ];
 
   let dicetextures = [
