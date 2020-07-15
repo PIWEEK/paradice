@@ -74,7 +74,7 @@
     margin-bottom: 2rem;
   }
 
-  .selectedtabletexture {
+  .selectedtexture {
     border: 0.1em solid #371B3E;
     border-radius: 50%;
     cursor: pointer;
@@ -85,32 +85,19 @@
     width: 40px;
   }
 
-  .texturetablesample {
+  .texturesample {
     border: 0.1em solid #CDB4CF;
     border-radius: 50%;
     cursor: pointer;
-    height: 40px;
+    height: 30px;
     flex-shrink: 0;
     margin: 0 .2rem;
     padding: 0.1em;
-    width: 40px;
+    width: 30px;
   }
 
-  .texturetablesample:hover {
+  .texturesample:hover {
     border-color:#CF4AD9 ;
-  }
-
-  .selecteddicetexture {
-    padding: 0.1em;
-    border-radius: 50%;
-    width: 20px;
-    border: 0.1em solid red;
-  }
-
-  .texturedicesample {
-    padding: 0.1em;
-    border-radius: 50%;
-    width: 20px;
   }
 
 </style>
@@ -128,9 +115,9 @@
   <div class="row-flex">
     {#each tabletextures as { id, path, selected }, i}
     {#if selected}
-    <img on:click|preventDefault={() => setTableImage(i)} class="selectedtabletexture"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setTableImage(i)} class="selectedtexture"  src="{path}" alt="{id}"/>
     {:else}
-    <img on:click|preventDefault={() => setTableImage(i)} class="texturetablesample"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setTableImage(i)} class="texturesample"  src="{path}" alt="{id}"/>
     {/if}
     {/each}
   </div>
@@ -140,9 +127,9 @@
   <div class="row-flex">
     {#each dicetextures as { id, path, selected }, i}
     {#if selected}
-    <img on:click|preventDefault={() => setDiceImage(i)} class="selecteddicetexture"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setDiceImage(i)} class="selectedtexture"  src="{path}" alt="{id}"/>
     {:else}
-    <img on:click|preventDefault={() => setDiceImage(i)} class="texturedicesample"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setDiceImage(i)} class="texturesample"  src="{path}" alt="{id}"/>
     {/if}
     {/each}
   </div>
