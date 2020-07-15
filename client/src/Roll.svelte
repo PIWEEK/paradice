@@ -128,7 +128,7 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 100, 0);
+    world.gravity.set(0, -9.82 * 50, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 16;
 
@@ -150,11 +150,27 @@
 
 
 
-    var bodyShape = new CANNON.Box(new CANNON.Vec3(200, 200, 400));
+    var bodyShape = new CANNON.Box(new CANNON.Vec3(0.1, 5, 10));
     var bodyMass = 5.0;
-    var body = new CANNON.Body(bodyMass, bodyShape);
-    body.position.set(0, 1000, 50);
+    var body = new CANNON.Body({
+      mass: 0,
+      shape: bodyShape,
+      material: DiceManager.floorBodyMaterial
+    });
+    body.position.set(10, 5.1, 0);
     world.add(body);
+
+    // barrier in threejs
+    var skyBoxGeometry = new THREE.CubeGeometry(0.2, 10, 20);
+    var skyBoxMaterial = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      side: THREE.BackSide
+    });
+    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
+    skyBox.position.y = 5.1;
+    skyBox.position.x = 10.1;
+    scene.add(skyBox);
+
 
 
     requestAnimationFrame(animate);
@@ -195,13 +211,13 @@
         dice.push(die);
         let yRand = Math.random() * 20
         die.getObject().position.x = -10 - (i % 3) * 1.5;
-        die.getObject().position.y = 2 + Math.floor(i / 3) * 1.5;
+        die.getObject().position.y = 15 + Math.floor(i / 3) * 1.5;
         die.getObject().position.z = -10 + (i % 3) * 1.5;
         die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
         let rand = Math.random() * 8;
-        die.getObject().body.velocity.set(50 + rand, 30 + yRand, 15 + rand);
+        die.getObject().body.velocity.set(40 + rand, 30 + yRand, 15 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
         diceValues.push({dice: die, value: diceIt.result[i]});
