@@ -110,7 +110,7 @@
   <ParadiceLogo/>
 <LatestRolls bind:latestrolls={userList}/>
 <RollLog/>
-  <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+<DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
 
 <RollDice/>
 </div>
