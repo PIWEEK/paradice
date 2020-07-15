@@ -52,7 +52,7 @@
 
 {#each dice as die}
 <label class="test">
-	{die.label} <input type=number bind:value={die.qty} min=0 max=20>
+	{die.label} <input type=number bind:value={die.qty} min=0 max=20 size=4>
 </label>
 {/each}
 <label class="test">

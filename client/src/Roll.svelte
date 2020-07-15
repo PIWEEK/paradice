@@ -32,7 +32,7 @@
       NEAR = 0.01,
       FAR = 20000;
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-    camera.position.set(0, 40, 10);
+    camera.position.set(0, 40, 2);
     scene.add(camera);
 
     // RENDERER
@@ -55,21 +55,19 @@
     // container.appendChild(stats.domElement);
 
     let ambient = new THREE.AmbientLight("#ffffff", 0.8);
-    ambient.castShadow = true;
     scene.add(ambient);
 
     let directionalLight = new THREE.DirectionalLight("#ffffff", 0.8);
     directionalLight.position.x = -5;
     directionalLight.position.y = 50;
     directionalLight.position.z = 5;
-    directionalLight.castShadow = true;
     scene.add(directionalLight);
 
-    let light = new THREE.SpotLight(0xefdfd5, 1.3);
+    let light = new THREE.SpotLight(0xefdfd5, 1.0);
     light.position.y = 100;
     light.position.x = -50;
     light.target.position.set(10, 10, 10);
-    light.castShadow = true;
+     light.castShadow = true;
     light.shadow.camera.near = 5;
     light.shadow.camera.far = 11;
     light.shadow.mapSize.width = 512;
@@ -93,7 +91,6 @@
     });
 
     floorMaterial.castShadow = true;
-    floorMaterial.needsUpdate = true;
 
     var floorGeometry = new THREE.PlaneGeometry(120, 120);
     floorGeometry.receiveShadow = true;
@@ -103,6 +100,11 @@
     floor.rotation.x += Math.PI/2;
     floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
+
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
 
     // SKYBOX/FOG
     var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
@@ -119,9 +121,9 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 20, 0);
+    world.gravity.set(0, -9.82 * 30, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
-    world.solver.iterations = 16;
+    world.solver.iterations = 32;
 
     DiceManager.setWorld(world);
 
@@ -129,14 +131,27 @@
     let floorBody = new CANNON.Body({
       mass: 0,
       shape: new CANNON.Plane(),
-      material: DiceManager.floorBodyMaterial
+      material: DiceManager.floorBodyMaterial // floorMaterial???
     });
     floorBody.receiveShadow = true;
+
     floorBody.quaternion.setFromAxisAngle(
       new CANNON.Vec3(1, 0, 0),
       -Math.PI / 2
     );
     world.add(floorBody);
+
+    //Floor
+    let size = 20;
+    let wallBody = new CANNON.Body({
+      mass: 0,
+      shape: new CANNON.Box(new CANNON.Vec3(size,size,size)),
+      material: floorMaterial // floorMaterial???
+    });
+    wallBody.receiveShadow = true;
+    wallBody.position.set(20,20,20*2);
+    world.add(wallBody);
+
 
     requestAnimationFrame(animate);
   }
@@ -150,26 +165,41 @@
     var imageTexture = new Image();
     imageTexture.src = diceInput.texture;
 
+
+    let dt = localStorage.getItem("dicetexturecolors");
+    let dicetextures = JSON.parse(dt);
+    
+    let matchingdice;
+    let dicefontcolor = dicetextures.find(obj => {
+    return obj.path == diceInput.texture
+    })
+    console.log(dicefontcolor);
+   
+    matchingdice = dicefontcolor["color"];
+     console.log(matchingdice);
+
+
+    
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
         if (diceIt.label == "D4") {
-          die = new DiceD4({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          die = new DiceD4({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
         } else if (diceIt.label == "D6") {
-          die = new DiceD6({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          die = new DiceD6({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
         } else if (diceIt.label == "D8") {
-          die = new DiceD8({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          die = new DiceD8({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
         } else if (diceIt.label == "D10") {
-          die = new DiceD10({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          die = new DiceD10({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
         } else if (diceIt.label == "D12") {
-          die = new DiceD12({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          die = new DiceD12({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
         } else { //if (diceIt.label == "D20") {
-          die = new DiceD20({ size: 1.5, fontColor: "#FFFFFF", imageTexture: imageTexture });
+          die = new DiceD20({ size: 1.5, fontColor: matchingdice, imageTexture: imageTexture });
         }
 
         die.getObject().name = `${diceIt.label}-${i}`;
         die.castShadow = true;
-        die.receiveShadow = true;
+        die.receiveShadow = false;
 
         scene.add(die.getObject());
         dice.push(die);
@@ -180,7 +210,7 @@
         die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
-        let rand = Math.random() * 5;
+        let rand = Math.random() * 8;
         die.getObject().body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 

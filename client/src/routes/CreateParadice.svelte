@@ -30,6 +30,7 @@
 
   localStorage.setItem("dicetexture", dicetextures[selecteddice]['path']);
   localStorage.setItem("tabletexture", tabletextures[selectedtable]['path']);
+  localStorage.setItem("dicetexturecolors", JSON.stringify(dicetextures));
 
   let textureindex = 2;
   let text = "Game table selected by default";
