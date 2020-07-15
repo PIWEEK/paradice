@@ -26,6 +26,7 @@
   import LatestRolls from '../LatestRolls.svelte';
   import RollLog from '../RollLog.svelte';
   import RollDice from '../RollDice.svelte';
+  import ResultBanner from '../ResultBanner.svelte';
  
 
   export let params = {};
@@ -53,6 +54,8 @@
   $: diceandmodinput = {dice: diceinput, mod: modinput};
   let floorcolor = "#00aa00";
   let texturepath;
+  let latestplayer;
+  let latestroll;
 
   onMount(()=> {
     initRollDice();
@@ -72,9 +75,9 @@
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
     rollDice(diceInput);
-	  if (userDict[userId]==username){
-		  mylatestroll = diceInput.result;
-	  }
+    latestplayer = userDict[userId];
+    latestroll = diceInput.result;
+	  
     rolls = [{
       user: userDict[userId],
       result: diceInput.result
@@ -93,7 +96,8 @@
 <Roll/>
 
 <div id="foreground">
-  <Player playername={username} latestroll={mylatestroll}/>
+
+  <ResultBanner playername={latestplayer} latestroll={latestroll}/>
 
 
   <button on:click={roll}>Roll dice</button>

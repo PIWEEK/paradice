@@ -48,6 +48,7 @@
 
 </style>
 
+<p>Soy DiceInput</p>
 
 {#each dice as die}
 <label class="test">
