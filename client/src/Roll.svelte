@@ -150,6 +150,10 @@
 
 
 
+   // BOUNDARIES FOR DICE TRAY
+
+    // CANNON part
+
     var bodyShape = new CANNON.Box(new CANNON.Vec3(0.1, 5, 10));
     var bodyMass = 5.0;
     var body = new CANNON.Body({
@@ -160,7 +164,8 @@
     body.position.set(10, 5.1, 0);
     world.add(body);
 
-    // barrier in threejs
+    // THREEJS part
+
     var skyBoxGeometry = new THREE.CubeGeometry(0.2, 10, 20);
     var skyBoxMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -169,9 +174,9 @@
     var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
     skyBox.position.y = 5.1;
     skyBox.position.x = 10.1;
-    scene.add(skyBox);
+ //   scene.add(skyBox);
 
-
+    // CANNON part
     var bodyShape = new CANNON.Box(new CANNON.Vec3(10, 10, 0.1));
     var bodyMass = 5.0;
     var body = new CANNON.Body({
@@ -182,7 +187,8 @@
     body.position.set(0, 5.1, 10.1);
     world.add(body);
 
-    // barrier in threejs
+    // THREEJS part 
+
     var skyBoxGeometry = new THREE.CubeGeometry(20, 10, 0.2);
     var skyBoxMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -191,7 +197,7 @@
     var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
     skyBox.position.y = 5.1;
     skyBox.position.z = 10.1;
-    scene.add(skyBox);
+//    scene.add(skyBox);
 
 
     requestAnimationFrame(animate);
@@ -238,7 +244,7 @@
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
         let rand = Math.random() * 8;
-        die.getObject().body.velocity.set(40 + rand, 30 + yRand, 15 + rand);
+        die.getObject().body.velocity.set(40 + rand, 10 + yRand, 35 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
         diceValues.push({dice: die, value: diceIt.result[i]});
