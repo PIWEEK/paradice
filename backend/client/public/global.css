@@ -154,6 +154,6 @@ button:focus {
 	border: 1px solid #CDB4CF;
 	display: flex;
 	flex-direction: column;
-	padding: .8rem .5rem;
+	padding: .5rem;
 	margin: .3rem 0;
 }
