@@ -1,11 +1,3 @@
-<style>
-	#ThreeJS {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-  }
-</style>
-
 <script>
   import { onMount } from 'svelte';
   import io from 'socket.io-client';
@@ -87,6 +79,21 @@
 
 </script>
 
+<style>
+
+	#ThreeJS {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  .btn-primary {
+    padding: .3rem;
+    margin: .6rem .3rem;
+  }
+
+</style>
+
 <Roll/>
 
 <div id="foreground">
@@ -105,6 +112,6 @@
       <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
 
   
-     <button on:click={roll}>Roll dice</button>
+     <button class="btn-primary" on:click={roll}>Roll dice</button>
   </div>
 </div>

@@ -20,7 +20,7 @@
 
     li {
         align-items: center;
-        padding: .1rem 0;
+        padding: .2rem 0;
         display: flex;
         width: 100%;
     }
@@ -49,6 +49,14 @@
         width: 14px;
     }
 
+    .last-roll {
+        background-color: #F1E2F4;
+        margin-left: auto;
+        padding: .1rem .2rem;
+        text-align: center;
+        width: 20px;
+    }
+
 </style>
 
 <ul>
@@ -56,11 +64,13 @@
     {#if p==username}
         <li>
             <div class="color-user" style=" background-image: url({dicetexture});"></div>
-            <span>{p} (You): {latestrolls[p]}</span>
+            <span>{p} (You)</span>
+            <span class="last-roll">{latestrolls[p]}</span>
         </li>
     {:else}
         <li>
             <div class="color-otheruser"></div>
+            <span>{p}: {latestrolls[p]}</span>
             <span>{p}: {latestrolls[p]}</span>
         </li>
 
