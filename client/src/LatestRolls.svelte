@@ -6,7 +6,6 @@
     let dicetexture = localStorage.getItem("dicetexture");
     console.log(dicetexture);
     
-    
 
 </script>
 
@@ -63,14 +62,14 @@
     {#each latestrollsbinded as p}
     {#if p==username}
         <li>
-            <div class="color-user" style=" background-image: url({dicetexture});"></div>
+            <div class="color-user" style="background-image: url({dicetexture});"></div>
             <span>{p} (You)</span>
             <span class="last-roll">{latestrolls[p]}</span>
         </li>
     {:else}
         <li>
-            <div class="color-otheruser"></div>
-            <span>{p} (You)</span>
+            <div class="color-otheruser" style="background-image: url({dicetexture});"></div>
+            <span>{p}</span>
             <span class="last-roll">{latestrolls[p]}</span>
         </li>
 
