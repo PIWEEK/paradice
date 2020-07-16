@@ -28,13 +28,14 @@
   let mylatestroll = 0;
   let diceinput;
   let modifier;
+  let wipevalue = true;
 
   $: diceandmodinput = {
     dice: diceinput,
     fontColor: DICE_TEXTURES.find((texture) => texture.path == localStorage.getItem("dicetexture")).fontColor,
     texture: localStorage.getItem("dicetexture"),
     modifier: modifier,
-    wipe: true
+    wipe: wipevalue
   };
 
   let floorcolor = "#00aa00";
@@ -105,7 +106,7 @@
       <LatestRolls latestRolls={latestRolls} userList={userList}/>
     </div>
     <RollLog bind:rolls={rolls}/>
-    <DiceInput bind:dice={diceinput} bind:modifier={modifier}/>
+    <DiceInput bind:dice={diceinput} bind:modifier={modifier} bind:wipe={wipevalue}/>
     <button class="btn-primary" on:click={roll}>Roll dice</button>
   </div>
 </div>
