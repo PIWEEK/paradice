@@ -54,6 +54,10 @@
     margin-bottom: 1rem;
   }
 
+  .column-flex {
+    margin: 0 .5rem;
+  }
+
   .selectedtexture {
     border: 0.1em solid #371B3E;
     border-radius: 50%;
@@ -94,11 +98,17 @@
 <div class="content-center">
 
   <h1>Welcome!</h1>
-  <label>YOUR NAME</label>
-  <input class="input-center" type=text bind:value={username} max=40>
+  <div class="row-flex">
+    <div class="column-flex">
+      <label>YOUR NAME</label>
+      <input class="input-center" type=text bind:value={username} max=40>
+    </div>
+    <div class="column-flex">
+      <label>GAME</label>
+      <input class="input-center" type=text bind:value={game} max=40>
+    </div>
+  </div>
 
-  <label>GAME</label>
-  <input class="input-center" type=text bind:value={game} max=40>
 
 
   <p>Table Skin</p>

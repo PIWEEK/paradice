@@ -122,6 +122,12 @@ button:focus {
 	display: flex;
 }
 
+.column-flex {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
 /* SIDEBAR STYLES */
 
 #foreground {
