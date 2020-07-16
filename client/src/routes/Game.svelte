@@ -33,7 +33,8 @@
     dice: diceinput,
     fontColor: DICE_TEXTURES.find((texture) => texture.path == localStorage.getItem("dicetexture")).fontColor,
     texture: localStorage.getItem("dicetexture"),
-    modifier: modifier
+    modifier: modifier,
+    wipe: true
   };
 
   let floorcolor = "#00aa00";

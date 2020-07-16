@@ -17,6 +17,7 @@ export interface DiceInput {
   texture: string;
   fontColor: string;
   modifier: string;
+  wipe: boolean;
 }
 
 export interface DiceResult extends Dice {
@@ -28,5 +29,6 @@ export interface DiceOutput {
   texture: string;
   fontColor: string;
   modifier: string;
+  wipe: boolean;
   result: number;
 }
