@@ -18,6 +18,7 @@ export interface DiceInput {
   fontColor: string;
   modifier: string;
   wipe: boolean;
+  sound: string;
 }
 
 export interface DiceResult extends Dice {
@@ -30,5 +31,6 @@ export interface DiceOutput {
   fontColor: string;
   modifier: string;
   wipe: boolean;
+  sound: string;
   result: number;
 }
