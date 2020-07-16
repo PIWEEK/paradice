@@ -2,6 +2,7 @@
   import { TABLE_TEXTURES, DICE_TEXTURES } from '../constants';
 
   let username = localStorage.getItem("username");
+  let selectedsetimg = '/dice/img/set-00.jpg';
   if (!username) {
     username = "Your name";
   }
@@ -24,8 +25,9 @@
     localStorage.setItem("tabletexture", path);
   }
 
-  function setDiceImage(path) {
+  function setDiceImage(path, setimg) {
     selectedDice = path;
+    selectedsetimg = setimg;
     localStorage.setItem("dicetexture", path);
   }
 </script>
@@ -104,16 +106,16 @@
   <p>Dice Skin</p>
 
   <div class="row-flex">
-    {#each DICE_TEXTURES as { id, path }, i}
+    {#each DICE_TEXTURES as { id, path, setimg }, i}
     {#if path == selectedDice}
-    <img on:click|preventDefault={() => setDiceImage(path)} class="selectedtexture"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setDiceImage(path, setimg)} class="selectedtexture"  src="{path}" alt="{id}"/>
     {:else}
-    <img on:click|preventDefault={() => setDiceImage(path)} class="texturesample"  src="{path}" alt="{id}"/>
+    <img on:click|preventDefault={() => setDiceImage(path, setimg)} class="texturesample"  src="{path}" alt="{id}"/>
     {/if}
     {/each}
   </div>
 
-  <img class="dice-set-img" src="/dice/img/set-00.jpg" alt="Dice set">
+  <img class="dice-set-img" src={selectedsetimg} alt="Dice set">
 
 
   <a class="btn-primary" href="/#/game/paradice-testing-game">Start Playing</a>
