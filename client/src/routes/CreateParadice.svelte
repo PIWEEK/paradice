@@ -38,12 +38,12 @@
   .logo-small {
     display: flex;
     max-width: 330px;
-    margin: 2rem auto;
+    margin: 1rem auto .5rem;
     width: 100%;
   }
 
   .row-flex {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .selectedtexture {
@@ -70,6 +70,13 @@
 
   .texturesample:hover {
     border-color:#CF4AD9 ;
+  }
+
+  .dice-set-img {
+    height: 90px;
+    margin-bottom: 1rem;
+    max-width: 80%;
+    width: 350px;
   }
 
 </style>
@@ -105,6 +112,9 @@
     {/if}
     {/each}
   </div>
+
+  <img class="dice-set-img" src="/dice/img/set-00.jpg" alt="Dice set">
+
 
   <a class="btn-primary" href="/#/game/paradice-testing-game">Start Playing</a>
 </div>
