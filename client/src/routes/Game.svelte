@@ -20,6 +20,11 @@
   let username = localStorage.getItem("username");
   let dicetexture = localStorage.getItem("dicetexture");
   let tabletexture = localStorage.getItem("tabletexture");
+  let game = localStorage.getItem("game");
+  if (!game) {
+    game = "your-game";
+  }
+
 
   const socket = io(`${apiURL}/?username=${username}&game=${params.gameId}&diceTexture=${dicetexture}`);
 
@@ -112,7 +117,7 @@
   <ParadiceLogo/>
   <div class="sidebar-content">
     <div class="sidebar-item">
-      <GameInfo/>
+      <GameInfo bind:game={game}/>
       <LatestRolls latestRolls={latestRolls} userList={userList}/>
     </div>
     <RollLog bind:rolls={rolls}/>
