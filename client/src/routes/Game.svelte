@@ -62,13 +62,18 @@
 
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
-    rollDice(diceInput);
-    latestPlayer = userId;
-    latestRolls[userId] = diceInput;
-    rolls = [{
-      user: userDict[userId],
-      ...diceInput
-    }, ...rolls];
+    rollDice(diceInput, () => {
+      setTimeout(() => {
+        latestPlayer = userId;
+        latestRolls[userId] = diceInput;
+        rolls = [{
+          user: userDict[userId],
+          ...diceInput
+          }, ...rolls
+        ];
+      },
+      1000);
+    });
   });
 
   // listen for user list event
