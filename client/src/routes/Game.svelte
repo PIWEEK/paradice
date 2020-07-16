@@ -8,7 +8,6 @@
   import ParadiceLogo from '../ParadiceLogo.svelte';
   import LatestRolls from '../LatestRolls.svelte';
   import RollLog from '../RollLog.svelte';
-  import RollDice from '../RollDice.svelte';
   import ResultBanner from '../ResultBanner.svelte';
   import GameInfo from '../GameInfo.svelte';
   import { DICE_TEXTURES } from '../constants';
@@ -59,7 +58,7 @@
 
   function roll() {
     socket.emit("roll", diceandmodinput);
-    new Audio('sounds/dice.mp3').play()
+    
   }
 
   function handleTextureUpdated(event) {
@@ -68,6 +67,7 @@
 
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
+    new Audio('sounds/dice.mp3').play();
     rollDice(diceInput, () => {
       setTimeout(() => {
         latestPlayer = userId;
