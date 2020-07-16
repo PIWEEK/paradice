@@ -74,6 +74,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+  width: 100%;
 }
 </style>
 
@@ -85,7 +86,7 @@
     <input type=number bind:value={die.qty} min=0 max=20 size=4>
   </label>
   {/each}
-  <label class="mod-input">
+  <label class="dice-input">
     <span>{modValidator(modifier)}</span>
     <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
   </label>

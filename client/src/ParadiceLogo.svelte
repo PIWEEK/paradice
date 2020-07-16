@@ -7,7 +7,7 @@
   .logo-sidebar {
     display: flex;
     max-width: 200px;
-    margin: 1rem;
+    margin: 0 1rem .5rem;
     width: 100%;
   }
 
