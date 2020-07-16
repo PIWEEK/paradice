@@ -68,9 +68,9 @@
 
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
-    soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
-    new Audio(soundpath).play();
+
     rollDice(diceInput, () => {
+      console.log(diceInput);
       setTimeout(() => {
         latestPlayer = userId;
         latestRolls[userId] = diceInput;
@@ -82,6 +82,18 @@
       },
       1000);
     });
+  var numdice = diceInput.dice.reduce(function(prev, cur) {
+  return prev + cur.qty;
+  }, 0);
+  soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
+  
+  if (numdice == 1){
+      soundpath = soundpath.replace('00','00_1');      
+      console.log(soundpath);
+  } else if (numdice == 2){
+      soundpath = soundpath.replace('00','00_2');      
+  }
+  new Audio(soundpath).play();
   });
 
   // listen for user list event
