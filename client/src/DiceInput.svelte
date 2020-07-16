@@ -14,6 +14,7 @@
     { id: 6, label: "D100", range: 10, qty: parseInt(localStorage.getItem("D100")) || 0, factor: 10, mod: 100, result: 0 },
   ]
   export let modifier = localStorage.getItem("modifier") || '';
+  export let wipe = true;
 
   $: {
     dice.forEach((d) => {
@@ -90,5 +91,9 @@
     <span>{modValidator(modifier)}</span>
     <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
   </label>
+  <label>
+	<input type=checkbox bind:checked={wipe}>
+	Wipe table?
+</label>
 </div>
 
