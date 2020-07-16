@@ -56,6 +56,7 @@
 
     // CONTROLS
     controls = new OrbitControls(camera, renderer.domElement);
+    controls.enabled = false;
 
     let ambient = new THREE.AmbientLight("#ffffff", 1.3);
     //scene.add(ambient);
