@@ -68,7 +68,7 @@
     {#each rolls.slice(0,50) as roll}
       <li>
         <div class="row-flex">
-          <div class="color-user"></div>
+          <div class="color-user" style="background-image: url({roll.user.diceTexture});"></div>
           <span>{roll.user.username}</span>
         </div>
         <span class="roll-op"><DiceResult roll={roll}/> = {roll.result}</span>

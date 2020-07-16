@@ -74,7 +74,12 @@
   // listen for user list event
   socket.on("users-list", (data) => {
     userDict = data;
-    userList = Object.values(data);
+    userList = Object.keys(data).map(userId => {
+      return {
+        ...data[userId],
+        userId: userId
+      }
+    });
   });
 
 </script>
