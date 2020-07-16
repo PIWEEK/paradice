@@ -1,0 +1,1 @@
+<h1>Soy Game Info</h1>
