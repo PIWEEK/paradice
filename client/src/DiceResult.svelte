@@ -1,7 +1,7 @@
 <script>
-    export let roll = {};
-
-    function printRoll() {
+  export let roll = {};
+  let rollText = "";
+  $: {
       const result = [];
       roll.dice.forEach(die => {
         if (die.qty > 0) {
@@ -12,8 +12,11 @@
       if (roll.mod) {
         result.push("TODO");
       }
-      return `${result.join(" + ")} = ${roll.result}`
+      rollText = `${result.join(" + ")}`;
+  }
+    function printRoll() {
+
     }
 </script>
 
-{printRoll()}
+{rollText}

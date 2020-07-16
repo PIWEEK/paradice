@@ -63,6 +63,8 @@
     latestPlayer = userId;
     latestRolls[userId] = diceInput;
 
+    console.log("latestRolls[userId]", latestRolls[userId])
+
     rolls = [{
       user: userDict[userId],
       ...diceInput

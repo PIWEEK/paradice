@@ -55,7 +55,7 @@
     {#each rolls.slice(0,50) as roll}
       <li>
         <span>{roll.user.username}</span>
-        <span class="roll-op"><DiceResult roll={roll}/></span>
+        <span class="roll-op"><DiceResult roll={roll}/> = {roll.result}</span>
       </li>
     {/each}
   </ul>

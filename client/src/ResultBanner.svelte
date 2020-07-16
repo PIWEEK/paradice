@@ -30,6 +30,6 @@
 
 {#if player}
   <div class="roll-result">
-    {player.username} got <span>{latestRoll.result}</span> <span class="maths"><DiceResult roll={latestRoll}/></span>
+    {player.username} got <span>{latestRoll.result}</span> <span class="maths"><DiceResult bind:roll={latestRoll}/></span>
   </div>
 {/if}
