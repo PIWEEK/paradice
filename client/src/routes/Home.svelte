@@ -15,10 +15,6 @@
     padding: 2rem;
   }
 
-  .big-logo {
-    font-size: .1px;
-  }
-
   .big-logo img {
     width: 100%;    
   }
@@ -46,7 +42,6 @@
 
   <h1 class="big-logo">
     <img src="/images/logo.png" alt="PARADICE" border="0">
-    PARADICE
   </h1>
 
   <a class="btn-primary" href="/create" use:link>Start Paradice</a>
