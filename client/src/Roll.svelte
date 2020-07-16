@@ -60,7 +60,7 @@
     let ambient = new THREE.AmbientLight("#ffffff", 1.3);
     //scene.add(ambient);
 
-    let light = new THREE.SpotLight(0xf2dba4, 3.0);
+    let light = new THREE.SpotLight(0xf2dba4, 2.8);
     light.position.y = 40;
     light.position.x = 0;
     light.target.position.set(3, 0, 3);

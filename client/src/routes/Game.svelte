@@ -10,6 +10,7 @@
   import RollLog from '../RollLog.svelte';
   import RollDice from '../RollDice.svelte';
   import ResultBanner from '../ResultBanner.svelte';
+  import GameInfo from '../GameInfo.svelte';
   import { DICE_TEXTURES } from '../constants';
 
   export let params = {};
@@ -111,6 +112,7 @@
   <ParadiceLogo/>
   <div class="sidebar-content">
     <div class="sidebar-item">
+      <GameInfo/>
       <LatestRolls latestRolls={latestRolls} userList={userList}/>
     </div>
     <RollLog bind:rolls={rolls}/>
