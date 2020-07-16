@@ -68,39 +68,24 @@
     light.shadow.camera.near = 1;
     light.shadow.camera.far = 200;
     light.shadowCameraFov = 50;
-    light.shadow.mapSize.width = 1024;
-    light.shadow.mapSize.height = 1024;
+    light.shadowBias = 0.001;
+    light.shadowDarkness = 1.1;
+    light.shadow.mapSize.width = 512;
+    light.shadow.mapSize.height = 512;
     light.shadowDarkness = 1.1;
     var spotLightHelper = new THREE.SpotLightHelper( light );
     scene.add( spotLightHelper );
     scene.add(light);
+    var desk_color = 0xdfdfdf;
+    // DESK
 
-    // FLOOR
-    var texturepath = 'table/img/table00.jpg';
-    var repeats = 5;
-    var index = 0;
-    var loader = new THREE.TextureLoader();
-    var floorTexture = loader.load(texturepath);
-    floorTexture.receiveShadow = true;
-    floorTexture.needsUpdate = true;
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.set(repeats, repeats);
+    var desk = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), 
+             new THREE.MeshPhongMaterial({ color: desk_color }));
+    desk.receiveShadow = true;
+    desk.rotation.x -= Math.PI/2;
+    scene.add(desk);
 
-    var floorMaterial = new THREE.MeshBasicMaterial({
-      map: floorTexture,
-      side: THREE.BackSide
-    });
-
-    floorMaterial.castShadow = true;
-
-    var floorGeometry = new THREE.PlaneGeometry(120, 120);
-    floorGeometry.receiveShadow = true;
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.name = "Floor";
-    floor.receiveShadow = true;
-    floor.rotation.x += Math.PI/2;
-    floor.position.y = 0;
-    scene.add(floor);
+    
 
 
     ////////////
@@ -259,11 +244,7 @@
 	  var floorTexture = loader.load(texturepath);
 	  floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
 	  floorTexture.repeat.set(repeats, repeats);
-		//change of floor texture on the fly
-    let f = scene.getObjectByName("Floor");
-    f.material.map = floorTexture;
-    f.material.needsUpdate = true;
-	}
+  }
 
 </script>
 
