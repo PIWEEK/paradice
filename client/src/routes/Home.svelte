@@ -28,6 +28,18 @@
     font-size: 24px;
   }
 
+  .footer-link {
+    bottom: 2rem;
+    font-size: .9rem;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer-link a {
+    color: #ffffff;
+  }
+
 </style>
 
 <div class="home-section">
@@ -38,5 +50,7 @@
   </h1>
 
   <a class="btn-primary" href="/create" use:link>Start Paradice</a>
+
+  <span class="footer-link">Made with love at PIWEEK <a href="https://github.com/PIWEEK/paradice" target="_blank">[ Github ]</a></span>
 
 </div>

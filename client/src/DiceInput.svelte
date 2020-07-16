@@ -56,27 +56,27 @@
     margin-top: 0;
   }
 
-.dice-input {
-  align-items: center;
-  display: flex;
-}
+  .dice-input {
+    align-items: center;
+    display: flex;
+    margin-bottom: .5rem;
+  }
 
-.dice-input span {
-  width: 35px;
-}
+  .dice-input span {
+    width: 32px;
+  }
 
-.dice-input input,
-.mod-input input {
-  border-color: #CDB4CF;
-  color: #CF4AD9;
-}
+  .dice-input input {
+    border-color: #CDB4CF;
+    color: #CF4AD9;
+    margin-bottom: 0;
+    width: 57px;
+  }
 
-.mod-input {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-  width: 100%;
-}
+  .input-checkbox {
+    margin-top: .5rem;
+  }
+
 </style>
 
 <div class="sidebar-item">
@@ -88,12 +88,12 @@
   </label>
   {/each}
   <label class="dice-input">
-    <span>(+ / -) MOD</span>
+    <span>MOD</span>
     <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
   </label>
-  <label>
-	<input type=checkbox bind:checked={wipe}>
-	Wipe table?
-</label>
+  <label class="input-checkbox">
+	  <input type=checkbox bind:checked={wipe}>
+	    Wipe table?
+  </label>
 </div>
 
