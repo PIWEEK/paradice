@@ -163,7 +163,7 @@
     skyBox.position.x = x;
     skyBox.position.y = y;
     skyBox.position.z = z;
-    
+
     scene.add(skyBox);
 
    };
@@ -174,20 +174,20 @@
     createBoundary(0, 0, 10, 20, 10, 0.1);
     createBoundary(-10, 0, 0, 0.1, 10, 20);
     createBoundary(0, 0, -10, 20, 10, 0.1);
-   
 
-    
-    requestAnimationFrame(animate);
+requestAnimationFrame(animate);
   }
 
   export function rollDice(diceInput) {
-    dice.forEach((d) => {
-      scene.remove(d.getObject());
-      world.remove(d.getObject().body);
-    });
+    if (diceInput.wipe) {
+      dice.forEach((d) => {
+        scene.remove(d.getObject());
+        world.remove(d.getObject().body);
+      });
 
-    diceValues = [];
-    dice = [];
+      diceValues = [];
+      dice = [];
+    }
 
     const imageTexture = imageTextures[diceInput.texture]
 

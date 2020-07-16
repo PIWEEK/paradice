@@ -87,7 +87,7 @@
   </label>
   {/each}
   <label class="dice-input">
-    <span>{modValidator(modifier)}</span>
+    <span>(+ / -) MOD</span>
     <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
   </label>
 </div>
