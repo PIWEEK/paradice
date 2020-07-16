@@ -27,13 +27,13 @@
   let rolls = [];
   let mylatestroll = 0;
   let diceinput;
-  let modinput;
+  let modifier;
 
   $: diceandmodinput = {
     dice: diceinput,
-    mod: modinput,
     fontColor: DICE_TEXTURES.find((texture) => texture.path == localStorage.getItem("dicetexture")).fontColor,
-    texture: localStorage.getItem("dicetexture")
+    texture: localStorage.getItem("dicetexture"),
+    modifier: modifier
   };
 
   let floorcolor = "#00aa00";
@@ -104,7 +104,7 @@
       <LatestRolls latestRolls={latestRolls} userList={userList}/>
     </div>
     <RollLog bind:rolls={rolls}/>
-    <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+    <DiceInput bind:dice={diceinput} bind:modifier={modifier}/>
     <button class="btn-primary" on:click={roll}>Roll dice</button>
   </div>
 </div>

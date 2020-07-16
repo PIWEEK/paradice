@@ -74,9 +74,9 @@ export class ParadiceServer {
 
         const diceOutput: DiceOutput = {
           dice: [],
-          mod: diceInput.mod,
           texture: diceInput.texture,
           fontColor: diceInput.fontColor,
+          modifier: diceInput.modifier,
           result: 0
         }
 
@@ -88,9 +88,13 @@ export class ParadiceServer {
           };
           diceOutput.dice.push(diceResult);
           diceOutput.result = diceOutput.result + values.map((v) => (dice.factor * v) % dice.mod).reduce((a, b) => a + b, 0);
+
         });
 
-        diceOutput.mod = diceInput.mod;
+        if (diceInput.modifier) {
+          console.log(11111, diceInput.modifier, parseInt(diceInput.modifier))
+          diceOutput.result = diceOutput.result + parseInt(diceInput.modifier);
+        }
         console.log(diceOutput);
 
         this.io.in(gameId).emit(Event.ROLL, socket.id, diceOutput);

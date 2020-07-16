@@ -13,12 +13,13 @@
     { id: 5, label: "D20", range: 20, qty: parseInt(localStorage.getItem("D20")) || 0, factor: 1, mod: 21, result: 0 },
     { id: 6, label: "D100", range: 10, qty: parseInt(localStorage.getItem("D100")) || 0, factor: 10, mod: 100, result: 0 },
   ]
-  export let modifier = '';
+  export let modifier = localStorage.getItem("modifier") || '';
 
   $: {
     dice.forEach((d) => {
       localStorage.setItem(d.label, d.qty);
-    })
+    });
+    localStorage.setItem("modifier", modifier);
   }
 
   function randomInt(dieid, qty){
