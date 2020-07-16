@@ -8,6 +8,8 @@ export interface Dice {
   label: string;
   range: number;
   qty: number;
+  factor: number;
+  mod: number;
 }
 
 export interface DiceInput {

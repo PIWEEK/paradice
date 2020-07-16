@@ -76,7 +76,6 @@
     userList = Object.values(data);
   });
 
-
 </script>
 
 <style>
@@ -97,21 +96,14 @@
 <Roll/>
 
 <div id="foreground">
-
   <ResultBanner playername={latestplayer} latestroll={latestroll}/>
   <ParadiceLogo/>
   <div class="sidebar-content">
     <div class="sidebar-item">
       <LatestRolls bind:latestrolls={latestplayerandrolls}/>
     </div>
-  
-   
-
-
     <RollLog bind:rolls={rolls}/>
-      <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
-
-  
-     <button class="btn-primary" on:click={roll}>Roll dice</button>
+    <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>
+    <button class="btn-primary" on:click={roll}>Roll dice</button>
   </div>
 </div>

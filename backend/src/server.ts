@@ -80,7 +80,7 @@ export class ParadiceServer {
             result: values
           };
           diceOutput.dice.push(diceResult);
-          diceOutput.result = diceOutput.result + values.reduce((a, b) => a + b, 0);
+          diceOutput.result = diceOutput.result + values.map((v) => (dice.factor * v) % dice.mod).reduce((a, b) => a + b, 0);
         });
 
         diceOutput.mod = diceInput.mod;

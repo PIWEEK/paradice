@@ -3,7 +3,7 @@
   import OrbitControls from 'orbit-controls-es6';
 
   import CANNON from "cannon";
-  import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20 } from "./dice";
+  import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20, DiceD100 } from "./dice";
   import Stats from "stats.js";
   import { onMount } from 'svelte';
   import { DICE_TEXTURES } from './constants';
@@ -226,8 +226,10 @@
           die = new DiceD10({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         } else if (diceIt.label == "D12") {
           die = new DiceD12({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
-        } else { //if (diceIt.label == "D20") {
+        } else if (diceIt.label == "D20") {
           die = new DiceD20({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+        } else {
+          die = new DiceD100({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
         }
 
         die.getObject().name = `${diceIt.label}-${i}`;

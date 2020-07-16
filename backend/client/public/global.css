@@ -30,16 +30,22 @@ a:visited {
 	color: rgb(0,80,160);
 }
 
-a.btn-primary {
+a.btn-primary,
+.btn-primary {
 	background-color: #371B3E;
-	color: #ffffff;
-	font-size: 18px;
-	padding: .5rem 2rem;
-	box-shadow: 0px 0px 0px 5px #371B3E;
 	border: 1px solid #CF4AD9;
+	border-radius: 0;
+	box-shadow: 0px 0px 0px 5px #371B3E;
+	box-sizing: border-box;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 18px;
+	outline: none;
+	padding: .5rem 2rem;
 }
 
-a.btn-primary:hover {
+a.btn-primary:hover,
+.btn-primary:hover {
 	background-color: #CF4AD9;
 	color: #371B3E;
 	text-decoration: none;
@@ -113,4 +119,34 @@ button:focus {
 .row-flex {
 	align-items: center;
 	display: flex;
+}
+
+/* SIDEBAR STYLES */
+
+#foreground {
+	box-sizing: border-box;
+	left: 1rem;
+	position: absolute;
+	top: 0;
+	z-index: 1000;
+}
+
+.sidebar-content {
+	background-color: #ffffff;
+	box-sizing: border-box;
+	box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.35);
+	display: flex;
+	flex-direction: column;
+	max-width: 230px;
+	padding: .5rem;
+	width: 100%;    
+}
+
+.sidebar-item {
+	align-items: center;
+	border: 1px solid #CDB4CF;
+	display: flex;
+	flex-direction: column;
+	padding: .8rem .5rem;
+	margin: .5rem 0;
 }
