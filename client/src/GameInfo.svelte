@@ -1,11 +1,26 @@
 <script>
- 
-export let game = "No name?";
+	import CopyClipBoard from './CopyClipBoard.svelte';
+
+  export let game = "No name?";
+
+  const shareUrl = `${window.location.origin}/#/create?game=${game}`;
+
+  let showShareUrl = false;
+
+  function toggleShowShareUrl() {
+    showShareUrl = !showShareUrl;
+  }
+
+  function copy() {
+		const app = new CopyClipBoard({
+			target: document.getElementById('clipboard'),
+			props: { shareUrl },
+		});
+		app.$destroy();
+  }
 
 </script>
 <style>
-   
-
   h2 {
     font-size: 1.2rem;
     margin: 0;
@@ -41,6 +56,13 @@ export let game = "No name?";
 <div class="row-flex">
   <h2>{game}</h2>
   <span class="copy-link">
-    <img  value="HEY!" src="/images/share-table.png" alt="SHARE TABLE">
+    <img  value="HEY!" src="/images/share-table.png" alt="SHARE TABLE" on:click={toggleShowShareUrl}>
   </span>
 </div>
+{#if showShareUrl}
+<div>
+  <input value="{shareUrl}">
+  <button on:click={copy}>Copy</button>
+</div>
+{/if}
+<div id="clipboard"></div>

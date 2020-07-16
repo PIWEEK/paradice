@@ -1,4 +1,6 @@
 <script>
+  import * as queryString from 'query-string';
+
   import { TABLE_TEXTURES, DICE_TEXTURES } from '../constants';
 
   let username = localStorage.getItem("username");
@@ -7,7 +9,8 @@
     username = "Your name";
   }
 
-  let game = localStorage.getItem("game");
+  const gameParam = queryString.parse(window.location.hash)["/create?game"];
+  let game = gameParam || localStorage.getItem("game");
   if (!game) {
     game = "your-game";
   }
