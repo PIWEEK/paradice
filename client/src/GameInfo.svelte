@@ -51,6 +51,20 @@
     width: 100%;
   }
 
+  .input-url {
+    border-color: #CDB4CF;
+    color: #CF4AD9;
+    font-size: .8rem;
+    margin-right: .6rem;
+    width: 140px;
+  }
+
+  .btn-primary {
+    box-shadow: 0px 0px 0px 3px #371B3E;
+    font-size: .9rem;
+    padding: .1rem .6rem;
+  }
+
 </style>
 
 <div class="row-flex">
@@ -60,9 +74,9 @@
   </span>
 </div>
 {#if showShareUrl}
-<div>
-  <input value="{shareUrl}">
-  <button on:click={copy}>Copy</button>
+<div class="row-flex">
+  <input class="input-url" value="{shareUrl}">
+  <button class="btn-primary" on:click={copy}>Copy</button>
 </div>
 {/if}
 <div id="clipboard"></div>
