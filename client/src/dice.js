@@ -33,7 +33,7 @@ class DiceManagerClass {
      *
      */
     prepareValues(diceValues) {
-        if (this.throwRunning) throw new Error('Cannot start another throw. Please wait, till the current throw is finished.');
+        // if (this.throwRunning) throw new Error('Cannot start another throw. Please wait, till the current throw is finished.');
 
         for (let i = 0; i < diceValues.length; i++) {
             if (diceValues[i].value < 1 || diceValues[i].dice.values < diceValues[i].value) {
