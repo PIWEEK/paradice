@@ -13,4 +13,6 @@
 
 </style>
 
-<img class="logo-sidebar" src="/images/logo-small.png" alt="PARADICE" border="0">
+<a href="/">
+  <img class="logo-sidebar" src="/images/logo-small.png" alt="PARADICE" border="0">
+</a>
