@@ -58,10 +58,10 @@
     controls = new OrbitControls(camera, renderer.domElement);
 
     let ambient = new THREE.AmbientLight("#ffffff", 1.3);
-    scene.add(ambient);
+    //scene.add(ambient);
 
-    let light = new THREE.SpotLight(0xf2dba4, 2.0);
-    light.position.y = 30;
+    let light = new THREE.SpotLight(0xf2dba4, 3.0);
+    light.position.y = 40;
     light.position.x = 0;
     light.target.position.set(3, 0, 3);
     light.castShadow = true;
@@ -74,15 +74,29 @@
     light.shadow.mapSize.height = 512;
     light.shadowDarkness = 1.1;
     var spotLightHelper = new THREE.SpotLightHelper( light );
-    scene.add( spotLightHelper );
+    //scene.add( spotLightHelper );
     scene.add(light);
     var desk_color = 0xdfdfdf;
     // DESK
 
+
+    var texturepath = 'table/img/table00.jpg';
+    var repeats = 5;
+    var index = 0;
+    var loader = new THREE.TextureLoader();
+    var floorTexture = loader.load(texturepath);
+    floorTexture.receiveShadow = true;
+    floorTexture.needsUpdate = true;
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.repeat.set(repeats, repeats);
+
+    var texture1 = loader.load("table/img/table00.jpg");
+    
     var desk = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), 
-             new THREE.MeshPhongMaterial({ color: desk_color }));
+             new THREE.MeshPhongMaterial({ color: desk_color, map:texture1 }));
     desk.receiveShadow = true;
     desk.rotation.x -= Math.PI/2;
+    desk.name = "Floor";
     scene.add(desk);
 
     
@@ -106,7 +120,7 @@
       material: DiceManager.floorBodyMaterial // floorMaterial???
     });
     floorBody.receiveShadow = true;
-    floorBody.position.y = 0.1;
+    floorBody.position.y = 0;
     floorBody.quaternion.setFromAxisAngle(
       new CANNON.Vec3(1, 0, 0),
       -Math.PI / 2
@@ -143,7 +157,7 @@
     skyBox.position.y = y;
     skyBox.position.z = z;
 
-    scene.add(skyBox);
+    //scene.add(skyBox);
 
    };
 
@@ -243,8 +257,14 @@
 	  var loader = new THREE.TextureLoader();
 	  var floorTexture = loader.load(texturepath);
 	  floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-	  floorTexture.repeat.set(repeats, repeats);
+    floorTexture.repeat.set(repeats, repeats);
+    		//change of floor texture on the fly
+    let f = scene.getObjectByName("Floor");
+    f.material.map = floorTexture;
+    f.material.needsUpdate = true;
+	
   }
+  
 
 </script>
 
