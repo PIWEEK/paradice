@@ -78,6 +78,7 @@ export class ParadiceServer {
           fontColor: diceInput.fontColor,
           modifier: diceInput.modifier,
           wipe: diceInput.wipe,
+          sound: diceInput.sound,
           result: 0
         }
 
