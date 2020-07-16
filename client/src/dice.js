@@ -114,7 +114,6 @@ class DiceObject {
         this.texture = options.imageTexture;
 
         this.customTextTextureFunction = (text, color, backColor) => {
-          console.log("customTextTextureFunction", text)
           let canvas = document.createElement("canvas");
           let context = canvas.getContext("2d");
           let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;

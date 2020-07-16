@@ -15,8 +15,6 @@
     imageTextures[texture.path].src = texture.path;
   });
 
-  console.log("DICE_TEXTURES", imageTextures)
-
   // standard global variables
   let container,
     scene,
@@ -54,15 +52,9 @@
 
     container = document.getElementById("ThreeJS");
     container.appendChild(renderer.domElement);
-    // EVENTS
+
     // CONTROLS
     controls = new OrbitControls(camera, renderer.domElement);
-    // STATS
-    // stats = new Stats();
-    // stats.domElement.style.position = "absolute";
-    // stats.domElement.style.bottom = "0px";
-    // stats.domElement.style.zIndex = 100;
-    // container.appendChild(stats.domElement);
 
     let ambient = new THREE.AmbientLight("#ffffff", 0.8);
     scene.add(ambient);
@@ -111,8 +103,6 @@
     floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
 
-
-
     // SKYBOX/FOG
     var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
     var skyBoxMaterial = new THREE.MeshPhongMaterial({
@@ -148,9 +138,7 @@
     );
     world.add(floorBody);
 
-
-
-   // BOUNDARIES FOR DICE TRAY
+    // BOUNDARIES FOR DICE TRAY
 
     // CANNON part
 
@@ -174,7 +162,7 @@
     var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
     skyBox.position.y = 5.1;
     skyBox.position.x = 10.1;
- //   scene.add(skyBox);
+    // scene.add(skyBox);
 
     // CANNON part
     var bodyShape = new CANNON.Box(new CANNON.Vec3(10, 10, 0.1));
@@ -187,7 +175,7 @@
     body.position.set(0, 5.1, 10.1);
     world.add(body);
 
-    // THREEJS part 
+    // THREEJS part
 
     var skyBoxGeometry = new THREE.CubeGeometry(20, 10, 0.2);
     var skyBoxMaterial = new THREE.MeshPhongMaterial({
@@ -197,8 +185,7 @@
     var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
     skyBox.position.y = 5.1;
     skyBox.position.z = 10.1;
-//    scene.add(skyBox);
-
+    // scene.add(skyBox);
 
     requestAnimationFrame(animate);
   }
@@ -206,12 +193,13 @@
   export function rollDice(diceInput) {
     dice.forEach((d) => {
       scene.remove(d.getObject());
-      world.remove(d.getObject());
+      world.remove(d.getObject().body);
     });
 
-    const imageTexture = imageTextures[diceInput.texture]
+    diceValues = [];
+    dice = [];
 
-    console.log("diceInput.fontColor", diceInput.fontColor)
+    const imageTexture = imageTextures[diceInput.texture]
 
     diceInput.dice.forEach((diceIt) => {
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
