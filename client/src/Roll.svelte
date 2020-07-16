@@ -100,6 +100,7 @@
     floor.name = "Floor";
     floor.receiveShadow = true;
     floor.rotation.x += Math.PI/2;
+    floor.position.y = 0;
     floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
 
@@ -118,7 +119,7 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 50, 0);
+    world.gravity.set(0, -9.82 * 90, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 16;
 
@@ -131,7 +132,7 @@
       material: DiceManager.floorBodyMaterial // floorMaterial???
     });
     floorBody.receiveShadow = true;
-
+    floorBody.position.y = 0.1;
     floorBody.quaternion.setFromAxisAngle(
       new CANNON.Vec3(1, 0, 0),
       -Math.PI / 2
@@ -140,53 +141,46 @@
 
     // BOUNDARIES FOR DICE TRAY
 
-    // CANNON part
+   function createBoundary(x, y, z, w, h, t){
 
-    var bodyShape = new CANNON.Box(new CANNON.Vec3(0.1, 5, 10));
+     // w = width h = height t = thickness
+     // x, y, z are coordinates
+
+
+    var bodyShape = new CANNON.Box(new CANNON.Vec3(w, h, t));
     var bodyMass = 5.0;
     var body = new CANNON.Body({
       mass: 0,
       shape: bodyShape,
       material: DiceManager.floorBodyMaterial
     });
-    body.position.set(10, 5.1, 0);
+    body.position.set(x, y/2, z);
     world.add(body);
 
-    // THREEJS part
-
-    var skyBoxGeometry = new THREE.CubeGeometry(0.2, 10, 20);
+    var skyBoxGeometry = new THREE.CubeGeometry(w*2, h*2, t*2);
     var skyBoxMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      side: THREE.BackSide
+      color: 0x761CEC,
+      side: THREE.BackSide,
+      wireframe: true
     });
     var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-    skyBox.position.y = 5.1;
-    skyBox.position.x = 10.1;
-    // scene.add(skyBox);
+    skyBox.position.x = x;
+    skyBox.position.y = y;
+    skyBox.position.z = z;
+    
+    scene.add(skyBox);
 
-    // CANNON part
-    var bodyShape = new CANNON.Box(new CANNON.Vec3(10, 10, 0.1));
-    var bodyMass = 5.0;
-    var body = new CANNON.Body({
-      mass: 0,
-      shape: bodyShape,
-      material: DiceManager.floorBodyMaterial
-    });
-    body.position.set(0, 5.1, 10.1);
-    world.add(body);
+   };
 
-    // THREEJS part
+    var sw = SCREEN_WIDTH;
+    var sh = SCREEN_HEIGHT;
+    createBoundary(10, 0, 0, 0.1, 10, 20);
+    createBoundary(0, 0, 10, 20, 10, 0.1);
+    createBoundary(-10, 0, 0, 0.1, 10, 20);
+    createBoundary(0, 0, -10, 20, 10, 0.1);
+   
 
-    var skyBoxGeometry = new THREE.CubeGeometry(20, 10, 0.2);
-    var skyBoxMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      side: THREE.BackSide
-    });
-    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-    skyBox.position.y = 5.1;
-    skyBox.position.z = 10.1;
-    // scene.add(skyBox);
-
+    
     requestAnimationFrame(animate);
   }
 
@@ -234,7 +228,7 @@
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
         let rand = Math.random() * 8;
-        die.getObject().body.velocity.set(40 + rand, 10 + yRand, 35 + rand);
+        die.getObject().body.velocity.set(60 + rand,  yRand, 35 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
         diceValues.push({dice: die, value: diceIt.result[i]});
