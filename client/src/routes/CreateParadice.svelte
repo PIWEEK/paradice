@@ -7,8 +7,14 @@
     username = "Your name";
   }
 
+  let game = localStorage.getItem("game");
+  if (!game) {
+    game = "your-game";
+  }
+
   $: {
     localStorage.setItem("username", username);
+    localStorage.setItem("game", game);
   }
 
   let selectedTable = localStorage.getItem("tabletexture");
@@ -87,9 +93,13 @@
 <img class="logo-small" src="/images/logo-small.png" alt="PARADICE" border="0">
 <div class="content-center">
 
-  <h1>You're the Host!</h1>
+  <h1>Welcome!</h1>
   <label>YOUR NAME</label>
   <input class="input-center" type=text bind:value={username} max=40>
+
+  <label>GAME</label>
+  <input class="input-center" type=text bind:value={game} max=40>
+
 
   <p>Table Skin</p>
 
@@ -118,5 +128,5 @@
   <img class="dice-set-img" src={selectedsetimg} alt="Dice set">
 
 
-  <a class="btn-primary" href="/#/game/paradice-testing-game">Start Playing</a>
+  <a class="btn-primary" href="/#/game/{game}">Start Playing</a>
 </div>
