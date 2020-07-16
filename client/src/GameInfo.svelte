@@ -35,16 +35,15 @@
   }
 
   .copy-link {
-    background-color: #371B3E;
     cursor: pointer;
     display: flex;
-    height: 16px;
+    height: 18px;
     padding: .2rem .3rem;
     width: 16px;
   }
 
   .copy-link:hover {
-    background-color: #CF4AD9;
+    background-color: #da57e4;
   }
 
   .copy-link img {

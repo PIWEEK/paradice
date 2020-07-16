@@ -8,7 +8,7 @@ html, body {
 body {
 	background-image: url("/images/bg-dice.jpg");
 	background-repeat: no-repeat;
-	background-size: 106%;
+	background-size: cover;
 	background-position: center;
 	color: #371B3E;
 	display: flex;
