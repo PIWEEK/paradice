@@ -110,7 +110,7 @@ class DiceObject {
             specular: 0x172022,
             color: 0xf0f0f0,
             shininess: 40,
-            shading: THREE.FlatShading,
+            flatShading: true,
         };
         this.labelColor = options.fontColor;
         this.diceColor = options.backColor;

@@ -67,7 +67,7 @@
     light.castShadow = true;
     light.shadow.camera.near = 1;
     light.shadow.camera.far = 200;
-    light.shadowCameraFov = 50;
+    light.shadow.camera.fov = 50;
     light.shadowBias = 0.001;
     light.shadowDarkness = 1.1;
     light.shadow.mapSize.width = 512;
@@ -81,7 +81,7 @@
 
 
     var texturepath = 'table/img/table00.jpg';
-    var repeats = 5;
+    var repeats = 10;
     var index = 0;
     var loader = new THREE.TextureLoader();
     var floorTexture = loader.load(texturepath);
@@ -92,7 +92,7 @@
 
     var texture1 = loader.load("table/img/table00.jpg");
     
-    var desk = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), 
+    var desk = new THREE.Mesh(new THREE.PlaneGeometry(90, 60), 
              new THREE.MeshPhongMaterial({ color: desk_color, map:texture1 }));
     desk.receiveShadow = true;
     desk.rotation.x -= Math.PI/2;
