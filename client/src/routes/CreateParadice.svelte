@@ -101,7 +101,7 @@
 <img class="logo-small" src="/images/logo-small.png" alt="PARADICE" border="0">
 <div class="content-center">
 
-  <h1>Welcome!</h1>
+  <h1>Welcome TO PARADICE!</h1>
   <div class="row-flex">
     <div class="column-flex">
       <label>YOUR NAME</label>

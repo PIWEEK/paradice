@@ -44,6 +44,7 @@
 }
 
 .roll-op {
+  color: #CF4AD9;
     font-size: .8rem;
 }
 
