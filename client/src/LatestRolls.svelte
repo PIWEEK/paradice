@@ -70,8 +70,8 @@
     {:else}
         <li>
             <div class="color-otheruser"></div>
-            <span>{p}: {latestrolls[p]}</span>
-            <span>{p}: {latestrolls[p]}</span>
+            <span>{p} (You)</span>
+            <span class="last-roll">{latestrolls[p]}</span>
         </li>
 
     {/if}
