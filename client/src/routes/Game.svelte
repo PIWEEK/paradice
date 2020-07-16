@@ -65,7 +65,7 @@
 
     rolls = [{
       user: userDict[userId],
-      result: diceInput.result
+      ...diceInput
     }, ...rolls];
   });
 

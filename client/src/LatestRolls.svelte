@@ -1,5 +1,4 @@
 <script>
-
     export let latestRolls = {};
     export let userList = [];
     let username = localStorage.getItem("username");
