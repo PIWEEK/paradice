@@ -2,7 +2,7 @@
   import { TABLE_TEXTURES, DICE_TEXTURES } from '../constants';
 
   let username = localStorage.getItem("username");
-  let selectedsetimg = '/dice/img/set-00.jpg';
+
   if (!username) {
     username = "Your name";
   }
@@ -21,9 +21,11 @@
   if (!selectedTable) {
     setTableImage(TABLE_TEXTURES[0].path);
   }
+
   let selectedDice = localStorage.getItem("dicetexture");
+  let selectedSetimg = localStorage.getItem("dicesetimg");
   if (!selectedDice) {
-    setDiceImage(DICE_TEXTURES[0].path);
+    setDiceImage(DICE_TEXTURES[0].path, DICE_TEXTURES[0].setimg);
   }
 
   function setTableImage(path) {
@@ -33,8 +35,10 @@
 
   function setDiceImage(path, setimg) {
     selectedDice = path;
-    selectedsetimg = setimg;
+    selectedSetimg = setimg;
     localStorage.setItem("dicetexture", path);
+    localStorage.setItem("dicesetimg", setimg);
+    console.log("setDiceImage(path, setimg)", path, setimg)
   }
 </script>
 
@@ -135,7 +139,7 @@
     {/each}
   </div>
 
-  <img class="dice-set-img" src={selectedsetimg} alt="Dice set">
+  <img class="dice-set-img" src={selectedSetimg} alt="Dice set">
 
 
   <a class="btn-primary" href="/#/game/{game}">Start Playing</a>
