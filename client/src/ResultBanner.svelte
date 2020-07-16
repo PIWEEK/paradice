@@ -1,6 +1,7 @@
 <script>
-  export let playername = '';
-  export let latestroll = 0;
+  export let player = null;
+  export let latestRoll = null;
+  import DiceResult from './DiceResult.svelte';
 </script>
 
 <style>
@@ -27,6 +28,8 @@
 
 </style>
 
-{#if playername!=''}
-  <div class="roll-result">{playername} got <span>{latestroll}</span> <span class="maths">1d6 + 2d10 + 6</span></div>
+{#if player}
+  <div class="roll-result">
+    {player.username} got <span>{latestRoll.result}</span> <span class="maths"><DiceResult roll={latestRoll}/></span>
+  </div>
 {/if}

@@ -1,5 +1,7 @@
 <script>
-    export let rolls = {};
+  import DiceResult from './DiceResult.svelte';
+  export let rolls = [];
+  console.log("rolls", rolls)
 </script>
 
 <style>
@@ -41,7 +43,7 @@
 .roll-log-list::-webkit-scrollbar-track {
     background-color:  transparent;
 }
- 
+
 .roll-log-list::-webkit-scrollbar-thumb {
     background-color: #ccacce;
 }
@@ -49,14 +51,12 @@
 </style>
 
 <div class="sidebar-item">
-    <ul class="roll-log-list">
-      {#each rolls.slice(0,50) as {user, result}, i}
-
-          <li>
-            <span>{user}</span>
-            <span class="roll-op">2D4 + 1d20 +6 = {result}</span>
-          </li>
-
-      {/each}
-    </ul>
+  <ul class="roll-log-list">
+    {#each rolls.slice(0,50) as roll}
+      <li>
+        <span>{roll.user.username}</span>
+        <span class="roll-op"><DiceResult roll={roll}/></span>
+      </li>
+    {/each}
+  </ul>
 </div>

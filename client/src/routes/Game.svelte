@@ -20,7 +20,7 @@
   let dicetexture = localStorage.getItem("dicetexture");
   let tabletexture = localStorage.getItem("tabletexture");
 
-  const socket = io(`${apiURL}/?username=${username}&game=${  params.gameId}`);
+  const socket = io(`${apiURL}/?username=${username}&game=${params.gameId}&diceTexture=${dicetexture}`);
 
   let userDict = {};
   let userList = [];
@@ -38,9 +38,9 @@
 
   let floorcolor = "#00aa00";
   let texturepath;
-  let latestplayer;
+  let latestPlayer;
   let latestroll;
-  let latestplayerandrolls = {};
+  let latestRolls = {};
 
   onMount(()=> {
     initRollDice();
@@ -60,13 +60,12 @@
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
     rollDice(diceInput);
-    latestplayer = userDict[userId];
-    latestroll = diceInput.result;
-    latestplayerandrolls[latestplayer] = latestroll;
+    latestPlayer = userId;
+    latestRolls[userId] = diceInput;
 
     rolls = [{
       user: userDict[userId],
-      result: diceInput.result
+      ...diceInput
     }, ...rolls];
   });
 
@@ -96,11 +95,11 @@
 <Roll/>
 
 <div id="foreground">
-  <ResultBanner playername={latestplayer} latestroll={latestroll}/>
+  <ResultBanner player={userDict[latestPlayer]} latestRoll={latestRolls[latestPlayer]}/>
   <ParadiceLogo/>
   <div class="sidebar-content">
     <div class="sidebar-item">
-      <LatestRolls bind:latestrolls={latestplayerandrolls}/>
+      <LatestRolls latestRolls={latestRolls} userList={userList}/>
     </div>
     <RollLog bind:rolls={rolls}/>
     <DiceInput bind:dice={diceinput} bind:modifier={modinput}/>

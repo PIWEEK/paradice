@@ -15,7 +15,10 @@ export class ParadiceServer {
   private port: string | number;
   private connectedUsers: {
     [id: string]: {
-      [id: string] : string; 
+      [id: string] : {
+        username: string;
+        diceTexture: string;
+      };
     }
   } = {};
 
@@ -50,11 +53,15 @@ export class ParadiceServer {
       console.log('Connected client %s on port %s.', socket.id, this.port);
       const username = socket.handshake.query.username;
       const gameId = socket.handshake.query.game;
+      const diceTexture = socket.handshake.query.diceTexture;
 
       if(!this.connectedUsers[gameId]) {
         this.connectedUsers[gameId] = {};
       }
-      this.connectedUsers[gameId][socket.id] = username;
+      this.connectedUsers[gameId][socket.id] = {
+        username: username,
+        diceTexture: diceTexture,
+      }
 
       console.log(username, gameId);
       socket.join(gameId);
