@@ -41,7 +41,7 @@
 .roll-log-list::-webkit-scrollbar-track {
     background-color:  transparent;
 }
- 
+
 .roll-log-list::-webkit-scrollbar-thumb {
     background-color: #ccacce;
 }
@@ -53,7 +53,7 @@
       {#each rolls.slice(0,50) as {user, result}, i}
 
           <li>
-            <span>{user}</span>
+            <span>{user.username}</span>
             <span class="roll-op">2D4 + 1d20 +6 = {result}</span>
           </li>
 

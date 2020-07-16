@@ -1,12 +1,8 @@
 <script>
 
-    export let latestrolls = {};
+    export let latestRolls = {};
+    export let userList = [];
     let username = localStorage.getItem("username");
-    $: latestrollsbinded = Object.keys(latestrolls);
-    let dicetexture = localStorage.getItem("dicetexture");
-    console.log(dicetexture);
-    
-
 </script>
 
 <style>
@@ -26,7 +22,6 @@
 
     .color-user {
         background-color: aqua;
-       
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
         background-size: cover; /* Resize the background image to cover the entire container */
@@ -59,20 +54,19 @@
 </style>
 
 <ul>
-    {#each latestrollsbinded as p}
-    {#if p==username}
+    {#each userList as user}
+    {#if user == username}
         <li>
-            <div class="color-user" style="background-image: url({dicetexture});"></div>
-            <span>{p} (You)</span>
-            <span class="last-roll">{latestrolls[p]}</span>
+            <div class="color-user" style="background-image: url({user.diceTexture});"></div>
+            <span>{user.username} (You)</span>
+            <span class="last-roll">{latestRolls[user] ? latestRolls[user].result : '--'}</span>
         </li>
     {:else}
         <li>
-            <div class="color-otheruser" style="background-image: url({dicetexture});"></div>
-            <span>{p}</span>
-            <span class="last-roll">{latestrolls[p]}</span>
+            <div class="color-otheruser" style="background-image: url({user.diceTexture});"></div>
+            <span>{user.username}</span>
+            <span class="last-roll">{latestRolls[user] ? latestRolls[user].result : '--'}</span>
         </li>
-
     {/if}
     {/each}
 </ul>
