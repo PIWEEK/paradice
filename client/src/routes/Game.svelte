@@ -10,7 +10,7 @@
   import RollLog from '../RollLog.svelte';
   import ResultBanner from '../ResultBanner.svelte';
   import GameInfo from '../GameInfo.svelte';
-  import { DICE_TEXTURES } from '../constants';
+  import { DICE_TEXTURES, TABLE_TEXTURES } from '../constants';
 
   export let params = {};
 
@@ -34,6 +34,7 @@
   let diceinput;
   let modifier;
   let wipevalue = true;
+  let soundpath = 'sounds/dice.mp3';
 
   $: diceandmodinput = {
     dice: diceinput,
@@ -67,7 +68,8 @@
 
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
-    new Audio('sounds/dice.mp3').play();
+    soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
+    new Audio(soundpath).play();
     rollDice(diceInput, () => {
       setTimeout(() => {
         latestPlayer = userId;
