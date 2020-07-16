@@ -68,11 +68,9 @@
     light.shadow.camera.near = 1;
     light.shadow.camera.far = 200;
     light.shadow.camera.fov = 50;
-    light.shadowBias = 0.001;
-    light.shadowDarkness = 1.1;
+    light.shadow.bias = 0.001;
     light.shadow.mapSize.width = 512;
     light.shadow.mapSize.height = 512;
-    light.shadowDarkness = 1.1;
     var spotLightHelper = new THREE.SpotLightHelper( light );
     //scene.add( spotLightHelper );
     scene.add(light);

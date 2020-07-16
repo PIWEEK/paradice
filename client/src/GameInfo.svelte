@@ -1,4 +1,10 @@
+<script>
+ 
+export let game = "No name?";
+
+</script>
 <style>
+   
 
   h2 {
     font-size: 1.2rem;
@@ -33,8 +39,8 @@
 </style>
 
 <div class="row-flex">
-  <h2>TABLE_NAME</h2>
+  <h2>{game}</h2>
   <span class="copy-link">
-    <img src="/images/share-table.png" alt="SHARE TABLE">
+    <img  value="HEY!" src="/images/share-table.png" alt="SHARE TABLE">
   </span>
 </div>
