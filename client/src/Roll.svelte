@@ -45,9 +45,10 @@
 
     // RENDERER
     renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    renderer.setSize(SCREEN_WIDTH-5, SCREEN_HEIGHT-5);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.setClearColor(0xffffff, 1);
     renderer.physicallyCorrectLights = true;
 
     container = document.getElementById("ThreeJS");
@@ -59,15 +60,17 @@
     let ambient = new THREE.AmbientLight("#ffffff", 1.3);
     scene.add(ambient);
 
-    let light = new THREE.SpotLight(0xf2dba4, 1.4);
+    let light = new THREE.SpotLight(0xf2dba4, 2.0);
     light.position.y = 30;
     light.position.x = 0;
     light.target.position.set(3, 0, 3);
     light.castShadow = true;
     light.shadow.camera.near = 1;
     light.shadow.camera.far = 200;
-    light.shadow.mapSize.width = 512;
-    light.shadow.mapSize.height = 512;
+    light.shadowCameraFov = 50;
+    light.shadow.mapSize.width = 1024;
+    light.shadow.mapSize.height = 1024;
+    light.shadowDarkness = 1.1;
     var spotLightHelper = new THREE.SpotLightHelper( light );
     scene.add( spotLightHelper );
     scene.add(light);
@@ -97,25 +100,15 @@
     floor.receiveShadow = true;
     floor.rotation.x += Math.PI/2;
     floor.position.y = 0;
-    floor.matrixWorldNeedsUpdate = true;
     scene.add(floor);
 
-    // SKYBOX/FOG
-    var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
-    var skyBoxMaterial = new THREE.MeshPhongMaterial({
-      color: 0x9999ff,
-      side: THREE.BackSide
-    });
-    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-    scene.add(skyBox);
-    scene.fog = new THREE.FogExp2(0x9999ff, 0.00025);
 
     ////////////
     // CUSTOM //
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 60, -10);
+    world.gravity.set(0, -9.82 * 70, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 32;
 
@@ -160,6 +153,7 @@
       wireframe: true
     });
     var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
+    skyBox.castShadow = true;
     skyBox.position.x = x;
     skyBox.position.y = y;
     skyBox.position.z = z;
