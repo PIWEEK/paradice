@@ -85,14 +85,16 @@
   var numdice = diceInput.dice.reduce(function(prev, cur) {
   return prev + cur.qty;
   }, 0);
+  console.log(numdice);
   soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
   
   if (numdice == 1){
-      soundpath = soundpath.replace('00','00_1');      
+      soundpath = soundpath.replace('.mp3','_1.mp3');      
       console.log(soundpath);
   } else if (numdice == 2){
-      soundpath = soundpath.replace('00','00_2');      
+      soundpath = soundpath.replace('.mp3','_2.mp3');      
   }
+  console.log(soundpath);
   new Audio(soundpath).play();
   });
 
