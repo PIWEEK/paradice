@@ -37,8 +37,8 @@
       SCREEN_HEIGHT = window.innerHeight;
     var VIEW_ANGLE = 45,
       ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
-      NEAR = 0.01,
-      FAR = 20000;
+      NEAR = 1,
+      FAR = 200;
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
     camera.position.set(0, 40, 2);
     scene.add(camera);
@@ -56,24 +56,20 @@
     // CONTROLS
     controls = new OrbitControls(camera, renderer.domElement);
 
-    let ambient = new THREE.AmbientLight("#ffffff", 0.8);
+    let ambient = new THREE.AmbientLight("#ffffff", 1.3);
     scene.add(ambient);
 
-    let directionalLight = new THREE.DirectionalLight("#ffffff", 0.8);
-    directionalLight.position.x = -5;
-    directionalLight.position.y = 50;
-    directionalLight.position.z = 5;
-    scene.add(directionalLight);
-
-    let light = new THREE.SpotLight(0xefdfd5, 1.0);
-    light.position.y = 100;
-    light.position.x = -50;
-    light.target.position.set(10, 10, 10);
-     light.castShadow = true;
-    light.shadow.camera.near = 5;
-    light.shadow.camera.far = 11;
+    let light = new THREE.SpotLight(0xf2dba4, 1.4);
+    light.position.y = 30;
+    light.position.x = 0;
+    light.target.position.set(3, 0, 3);
+    light.castShadow = true;
+    light.shadow.camera.near = 1;
+    light.shadow.camera.far = 200;
     light.shadow.mapSize.width = 512;
     light.shadow.mapSize.height = 512;
+    var spotLightHelper = new THREE.SpotLightHelper( light );
+    scene.add( spotLightHelper );
     scene.add(light);
 
     // FLOOR
@@ -119,9 +115,9 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(0, -9.82 * 90, 0);
+    world.gravity.set(0, -9.82 * 60, -10);
     world.broadphase = new CANNON.NaiveBroadphase();
-    world.solver.iterations = 16;
+    world.solver.iterations = 32;
 
     DiceManager.setWorld(world);
 
@@ -227,8 +223,8 @@
         die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
-        let rand = Math.random() * 8;
-        die.getObject().body.velocity.set(60 + rand,  yRand, 35 + rand);
+        let rand = Math.random() * 5;
+        die.getObject().body.velocity.set(60 + rand,  yRand, 50 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
 
         diceValues.push({dice: die, value: diceIt.result[i]});
