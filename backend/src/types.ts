@@ -19,6 +19,7 @@ export interface DiceInput {
   modifier: string;
   wipe: boolean;
   sound: string;
+  split: boolean;
 }
 
 export interface DiceResult extends Dice {
@@ -32,5 +33,6 @@ export interface DiceOutput {
   modifier: string;
   wipe: boolean;
   sound: string;
+  split: boolean;
   result: number;
 }

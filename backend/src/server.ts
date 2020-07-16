@@ -79,6 +79,7 @@ export class ParadiceServer {
           modifier: diceInput.modifier,
           wipe: diceInput.wipe,
           sound: diceInput.sound,
+          split: diceInput.split,
           result: 0
         }
 
