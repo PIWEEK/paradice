@@ -35,7 +35,8 @@
     fontColor: DICE_TEXTURES.find((texture) => texture.path == localStorage.getItem("dicetexture")).fontColor,
     texture: localStorage.getItem("dicetexture"),
     modifier: modifier,
-    wipe: wipevalue
+    wipe: wipevalue,
+    modifier: parseInt(modifier) || ''
   };
 
   let floorcolor = "#00aa00";
@@ -61,22 +62,29 @@
 
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
-    rollDice(diceInput);
-    latestPlayer = userId;
-    latestRolls[userId] = diceInput;
-
-    console.log("latestRolls[userId]", latestRolls[userId])
-
-    rolls = [{
-      user: userDict[userId],
-      ...diceInput
-    }, ...rolls];
+    rollDice(diceInput, () => {
+      setTimeout(() => {
+        latestPlayer = userId;
+        latestRolls[userId] = diceInput;
+        rolls = [{
+          user: userDict[userId],
+          ...diceInput
+          }, ...rolls
+        ];
+      },
+      1000);
+    });
   });
 
   // listen for user list event
   socket.on("users-list", (data) => {
     userDict = data;
-    userList = Object.values(data);
+    userList = Object.keys(data).map(userId => {
+      return {
+        ...data[userId],
+        userId: userId
+      }
+    });
   });
 
 </script>

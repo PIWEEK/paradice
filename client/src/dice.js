@@ -32,7 +32,7 @@ class DiceManagerClass {
      * @param {number} [diceValues.value]
      *
      */
-    prepareValues(diceValues) {
+    prepareValues(diceValues, allStableCallback) {
         // if (this.throwRunning) throw new Error('Cannot start another throw. Please wait, till the current throw is finished.');
 
         for (let i = 0; i < diceValues.length; i++) {
@@ -74,6 +74,9 @@ class DiceManagerClass {
                 }
 
                 this.throwRunning = false;
+
+                allStableCallback();
+
             } else {
                 DiceManager.world.step(DiceManager.world.dt);
             }

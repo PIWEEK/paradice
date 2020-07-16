@@ -1,8 +1,7 @@
 <script>
     export let latestRolls = {};
     export let userList = [];
-    let username = localStorage.getItem("username");
-</script>
+    let username = localStorage.getIte</script>
 
 <style>
     ul {
@@ -58,13 +57,13 @@
         <li>
             <div class="color-user" style="background-image: url({user.diceTexture});"></div>
             <span>{user.username} (You)</span>
-            <span class="last-roll">{latestRolls[user] ? latestRolls[user].result : '--'}</span>
+            <span class="last-roll">{latestRolls[user.userId] ? latestRolls[user.userId].result : '--'}</span>
         </li>
     {:else}
         <li>
             <div class="color-otheruser" style="background-image: url({user.diceTexture});"></div>
             <span>{user.username}</span>
-            <span class="last-roll">{latestRolls[user] ? latestRolls[user].result : '--'}</span>
+            <span class="last-roll">{latestRolls[user.userId] ? latestRolls[user.userId].result : '--'}</span>
         </li>
     {/if}
     {/each}

@@ -169,10 +169,10 @@
     createBoundary(-10, 0, 0, 0.1, 10, 20);
     createBoundary(0, 0, -10, 20, 10, 0.1);
 
-requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
   }
 
-  export function rollDice(diceInput) {
+  export function rollDice(diceInput, allStableCallback) {
     if (diceInput.wipe) {
       dice.forEach((d) => {
         scene.remove(d.getObject());
@@ -225,7 +225,7 @@ requestAnimationFrame(animate);
       });
     });
 
-    DiceManager.prepareValues(diceValues);
+    DiceManager.prepareValues(diceValues, allStableCallback);
   }
 
   function animate() {
