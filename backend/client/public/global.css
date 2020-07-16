@@ -148,5 +148,5 @@ button:focus {
 	display: flex;
 	flex-direction: column;
 	padding: .8rem .5rem;
-	margin: .5rem 0;
+	margin: .3rem 0;
 }
