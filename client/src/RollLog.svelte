@@ -10,6 +10,19 @@
     padding: 0;
 }
 
+.color-user {
+    background-color: aqua;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    border: 1px solid #333333;
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 6px;
+    margin-right: .3rem;
+    width: 6px;
+}
+
 .roll-log-list {
     box-sizing: border-box;
     display: flex;
@@ -54,7 +67,10 @@
   <ul class="roll-log-list">
     {#each rolls.slice(0,50) as roll}
       <li>
-        <span>{roll.user.username}</span>
+        <div class="row-flex">
+          <div class="color-user"></div>
+          <span>{roll.user.username}</span>
+        </div>
         <span class="roll-op"><DiceResult roll={roll}/> = {roll.result}</span>
       </li>
     {/each}
