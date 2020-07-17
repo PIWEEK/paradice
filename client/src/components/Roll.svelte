@@ -157,7 +157,7 @@
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
-    createBoundary(Math.max(12,sw/90), 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
+    createBoundary(Math.max(12,sw/100), 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, 15, 30, 50, 5);
     createBoundary(Math.min(-15,-sw/100), 0, 0, 5, 10, 20); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, -20, 30, 50, 5);
@@ -205,8 +205,9 @@
         dice.push(die);
         let yRand = Math.random() * 20
         let zPosRand = Math.random() * 10
-        die.getObject().position.x = -10 - (i % 3) * 1.5 + zPosRand;
-        die.getObject().position.y = 15 + Math.floor(i / 3) * 1.5;
+        let xPosRand = Math.random() * 5
+        die.getObject().position.x = -10 - (i % 3) * 1.5 + xPosRand;
+        die.getObject().position.y = 13 + Math.floor(i / 3) * 1.5;
         die.getObject().position.z = -10 + (i % 3) * 1.5  - zPosRand;
         die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
