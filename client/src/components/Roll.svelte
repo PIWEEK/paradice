@@ -103,7 +103,7 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(-10, -9.82 * 80, 0);
+    world.gravity.set(-5, -9.82 * 80, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 32;
 
@@ -157,9 +157,9 @@
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
-    createBoundary(12, 0, 0, 5, 15, 20);
-    createBoundary(0, 0, 15, 20, 10, 5);
-    createBoundary(-17, 0, 0, 5, 7, 20);
+    createBoundary(Math.max(12,sw/90), 0, 0, 5, 15, 20); //dirty hack until we solve proper mobile support
+    createBoundary(0, 0, 15, 30, 10, 5);
+    createBoundary(Math.max(-15,-sw/90), 0, 0, 5, 7, 20); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, -15, 20, 10, 5);
 
     requestAnimationFrame(animate);
