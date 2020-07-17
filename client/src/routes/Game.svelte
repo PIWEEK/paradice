@@ -24,7 +24,6 @@
     game = "your-game";
   }
 
-
   const socket = io(`${apiURL}/?username=${username}&game=${params.gameId}&diceTexture=${dicetexture}`);
 
   let userDict = {};
@@ -45,6 +44,8 @@
     modifier: parseInt(modifier) || ''
   };
 
+  $: rollDiceEnabled = diceinput ? diceinput.reduce((prev, cur) => prev + cur.qty, 0) > 0 : false;
+
   let floorcolor = "#00aa00";
   let texturepath;
   let latestPlayer;
@@ -59,7 +60,6 @@
 
   function roll() {
     socket.emit("roll", diceandmodinput);
-    
   }
 
   function handleTextureUpdated(event) {
@@ -70,7 +70,6 @@
   socket.on("roll", (userId, diceInput) => {
 
     rollDice(diceInput, () => {
-      console.log(diceInput);
       setTimeout(() => {
         latestPlayer = userId;
         latestRolls[userId] = diceInput;
@@ -82,20 +81,15 @@
       },
       1000);
     });
-  var numdice = diceInput.dice.reduce(function(prev, cur) {
-  return prev + cur.qty;
-  }, 0);
-  console.log(numdice);
-  soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
-  
-  if (numdice == 1){
-      soundpath = soundpath.replace('.mp3','_1.mp3');      
-      console.log(soundpath);
-  } else if (numdice == 2){
-      soundpath = soundpath.replace('.mp3','_2.mp3');      
-  }
-  console.log(soundpath);
-  new Audio(soundpath).play();
+    var numdice = diceInput.dice.reduce((prev, cur) => prev + cur.qty, 0);
+
+    soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
+    if (numdice == 1){
+        soundpath = soundpath.replace('.mp3','_1.mp3');
+    } else if (numdice == 2){
+        soundpath = soundpath.replace('.mp3','_2.mp3');
+    }
+    new Audio(soundpath).play();
   });
 
   // listen for user list event
@@ -138,6 +132,6 @@
     </div>
     <RollLog bind:rolls={rolls}/>
     <DiceInput bind:dice={diceinput} bind:modifier={modifier} bind:wipe={wipevalue}/>
-    <button class="btn-primary" on:click={roll}>Roll dice</button>
+    <button class="btn-primary {rollDiceEnabled ? 'enabled' : 'disabled'}" on:click={roll}>Roll dice</button>
   </div>
 </div>
