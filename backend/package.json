@@ -4,8 +4,8 @@
   "description": "Paradice backend",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/main.ts",
-    "prod": "tsc && node ./dist/server.js",
+    "dev": "ts-node-dev --respawn ./src/main.ts",
+    "prod": "tsc && node ./dist/main.js",
     "start": "ts-node-dev --respawn ./src/main.ts"
   },
   "author": "",
