@@ -30,7 +30,7 @@
     list-style: none;
     overflow-y: auto;
     margin: -1px 2px 0 0;
-    height: 178px;
+    height: 153px;
     padding: 0 .5rem;
     width: 100%;
 }
@@ -39,7 +39,7 @@
     border-top: 1px solid #CDB4CF;
     padding: .3rem 0;
     display: flex;
-    font-size: .9rem;
+    font-size: .8rem;
     flex-direction: column;
 }
 
