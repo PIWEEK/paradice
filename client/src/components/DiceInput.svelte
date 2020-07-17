@@ -1,7 +1,5 @@
 <script>
   import { modValidator } from './validators.js';
-  import Player from './Player.svelte';
-
   import { writable } from "svelte/store";
 
   export let dice = [

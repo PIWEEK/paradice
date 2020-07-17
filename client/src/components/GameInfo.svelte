@@ -69,7 +69,7 @@
 <div class="row-flex">
   <h2>{game}</h2>
   <span class="copy-link">
-    {#if showShareUrl}    
+    {#if showShareUrl}
     <img  value="HEY!" src="/images/close-icon.png" alt="SHARE TABLE" on:click={toggleShowShareUrl}>
     {:else}
     <img  value="HEY!" src="/images/share-table.png" alt="SHARE TABLE" on:click={toggleShowShareUrl}>

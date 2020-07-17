@@ -6,7 +6,7 @@
   import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20, DiceD100 } from "./dice";
   import Stats from "stats.js";
   import { onMount } from 'svelte';
-  import { DICE_TEXTURES } from './constants';
+  import { DICE_TEXTURES } from '../constants';
 
   const imageTextures = {};
   // Preload dice textures
@@ -90,16 +90,13 @@
     floorTexture.repeat.set(repeats, repeats);
 
     var texture1 = loader.load("table/img/table00.jpg");
-    
-    var desk = new THREE.Mesh(new THREE.PlaneGeometry(90, 60), 
+
+    var desk = new THREE.Mesh(new THREE.PlaneGeometry(90, 60),
              new THREE.MeshPhongMaterial({ color: desk_color, map:texture1 }));
     desk.receiveShadow = true;
     desk.rotation.x -= Math.PI/2;
     desk.name = "Floor";
     scene.add(desk);
-
-    
-
 
     ////////////
     // CUSTOM //
@@ -128,11 +125,9 @@
 
     // BOUNDARIES FOR DICE TRAY
 
-   function createBoundary(x, y, z, w, h, t){
-
-     // w = width h = height t = thickness
-     // x, y, z are coordinates
-
+    function createBoundary(x, y, z, w, h, t){
+      // w = width h = height t = thickness
+      // x, y, z are coordinates
 
     var bodyShape = new CANNON.Box(new CANNON.Vec3(w, h, t));
     var bodyMass = 5.0;
@@ -158,7 +153,7 @@
 
     //scene.add(skyBox);
 
-   };
+    };
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
@@ -261,9 +256,7 @@
     let f = scene.getObjectByName("Floor");
     f.material.map = floorTexture;
     f.material.needsUpdate = true;
-	
   }
-  
 
 </script>
 

@@ -2,7 +2,6 @@
   import {link} from 'svelte-spa-router'
 </script>
 
-
 <style>
 
   .home-section {
@@ -16,7 +15,7 @@
   }
 
   .big-logo img {
-    width: 100%;    
+    width: 100%;
   }
 
   .btn-primary {

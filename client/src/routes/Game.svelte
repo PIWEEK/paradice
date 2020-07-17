@@ -1,15 +1,14 @@
 <script>
   import { onMount } from 'svelte';
   import io from 'socket.io-client';
-  import Table from '../Table.svelte';
-  import Player from '../Player.svelte';
-  import DiceInput from '../DiceInput.svelte';
-  import Roll, { initRollDice, rollDice, changeTexture } from '../Roll.svelte';
-  import ParadiceLogo from '../ParadiceLogo.svelte';
-  import LatestRolls from '../LatestRolls.svelte';
-  import RollLog from '../RollLog.svelte';
-  import ResultBanner from '../ResultBanner.svelte';
-  import GameInfo from '../GameInfo.svelte';
+  import Table from '../components/Table.svelte';
+  import DiceInput from '../components/DiceInput.svelte';
+  import Roll, { initRollDice, rollDice, changeTexture } from '../components/Roll.svelte';
+  import ParadiceLogo from '../components/ParadiceLogo.svelte';
+  import LatestRolls from '../components/LatestRolls.svelte';
+  import RollLog from '../components/RollLog.svelte';
+  import ResultBanner from '../components/ResultBanner.svelte';
+  import GameInfo from '../components/GameInfo.svelte';
   import { DICE_TEXTURES, TABLE_TEXTURES } from '../constants';
 
   export let params = {};

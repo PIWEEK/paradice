@@ -100,7 +100,6 @@
 
 </style>
 
-
 <img class="logo-small" src="/images/logo-small.png" alt="PARADICE" border="0">
 <div class="content-center">
 
@@ -115,8 +114,6 @@
       <input class="input-center" type=text bind:value={game} max=40>
     </div>
   </div>
-
-
 
   <p>Table Skin</p>
 
@@ -143,7 +140,6 @@
   </div>
 
   <img class="dice-set-img" src={selectedSetimg} alt="Dice set">
-
 
   <a class="btn-primary" href="/#/game/{game}">Start Playing</a>
 </div>

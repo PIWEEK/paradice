@@ -1,16 +1,10 @@
-<script>
-
-</script>
-
 <style>
-
   .logo-sidebar {
     display: flex;
     max-width: 200px;
     margin: 0 1rem .5rem;
     width: 100%;
   }
-
 </style>
 
 <a href="/">
