@@ -14,7 +14,7 @@
 
   export let params = {};
 
-  const apiURL = API_URL || "https://guarded-stream-90676.herokuapp.com";
+  const apiURL = API_URL || "https://theparadice.online";
 
   let username = localStorage.getItem("username");
   let dicetexture = localStorage.getItem("dicetexture");
