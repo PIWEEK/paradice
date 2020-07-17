@@ -48,7 +48,8 @@
 
   <span class="footer-link">Made with love at PIWEEK 
     <a href="https://github.com/PIWEEK/paradice" target="_blank">[ Github ]</a>
-    <a href="https://twitter.com/parad1c31" target="_blank">[ Twitter ]</a>
+    <a href="https://twitter.com/myparad1c3" target="_blank">[ Twitter ]</a>
+    <a href="https://piweek.com" target="_blank">[ Piweek ]</a>
   </span>
 
 </div>
