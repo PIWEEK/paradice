@@ -55,7 +55,7 @@
     color: #CF4AD9;
     font-size: .8rem;
     margin-right: .6rem;
-    width: 140px;
+    width: 132px;
   }
 
   .btn-primary {

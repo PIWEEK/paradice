@@ -46,11 +46,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: .7rem .5rem;
   }
 
   h2 {
     font-size: 1.2rem;
+    margin-bottom: .8rem;
     margin-top: 0;
   }
 
@@ -70,10 +70,13 @@
     color: #CF4AD9;
     font-size: .9rem;
     margin-bottom: 0;
+    padding: .3rem .5rem;
     width: 57px;
   }
 
   .input-checkbox {
+    cursor: pointer;
+    font-size: .9rem;
     margin-top: .5rem;
   }
 
