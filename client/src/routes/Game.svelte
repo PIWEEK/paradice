@@ -78,7 +78,7 @@
           }, ...rolls
         ];
       },
-      1000);
+      2500);
     });
     var numdice = diceInput.dice.reduce((prev, cur) => prev + cur.qty, 0);
 

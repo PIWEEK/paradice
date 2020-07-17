@@ -103,7 +103,7 @@
     ////////////
     world = new CANNON.World();
 
-    world.gravity.set(-5, -9.82 * 80, 0);
+    world.gravity.set(-15, -9.82 * 60, 0);
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 32;
 
@@ -157,10 +157,10 @@
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
-    createBoundary(Math.max(12,sw/90), 0, 0, 5, 15, 20); //dirty hack until we solve proper mobile support
-    createBoundary(0, 0, 15, 30, 10, 5);
-    createBoundary(Math.max(-15,-sw/90), 0, 0, 5, 7, 20); //dirty hack until we solve proper mobile support
-    createBoundary(0, 0, -15, 20, 10, 5);
+    createBoundary(Math.max(12,sw/90), 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
+    createBoundary(0, 0, 15, 30, 50, 5);
+    createBoundary(Math.min(-15,-sw/100), 0, 0, 5, 10, 20); //dirty hack until we solve proper mobile support
+    createBoundary(0, 0, -20, 30, 50, 5);
 
     requestAnimationFrame(animate);
   }
@@ -204,9 +204,10 @@
         scene.add(die.getObject());
         dice.push(die);
         let yRand = Math.random() * 20
-        die.getObject().position.x = -10 - (i % 3) * 1.5;
-        die.getObject().position.y = 11 + Math.floor(i / 3) * 1.5;
-        die.getObject().position.z = -10 + (i % 3) * 1.5;
+        let zPosRand = Math.random() * 10
+        die.getObject().position.x = -10 - (i % 3) * 1.5 + zPosRand;
+        die.getObject().position.y = 15 + Math.floor(i / 3) * 1.5;
+        die.getObject().position.z = -10 + (i % 3) * 1.5  - zPosRand;
         die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
         die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
         die.updateBodyFromMesh();
