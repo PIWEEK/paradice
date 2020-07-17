@@ -70,7 +70,7 @@
     color: #CF4AD9;
     font-size: .9rem;
     margin-bottom: 0;
-    padding: .3rem .5rem;
+    padding: .3rem .3rem .3rem .5rem;
     width: 57px;
   }
 
