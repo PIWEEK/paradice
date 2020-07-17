@@ -17,6 +17,7 @@ body {
 	margin: 0;
 	/* font-family: 'Staatliches', cursive, sans-serif; */
 	font-family: 'Oswald', sans-serif;
+	overflow: hidden; /* Hide scrollbars */
 }
 
 a {

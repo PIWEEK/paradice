@@ -45,7 +45,7 @@
 
     // RENDERER
     renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(SCREEN_WIDTH-5, SCREEN_HEIGHT-5);
+    renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setClearColor(0xffffff, 1);
@@ -56,7 +56,7 @@
 
     // CONTROLS
     controls = new OrbitControls(camera, renderer.domElement);
-    controls.enabled = true;
+    controls.enabled = false;
 
     let ambient = new THREE.AmbientLight("#ffffff", 1.3);
     //scene.add(ambient);
