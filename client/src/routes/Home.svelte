@@ -46,6 +46,9 @@
 
   <a class="btn-primary" href="/create" use:link>Start Paradice</a>
 
-  <span class="footer-link">Made with love at PIWEEK <a href="https://github.com/PIWEEK/paradice" target="_blank">[ Github ]</a></span>
+  <span class="footer-link">Made with love at PIWEEK 
+    <a href="https://github.com/PIWEEK/paradice" target="_blank">[ Github ]</a>
+    <a href="https://twitter.com/parad1c31" target="_blank">[ Twitter ]</a>
+  </span>
 
 </div>
