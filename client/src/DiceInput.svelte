@@ -63,12 +63,14 @@
   }
 
   .dice-input span {
+    font-size: .8rem;
     width: 32px;
   }
 
   .dice-input input {
     border-color: #CDB4CF;
     color: #CF4AD9;
+    font-size: .9rem;
     margin-bottom: 0;
     width: 57px;
   }

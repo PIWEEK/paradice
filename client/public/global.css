@@ -13,8 +13,10 @@ body {
 	color: #371B3E;
 	display: flex;
 	flex-direction: column;
+	font-weight: 500;
 	margin: 0;
-	font-family: 'Staatliches', cursive, sans-serif;
+	/* font-family: 'Staatliches', cursive, sans-serif; */
+	font-family: 'Oswald', sans-serif;
 }
 
 a {
@@ -40,8 +42,10 @@ a.btn-primary,
 	color: #ffffff;
 	cursor: pointer;
 	font-size: 18px;
+	font-weight: 500;
 	outline: none;
 	padding: .5rem 2rem;
+	text-transform: uppercase;
 }
 
 a.btn-primary:hover,

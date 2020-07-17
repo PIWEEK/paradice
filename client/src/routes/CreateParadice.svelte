@@ -104,14 +104,14 @@
 <img class="logo-small" src="/images/logo-small.png" alt="PARADICE" border="0">
 <div class="content-center">
 
-  <h1>Welcome TO PARADICE!</h1>
+  <h1>Welcome to PARADICE!</h1>
   <div class="row-flex">
     <div class="column-flex">
-      <label>YOUR NAME</label>
+      <label>Your name</label>
       <input class="input-center" type=text bind:value={username} max=40>
     </div>
     <div class="column-flex">
-      <label>GAME</label>
+      <label>Game</label>
       <input class="input-center" type=text bind:value={game} max=40>
     </div>
   </div>

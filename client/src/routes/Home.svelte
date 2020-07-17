@@ -27,6 +27,7 @@
   .footer-link {
     bottom: 2rem;
     font-size: .9rem;
+    font-weight: 500;
     position: absolute;
     text-align: center;
     width: 100%;
