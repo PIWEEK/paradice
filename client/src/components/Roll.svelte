@@ -130,7 +130,6 @@
       // x, y, z are coordinates
 
       var bodyShape = new CANNON.Box(new CANNON.Vec3(w, h, t));
-      var bodyMass = 5.0;
       var body = new CANNON.Body({
         mass: 0,
         shape: bodyShape,
@@ -157,7 +156,7 @@
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
-    createBoundary(Math.max(12,sw/100), 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
+    createBoundary(Math.max(12,sw/110), 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, 15, 30, 50, 5);
     createBoundary(Math.min(-15,-sw/100), 0, 0, 5, 10, 20); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, -20, 30, 50, 5);

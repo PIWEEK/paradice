@@ -51,6 +51,7 @@
   let latestroll;
   let latestRolls = {};
 
+
   onMount(()=> {
     initRollDice();
     changeTexture(tabletexture);
@@ -58,6 +59,7 @@
   });
 
   function roll() {
+ 
     socket.emit("roll", diceandmodinput);
   }
 
@@ -68,8 +70,11 @@
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
 
+    
+  
     rollDice(diceInput, () => {
       setTimeout(() => {
+ 
         latestPlayer = userId;
         latestRolls[userId] = diceInput;
         rolls = [{
@@ -77,9 +82,14 @@
           ...diceInput
           }, ...rolls
         ];
+                
+
       },
       2500);
-    });
+   
+
+});
+    
     var numdice = diceInput.dice.reduce((prev, cur) => prev + cur.qty, 0);
 
     soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
@@ -123,6 +133,7 @@
 <Roll/>
 
 <div id="foreground">
+
   <ResultBanner player={userDict[latestPlayer]} latestRoll={latestRolls[latestPlayer]}/>
   <ParadiceLogo/>
   <div class="sidebar-content">
