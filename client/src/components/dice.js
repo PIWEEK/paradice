@@ -121,7 +121,7 @@ class DiceObject {
           let context = canvas.getContext("2d");
           let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
           canvas.width = canvas.height = ts;
-          context.font = ts / (1.5 + 2 * this.textMargin) + "pt Garamond";
+          context.font = ts / (1.5 + 2 * this.textMargin) + "pt Arial";
           const pFill = context.createPattern(this.texture, "repeat");
           context.fillStyle = pFill;
           context.fillRect(0, 0, canvas.width, canvas.height);
@@ -356,7 +356,7 @@ class DiceObject {
         let context = canvas.getContext("2d");
         let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
         canvas.width = canvas.height = ts;
-        context.font = ts / (2 + 2 * this.textMargin) + "pt Garamond";
+        context.font = ts / (2 + 2 * this.textMargin) + "pt Arial";
         context.fillStyle = backColor;
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.textAlign = "center";
@@ -452,7 +452,7 @@ export class DiceD4 extends DiceObject {
             let context = canvas.getContext("2d");
             let ts = this.calculateTextureSize(this.size / 2 + this.size * 2) * 2;
             canvas.width = canvas.height = ts;
-            context.font = ts / 5 + "pt Garamond";
+            context.font = ts / 5 + "pt Arial";
             const pFill = context.createPattern(this.texture, "repeat");
             context.fillStyle = pFill;
             context.fillRect(0, 0, canvas.width, canvas.height);
