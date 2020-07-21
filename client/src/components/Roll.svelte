@@ -6,7 +6,7 @@
   import { DiceManager, DiceD4, DiceD6, DiceD8, DiceD10, DiceD12, DiceD20, DiceD100 } from "./dice";
   import Stats from "stats.js";
   import { onMount } from 'svelte';
-  import { DICE_TEXTURES } from '../constants';
+  import { DICE_TEXTURES, TABLE_TEXTURES } from '../constants';
 
   const imageTextures = {};
   // Preload dice textures
@@ -61,7 +61,7 @@
     let ambient = new THREE.AmbientLight("#ffffff", 1.3);
     //scene.add(ambient);
 
-    let light = new THREE.SpotLight(0xf2dba4, 2.8);
+    let light = new THREE.SpotLight(0xf2dba4, 3);
     light.position.y = 40;
     light.position.x = 0;
     light.target.position.set(3, 0, 3);
@@ -247,7 +247,8 @@
   }
 
   export function changeTexture(texturepath) {
-    var repeats = 5;
+    var texture = TABLE_TEXTURES.find((texture) => texture.path == texturepath);
+    var repeats = texture.repeats;
     var index = 0;
 	  var loader = new THREE.TextureLoader();
 	  var floorTexture = loader.load(texturepath);

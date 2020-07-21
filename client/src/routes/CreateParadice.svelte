@@ -22,7 +22,7 @@
 
   let selectedTable = localStorage.getItem("tabletexture");
   if (!selectedTable) {
-    setTableImage(TABLE_TEXTURES[0].path);
+    setTableImage(TABLE_TEXTURES[0].path,TABLE_TEXTURES[0].repeats);
   }
 
   let selectedDice = localStorage.getItem("dicetexture");
@@ -33,8 +33,11 @@
 
   function setTableImage(path) {
     selectedTable = path;
+    let repeats = TABLE_TEXTURES[5].repeats;
     localStorage.setItem("tabletexture", path);
-  }
+    localStorage.setItem("repeats", repeats);
+
+}
 
   function setDiceImage(path, setimg) {
     selectedDice = path;

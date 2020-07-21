@@ -1,10 +1,12 @@
 export const TABLE_TEXTURES = [
-  { id: 0, name: "Skin #1", path: 'table/img/table00.jpg', color: "#761CEC", soundpath: 'table/snd/table00.mp3'},
-  { id: 1, name: "Skin #2", path: 'table/img/table01.jpg', color: "#FC8EAC", soundpath: 'table/snd/table01.mp3'},
-  { id: 2, name: "Skin #3", path: 'table/img/table02.jpg', color: "#A60570", soundpath: 'table/snd/table02.mp3'},
-  { id: 3, name: "Skin #4", path: 'table/img/table03.jpg', color: "#A60570", soundpath: 'table/snd/table03.mp3'},
-  { id: 4, name: "Skin #5", path: 'table/img/table04.jpg', color: "#000000", soundpath: 'table/snd/table04.mp3'},
-  { id: 5, name: "Skin #6", path: 'table/img/table05.jpg', color: "#000000", soundpath: 'table/snd/table05.mp3'},
+  { id: 0, name: "Skin #1", path: 'table/img/table00.jpg', repeats: 5, color: "#761CEC", soundpath: 'table/snd/table00.mp3'},
+  { id: 1, name: "Skin #2", path: 'table/img/table01.jpg', repeats: 5, color: "#FC8EAC", soundpath: 'table/snd/table01.mp3'},
+  { id: 2, name: "Skin #3", path: 'table/img/table02.jpg', repeats: 5, color: "#A60570", soundpath: 'table/snd/table02.mp3'},
+  { id: 3, name: "Skin #4", path: 'table/img/table03.jpg', repeats: 5, color: "#A60570", soundpath: 'table/snd/table03.mp3'},
+  { id: 4, name: "Skin #5", path: 'table/img/table04.jpg', repeats: 5, color: "#000000", soundpath: 'table/snd/table04.mp3'},
+  { id: 5, name: "Skin #6", path: 'table/img/table05.jpg', repeats: 5, color: "#000000", soundpath: 'table/snd/table05.mp3'},
+  { id: 6, name: "Skin #7", path: 'table/img/table06.jpg', repeats: 1, color: "#000000", soundpath: 'table/snd/table00.mp3'},
+
 ];
 
 export const DICE_TEXTURES = [

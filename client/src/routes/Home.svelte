@@ -46,10 +46,10 @@
 
   <a class="btn-primary" href="/create" use:link>Start Paradice</a>
 
-  <span class="footer-link">Made with love at PIWEEK 
+  <span class="footer-link">Made with love at Kaleidos XVIII PIWEEK 
     <a href="https://github.com/PIWEEK/paradice" target="_blank">[ Github ]</a>
     <a href="https://twitter.com/myparad1c3" target="_blank">[ Twitter ]</a>
-    <a href="https://piweek.com" target="_blank">[ Piweek ]</a>
+    <a href="https://piweek.com" target="_blank">[ PIWEEK ]</a>
   </span>
 
 </div>

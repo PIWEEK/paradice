@@ -121,14 +121,14 @@ class DiceObject {
           let context = canvas.getContext("2d");
           let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
           canvas.width = canvas.height = ts;
-          context.font = ts / (1 + 2 * this.textMargin) + "pt Arial";
+          context.font = ts / (1.5 + 2 * this.textMargin) + "pt Garamond";
           const pFill = context.createPattern(this.texture, "repeat");
           context.fillStyle = pFill;
           context.fillRect(0, 0, canvas.width, canvas.height);
           context.textAlign = "center";
           context.textBaseline = "middle";
           context.fillStyle = color;
-          context.fillText(text, canvas.width / 2, canvas.height / 2);
+          context.fillText(text, canvas.width / 2, canvas.height / 1.9);
           let texture = new THREE.Texture(canvas);
           texture.needsUpdate = true;
           return texture;
@@ -356,7 +356,7 @@ class DiceObject {
         let context = canvas.getContext("2d");
         let ts = this.calculateTextureSize(this.size / 2 + this.size * this.textMargin) * 2;
         canvas.width = canvas.height = ts;
-        context.font = ts / (1 + 2 * this.textMargin) + "pt Arial";
+        context.font = ts / (2 + 2 * this.textMargin) + "pt Garamond";
         context.fillStyle = backColor;
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.textAlign = "center";
@@ -365,6 +365,7 @@ class DiceObject {
         context.fillText(text, canvas.width / 2, canvas.height / 2);
         let texture = new THREE.Texture(canvas);
         texture.needsUpdate = true;
+
         return texture;
     }
 
@@ -451,7 +452,7 @@ export class DiceD4 extends DiceObject {
             let context = canvas.getContext("2d");
             let ts = this.calculateTextureSize(this.size / 2 + this.size * 2) * 2;
             canvas.width = canvas.height = ts;
-            context.font = ts / 5 + "pt Arial";
+            context.font = ts / 5 + "pt Garamond";
             const pFill = context.createPattern(this.texture, "repeat");
             context.fillStyle = pFill;
             context.fillRect(0, 0, canvas.width, canvas.height);
@@ -462,7 +463,7 @@ export class DiceD4 extends DiceObject {
                 context.fillText(text[i], canvas.width / 2,
                     canvas.height / 2 - ts * 0.3);
                 context.translate(canvas.width / 2, canvas.height / 2);
-                context.rotate(Math.PI * 2 / 3);
+                context.rotate(Math.PI * 2/3);
                 context.translate(-canvas.width / 2, -canvas.height / 2);
             }
             let texture = new THREE.Texture(canvas);
@@ -488,11 +489,11 @@ export class DiceD6 extends DiceObject {
         [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]];
         this.faces = [[0, 3, 2, 1, 1], [1, 2, 6, 5, 2], [0, 1, 5, 4, 3],
         [3, 7, 6, 2, 4], [0, 4, 7, 3, 5], [4, 5, 6, 7, 6]];
-        this.scaleFactor = 0.9;
+        this.scaleFactor = 1.0;
         this.values = 6;
         this.faceTexts = [' ', '0', '1', '2', '3', '4', '5', '6', '7', '8',
             '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
-        this.textMargin = 1.0;
+        this.textMargin = 1.5;
         this.mass = 300;
         this.inertia = 13;
         this.create();
@@ -602,7 +603,7 @@ export class DiceD20 extends DiceObject {
     this.values = 20;
     this.faceTexts = [' ', '0', '1', '2', '3', '4', '5', '6.', '7', '8',
         '9.', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
-    this.textMargin = 1.0;
+    this.textMargin = 1.1;
     this.mass = 400;
     this.inertia = 6;
 
