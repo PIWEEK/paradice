@@ -53,6 +53,7 @@
     font-size: 1.2rem;
     margin-bottom: .8rem;
     margin-top: 0;
+    width: 100%;
   }
 
   .dice-input {
@@ -79,11 +80,12 @@
     cursor: pointer;
     font-size: .9rem;
     margin-top: .5rem;
+    width: 100%;
   }
 
 </style>
 
-<div class="sidebar-item">
+<div class="sidebar-item show">
   <h2>Select your dice!</h2>
   {#each dice as die}
   <label class="dice-input">

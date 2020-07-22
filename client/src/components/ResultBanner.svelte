@@ -45,6 +45,16 @@
   color: rgba(255,255,255,.5);
 }
 
+@media (max-width: 480px) {
+  .roll-result {
+    font-size: 1.25rem;
+    left: 1rem;
+    text-align: center;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
 </style>
 
 {#if (player)}

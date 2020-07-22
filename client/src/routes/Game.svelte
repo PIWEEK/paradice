@@ -124,6 +124,10 @@
 
 <style>
 
+  body {
+	  overflow: hidden; /* Hide scrollbars */
+  }
+
 	#ThreeJS {
     position: absolute;
     left: 0px;
@@ -135,6 +139,57 @@
     margin: .6rem .3rem;
   }
 
+  .mobile-nav {
+    align-items: center;
+    background-color: rgba(0,0,0,.5);
+    background: linear-gradient(180deg, rgba(40, 18, 46, 0) 0%, rgb(39, 16, 44) 100%);
+    bottom: 0;
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    height: 70px;
+    justify-content: space-around;
+    padding: 1rem;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .mobile-nav a {
+    display: flex;
+    max-width: 55px;
+    margin-bottom: .6rem;
+    opacity: .6;
+    transition: all .3s ease;
+  }
+
+  .mobile-nav a.selected {
+    opacity: 1;
+  }
+
+  .mobile-nav a img {
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    #foreground {
+      display: flex;
+      height: calc(100% - 2rem);
+      margin: 1rem;
+      padding-bottom: 9vh;
+      width: calc(100% - 2rem);
+    }
+
+    .sidebar-content {
+      margin-top: auto;
+      max-height: 50vh;
+      max-width: 100%;
+    }
+
+    .mobile-nav {
+      display: flex;
+    }
+  }
 
 </style>
 
@@ -162,4 +217,17 @@
 
     <button class="btn-primary {rollDiceEnabled ? 'enabled' : 'disabled'}" on:click={roll}>Roll dice</button>
   </div>
+
+</div>
+
+<div class="mobile-nav">
+  <a href="#">
+    <img src="images/icon-3d-players.png" alt="Players list">
+  </a>
+  <a class="selected" href="#">
+    <img src="images/icon-3d-roll.png" alt="Roll dice">
+  </a>
+  <a href="#">
+    <img src="images/icon-3d-log.png" alt="Roll log">
+  </a>
 </div>

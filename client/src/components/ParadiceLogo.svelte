@@ -6,6 +6,12 @@
     margin: 0 1rem .5rem;
     width: 100%;
   }
+
+  @media (max-width: 480px) {
+    .logo-sidebar {
+      display: none;
+    }
+  }
 </style>
 
 <a  href="/">
