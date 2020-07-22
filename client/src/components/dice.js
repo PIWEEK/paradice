@@ -21,7 +21,7 @@ class DiceManagerClass {
             new CANNON.ContactMaterial(this.barrierBodyMaterial, this.diceBodyMaterial, { friction: 0, restitution: 1.0 })
         );
         world.addContactMaterial(
-            new CANNON.ContactMaterial(this.diceBodyMaterial, this.diceBodyMaterial, { friction: 0.1, restitution: 0.8 })
+            new CANNON.ContactMaterial(this.diceBodyMaterial, this.diceBodyMaterial, { friction: 0.1, restitution: 0.95 })
         );
     }
 
@@ -131,6 +131,7 @@ class DiceObject {
           context.fillText(text, canvas.width / 2, canvas.height / 1.9);
           let texture = new THREE.Texture(canvas);
           texture.needsUpdate = true;
+          console.log(text);
           return texture;
         };
     }
@@ -365,6 +366,7 @@ class DiceObject {
         context.fillText(text, canvas.width / 2, canvas.height / 2);
         let texture = new THREE.Texture(canvas);
         texture.needsUpdate = true;
+        
 
         return texture;
     }
@@ -373,6 +375,7 @@ class DiceObject {
         let materials = [];
         for (let i = 0; i < this.faceTexts.length; ++i) {
             let texture = null;
+            console.log("i",i);
             if (this.customTextTextureFunction) {
                 texture = this.customTextTextureFunction(this.faceTexts[i], this.labelColor, this.diceColor);
             } else {
@@ -491,8 +494,7 @@ export class DiceD6 extends DiceObject {
         [3, 7, 6, 2, 4], [0, 4, 7, 3, 5], [4, 5, 6, 7, 6]];
         this.scaleFactor = 1.0;
         this.values = 6;
-        this.faceTexts = [' ', '0', '1', '2', '3', '4', '5', '6', '7', '8',
-            '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+        this.faceTexts = ['','0','1', '2', '3', '4', '5', '6'];
         this.textMargin = 1.5;
         this.mass = 300;
         this.inertia = 13;
@@ -634,7 +636,7 @@ export class DiceD100 extends DiceObject {
       this.scaleFactor = 0.9;
       this.values = 10;
       this.faceTexts = [' ', '00', '10', '20', '30', '40', '50', '60', '70', '80',
-          '90', '00', '10', '20', '30', '40', '50', '60', '70', '80', '90', '00'];
+          '90', '00'];
       this.textMargin = 2;
       this.mass = 350;
       this.inertia = 9;

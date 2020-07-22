@@ -58,10 +58,10 @@
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
 
-    let ambient = new THREE.AmbientLight("#ffffff", 1.3);
+    let ambient = new THREE.AmbientLight("#ffffff", 1.0);
     //scene.add(ambient);
 
-    let light = new THREE.SpotLight(0xf2dba4, 3);
+    let light = new THREE.SpotLight(0xf2dba4, 3.0);
     light.position.y = 40;
     light.position.x = 0;
     light.target.position.set(3, 0, 3);
