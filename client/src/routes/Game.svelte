@@ -35,6 +35,7 @@
   let modifier;
   let wipevalue = true;
   let soundpath = 'sounds/dice.mp3';
+  let visibleBanner = false;
 
   $: diceandmodinput = {
     dice: diceinput,
@@ -60,7 +61,9 @@
   });
 
   function roll() {
+    visibleBanner = false;
     socket.emit("roll", diceandmodinput);
+    
   }
 
   function handleTextureUpdated(event) {
@@ -83,6 +86,7 @@
     rollDice(diceInput, () => {
       setTimeout(() => {
         latestPlayer = userId;
+        visibleBanner = true;
         latestRolls[userId] = diceInput;
         rolls = [{
           user: userDict[userId],
@@ -136,7 +140,9 @@
 
 <div id="foreground">
 
+  {#if visibleBanner}
   <ResultBanner player={userDict[latestPlayer]} latestRoll={latestRolls[latestPlayer]}/>
+  {/if}
   <ParadiceLogo/>
   <div class="sidebar-content">
     <div class="sidebar-item">
