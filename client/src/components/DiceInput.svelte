@@ -13,6 +13,7 @@
   ]
   export let modifier = localStorage.getItem("modifier") || '';
   export let wipe = true;
+  export let split = false;
 
   $: {
     dice.forEach((d) => {
@@ -93,6 +94,10 @@
   <label class="dice-input">
     <span>MOD</span>
     <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
+  </label>
+  <label class="input-checkbox">
+	  <input type=checkbox bind:checked={split}>
+	    SPLIT
   </label>
   <label class="input-checkbox">
 	  <input type=checkbox bind:checked={wipe}>

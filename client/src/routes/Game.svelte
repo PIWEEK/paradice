@@ -34,6 +34,7 @@
   let diceinput;
   let modifier;
   let wipevalue = true;
+  let split = false;
   let soundpath = 'sounds/dice.mp3';
 
   $: diceandmodinput = {
@@ -42,6 +43,7 @@
     texture: dicetexture,
     modifier: modifier,
     wipe: wipevalue,
+    split: split,
     modifier: parseInt(modifier) || ''
   };
 
@@ -144,7 +146,7 @@
       <LatestRolls latestRolls={latestRolls} userList={userList}/>
     </div>
     <RollLog bind:rolls={rolls}/>
-    <DiceInput bind:dice={diceinput} bind:modifier={modifier} bind:wipe={wipevalue}/>
+    <DiceInput bind:dice={diceinput} bind:modifier={modifier} bind:wipe={wipevalue} bind:split={split}/>
 
     <!-- <p>Table Skin</p>
     <TableTextureSelector on:tableTextureSelected={handleTableTextureUpdated}/>
