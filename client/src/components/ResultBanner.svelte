@@ -3,14 +3,22 @@
   export let latestRoll = null;
   import DiceResult from './DiceResult.svelte';
 
+  function singleDieMod(die, mod, factor){
+    return die*factor+mod;
+  }
+
   let splitResult = "";
   $: {
     let result = [];
     latestRoll && latestRoll.dice
       .filter(element => element.qty > 0)
       .forEach(element => {
-        result.push(`${element.label}[${element.result.map(element => element + latestRoll.modifier).join(',')}]`);
-      });
+        console.log("-->",element);
+
+
+        result.push(`${element.label}[${element.result.map(e => e*element.factor  + latestRoll.modifier).join(',')}]`);
+
+});
     splitResult = result.join(' ');
   }
 </script>
