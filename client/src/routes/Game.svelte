@@ -10,6 +10,8 @@
   import ResultBanner from '../components/ResultBanner.svelte';
   import GameInfo from '../components/GameInfo.svelte';
   import { DICE_TEXTURES, TABLE_TEXTURES } from '../constants';
+  import TableTextureSelector from '../components/TableTextureSelector.svelte';
+  import DiceTextureSelector from '../components/DiceTextureSelector.svelte';
 
   export let params = {};
 
@@ -36,8 +38,8 @@
 
   $: diceandmodinput = {
     dice: diceinput,
-    fontColor: DICE_TEXTURES.find((texture) => texture.path == localStorage.getItem("dicetexture")).fontColor,
-    texture: localStorage.getItem("dicetexture"),
+    fontColor: DICE_TEXTURES.find((texture) => texture.path == dicetexture).fontColor,
+    texture: dicetexture,
     modifier: modifier,
     wipe: wipevalue,
     modifier: parseInt(modifier) || ''
@@ -55,11 +57,9 @@
   onMount(()=> {
     initRollDice();
     changeTexture(tabletexture);
-
   });
 
   function roll() {
- 
     socket.emit("roll", diceandmodinput);
   }
 
@@ -67,14 +67,21 @@
     changeTexture(event.detail.path);
   }
 
+  function handleDiceTextureUpdated(event) {
+    dicetexture = event.detail.dicetexture;
+  }
+
+  function handleTableTextureUpdated(event) {
+    console.log("handleTableTextureUpdated", event)
+    tabletexture = event.detail.tabletexture;
+    // initRollDice();
+    changeTexture(tabletexture);
+  }
+
   // listen for roll event
   socket.on("roll", (userId, diceInput) => {
-
-    
-  
     rollDice(diceInput, () => {
       setTimeout(() => {
- 
         latestPlayer = userId;
         latestRolls[userId] = diceInput;
         rolls = [{
@@ -82,14 +89,9 @@
           ...diceInput
           }, ...rolls
         ];
-                
-
       },
       2500);
-   
-
-});
-    
+    });
     var numdice = diceInput.dice.reduce((prev, cur) => prev + cur.qty, 0);
 
     soundpath = TABLE_TEXTURES.find((texture) => texture.path == localStorage.getItem("tabletexture")).soundpath;
@@ -143,6 +145,13 @@
     </div>
     <RollLog bind:rolls={rolls}/>
     <DiceInput bind:dice={diceinput} bind:modifier={modifier} bind:wipe={wipevalue}/>
+
+    <!-- <p>Table Skin</p>
+    <TableTextureSelector on:tableTextureSelected={handleTableTextureUpdated}/>
+
+    <p>Dice Skin</p>
+    <DiceTextureSelector on:diceTextureSelected={handleDiceTextureUpdated}/> -->
+
     <button class="btn-primary {rollDiceEnabled ? 'enabled' : 'disabled'}" on:click={roll}>Roll dice</button>
   </div>
 </div>

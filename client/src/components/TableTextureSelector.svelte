@@ -1,5 +1,8 @@
 <script>
   import { TABLE_TEXTURES } from '../constants';
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
 
   let selectedTable = localStorage.getItem("tabletexture");
   if (!selectedTable) {
@@ -11,6 +14,13 @@
     let repeats = TABLE_TEXTURES[5].repeats;
     localStorage.setItem("tabletexture", path);
     localStorage.setItem("repeats", repeats);
+
+    console.log("DISPATCH tableTextureSelected")
+    dispatch('tableTextureSelected', {
+      tabletexture: path,
+      repeats: repeats
+		});
+
   }
 </script>
 

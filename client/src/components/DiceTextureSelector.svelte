@@ -1,26 +1,24 @@
 <script>
   import { DICE_TEXTURES } from '../constants';
+  import { createEventDispatcher } from 'svelte';
 
+  const dispatch = createEventDispatcher();
   let selectedDice = localStorage.getItem("dicetexture");
   let selectedSetimg = localStorage.getItem("dicesetimg");
   if (!selectedDice) {
     setDiceImage(DICE_TEXTURES[0].path, DICE_TEXTURES[0].setimg);
   }
 
-  function setTableImage(path) {
-    selectedTable = path;
-    let repeats = TABLE_TEXTURES[5].repeats;
-    localStorage.setItem("tabletexture", path);
-    localStorage.setItem("repeats", repeats);
-
-}
-
   function setDiceImage(path, setimg) {
     selectedDice = path;
     selectedSetimg = setimg;
     localStorage.setItem("dicetexture", path);
     localStorage.setItem("dicesetimg", setimg);
-    console.log("setDiceImage(path, setimg)", path, setimg)
+
+		dispatch('diceTextureSelected', {
+      dicetexture: path,
+      dicesetimg: setimg
+		});
   }
 </script>
 

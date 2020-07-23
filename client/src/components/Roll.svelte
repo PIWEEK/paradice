@@ -247,6 +247,7 @@
   }
 
   export function changeTexture(texturepath) {
+    console.log("changeTexture", texturepath);
     var texture = TABLE_TEXTURES.find((texture) => texture.path == texturepath);
     var repeats = texture.repeats;
     var index = 0;
