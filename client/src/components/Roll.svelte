@@ -181,19 +181,19 @@
       Array.from(Array(diceIt.qty)).forEach((x, i) => {
         var die = null;
         if (diceIt.label == "D4") {
-          die = new DiceD4({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD4({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1 });
         } else if (diceIt.label == "D6") {
-          die = new DiceD6({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD6({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1 });
         } else if (diceIt.label == "D8") {
-          die = new DiceD8({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD8({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1 });
         } else if (diceIt.label == "D10") {
-          die = new DiceD10({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD10({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1.2 });
         } else if (diceIt.label == "D12") {
-          die = new DiceD12({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD12({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1 });
         } else if (diceIt.label == "D20") {
-          die = new DiceD20({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD20({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1 });
         } else {
-          die = new DiceD100({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture });
+          die = new DiceD100({ size: 1.5, fontColor: diceInput.fontColor, imageTexture: imageTexture, heightModifier: 1.2 });
         }
 
         die.getObject().name = `${diceIt.label}-${i}`;

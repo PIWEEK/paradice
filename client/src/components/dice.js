@@ -99,7 +99,8 @@ class DiceObject {
             size: 100,
             fontColor: '#000000',
             backColor: '#ffffff',
-            imageTexture: null
+            imageTexture: null,
+            heightModifier: 1
         });
 
         this.object = null;
@@ -115,6 +116,7 @@ class DiceObject {
         this.labelColor = options.fontColor;
         this.diceColor = options.backColor;
         this.texture = options.imageTexture;
+        this.heightModifier = options.heightModifier;
 
         this.customTextTextureFunction = (text, color, backColor) => {
           let canvas = document.createElement("canvas");
@@ -128,7 +130,7 @@ class DiceObject {
           context.textAlign = "center";
           context.textBaseline = "middle";
           context.fillStyle = color;
-          context.fillText(text, canvas.width / 2, canvas.height / 1.9);
+          context.fillText(text, canvas.width / 2, this.heightModifier * canvas.height / 2);
           let texture = new THREE.Texture(canvas);
           texture.needsUpdate = true;
           return texture;
