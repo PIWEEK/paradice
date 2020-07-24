@@ -28,6 +28,7 @@
   .row-flex {
     margin-bottom: 1rem;
   }
+
   .selectedtexture {
     border: 0.1em solid #371B3E;
     border-radius: 50%;
@@ -52,6 +53,25 @@
 
   .texturesample:hover {
     border-color:#CF4AD9 ;
+  }
+
+  @media (max-width: 480px) {
+    .row-flex {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .selectedtexture {
+      height: 30px;
+      width: 30px;
+    }
+
+    .texturesample {
+      height: 20px;
+      width: 20px;
+    }
   }
 </style>
 

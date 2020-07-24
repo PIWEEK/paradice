@@ -26,6 +26,7 @@
   .row-flex {
     margin-bottom: 1rem;
   }
+
   .selectedtexture {
     border: 0.1em solid #371B3E;
     border-radius: 50%;
@@ -58,6 +59,31 @@
     max-width: 80%;
     width: 350px;
   }
+
+  @media (max-width: 480px) {
+
+    .row-flex {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .dice-set-img {
+      height: auto;
+    }
+
+    .selectedtexture {
+      height: 30px;
+      width: 30px;
+    }
+
+    .texturesample {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
 </style>
 
 <div class="row-flex">

@@ -10,14 +10,13 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+	background-attachment: fixed;
 	color: #371B3E;
 	display: flex;
 	flex-direction: column;
+	font-family: 'Oswald', sans-serif;
 	font-weight: 500;
 	margin: 0;
-	/* font-family: 'Staatliches', cursive, sans-serif; */
-	font-family: 'Oswald', sans-serif;
-	overflow: hidden; /* Hide scrollbars */
 }
 
 a {
@@ -122,6 +121,7 @@ button:focus {
 	background-color: #ffffff;
 	border: 1px solid #CDB4CF;
 	box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.35);
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	outline: 6px solid #ffffff;
@@ -146,10 +146,11 @@ button:focus {
 
 #foreground {
 	box-sizing: border-box;
-	left: 1rem;
+	left: 0;
+	margin: 0 1rem;
 	position: absolute;
 	top: 0;
-	z-index: 1000;
+	z-index: 999;
 }
 
 .sidebar-content {
@@ -170,4 +171,36 @@ button:focus {
 	flex-direction: column;
 	padding: .3rem .5rem;
 	margin: .3rem 0;
+}
+
+.hide {
+	display: none !important;
+}
+
+.show {
+	display: flex !important;
+}
+/* MOBILE */
+
+@media (max-width: 480px) {
+	.content-center {
+		margin: 1rem;
+		padding: 1rem;
+		width: auto;
+		text-align: center;
+	}
+
+	.input-center {
+		height: 40px;
+		font-size: 1.2rem;
+	}
+
+	.sidebar-item {
+		display: none;
+	}
+
+	a.btn-primary,
+	.btn-primary {
+		font-size: 16px;
+	}
 }

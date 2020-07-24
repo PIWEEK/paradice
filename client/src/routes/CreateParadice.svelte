@@ -43,6 +43,23 @@
     margin: 0 .5rem;
   }
 
+  @media (max-width: 480px) {
+    .logo-small {
+      max-width: 230px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .row-flex {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+  }
+
 </style>
 
 <img class="logo-small" src="/images/logo-small.png" alt="PARADICE" border="0">
