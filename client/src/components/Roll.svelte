@@ -156,11 +156,20 @@
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
+    console.log(sw);
+    if (sw < 481) {
+    createBoundary(12, 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
+    createBoundary(0, 0, 5, 5, 50, 5);
+    createBoundary(-12, 0, 0, 5, 15, 20); //dirty hack until we solve proper mobile support
+    createBoundary(0, 0, -20, 30, 50, 5);
+    }
+    else {
+    console.log("no mobile");
     createBoundary(Math.max(12,sw/110), 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, 15, 30, 50, 5);
     createBoundary(Math.min(-15,-sw/100), 0, 0, 5, 10, 20); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, -20, 30, 50, 5);
-
+    }
     requestAnimationFrame(animate);
   }
 
