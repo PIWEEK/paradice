@@ -4,6 +4,12 @@
   let username = localStorage.getIte</script>
 
 <style>
+
+  .sidebar-item {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
   ul {
     list-style: none;
     margin: 0;
@@ -50,7 +56,7 @@
   }
 
 </style>
-
+<div class="sidebar-item show">
 <ul>
   {#each userList as user}
   {#if user == username}
@@ -68,3 +74,4 @@
   {/if}
   {/each}
 </ul>
+</div>

@@ -56,10 +56,38 @@
   let latestroll;
   let latestRolls = {};
 
+  var SCREEN_WIDTH = window.innerWidth;
+  let showMobileLatestRolls, showMobileRollLog = true;
+  let showMobileDiceInput = true;
+  var mobileThreshold = 480;
+
+  if (SCREEN_WIDTH <= mobileThreshold){
+  showMobileLatestRolls, showMobileRollLog = false;
+  }
+  
+
+  function showModule(choice) {
+    if (choice == 'latestrolls'){
+      showMobileLatestRolls = true;
+      showMobileDiceInput = false;
+      showMobileRollLog = false;
+    }
+    if (choice == 'inputdice'){
+      showMobileLatestRolls = false;
+      showMobileDiceInput = true;
+      showMobileRollLog = false;
+    }
+    if (choice == 'rolllog'){
+      showMobileLatestRolls = false;
+      showMobileDiceInput = false;
+      showMobileRollLog = true;
+    }
+  }
 
   onMount(()=> {
     initRollDice();
     changeTexture(tabletexture);
+
   });
 
   function roll() {
@@ -155,20 +183,17 @@
     z-index: 1000;
   }
 
-  .mobile-nav a {
+  .mobile-nav img {
     display: flex;
     max-width: 55px;
     margin-bottom: .6rem;
     opacity: .6;
     transition: all .3s ease;
-  }
-
-  .mobile-nav a.selected {
-    opacity: 1;
-  }
-
-  .mobile-nav a img {
     width: 100%;
+  }
+
+  .mobile-nav img.selected {
+    opacity: 1;
   }
 
   @media (max-width: 480px) {
@@ -202,13 +227,17 @@
   {/if}
   <ParadiceLogo/>
   <div class="sidebar-content">
-    <div class="sidebar-item">
-      <GameInfo bind:game={game}/>
-      <LatestRolls latestRolls={latestRolls} userList={userList}/>
-    </div>
+  
+    <GameInfo bind:game={game}/>
+      {#if showMobileLatestRolls}
+    <LatestRolls latestRolls={latestRolls} userList={userList}/>
+      {/if}
+      {#if showMobileRollLog}
     <RollLog bind:rolls={rolls}/>
+    {/if}
+    {#if showMobileDiceInput}
     <DiceInput bind:dice={diceinput} bind:modifier={modifier} bind:wipe={wipevalue} bind:split={split}/>
-
+    {/if}
     <!-- <p>Table Skin</p>
     <TableTextureSelector on:tableTextureSelected={handleTableTextureUpdated}/>
 
@@ -221,13 +250,7 @@
 </div>
 
 <div class="mobile-nav">
-  <a href="#">
-    <img src="images/icon-3d-players.png" alt="Players list">
-  </a>
-  <a class="selected" href="#">
-    <img src="images/icon-3d-roll.png" alt="Roll dice">
-  </a>
-  <a href="#">
-    <img src="images/icon-3d-log.png" alt="Roll log">
-  </a>
+    <img class="{showMobileLatestRolls === true ? 'selected' : ''}" on:click={() => showModule("latestrolls")} src="images/icon-3d-players.png" alt="Players list">
+    <img class="{showMobileDiceInput === true ? 'selected' : ''}" on:click={() => showModule("inputdice")} src="images/icon-3d-roll.png" alt="Roll dice">
+    <img class="{showMobileRollLog === true ? 'selected' : ''}" on:click={() => showModule("rolllog")} src="images/icon-3d-log.png" alt="Roll log">
 </div>

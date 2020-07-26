@@ -64,7 +64,7 @@
 
 </style>
 
-<div class="sidebar-item">
+<div class="sidebar-item show">
   <ul class="roll-log-list">
     {#each rolls.slice(0,50) as roll}
       <li>
