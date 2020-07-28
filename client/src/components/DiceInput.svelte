@@ -83,6 +83,19 @@
     width: 100%;
   }
 
+  .row-flex {
+    width: 100%;
+  }
+
+  .wipe {
+    text-align: right;
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      display: none;
+    }
+  }
 </style>
 
 <div class="sidebar-item show">
@@ -97,13 +110,17 @@
     <span>MOD</span>
     <input pattern="[+-]*[0-9]{1,3}" title="(+/-)# please" size=5 type=text bind:value={modifier}>
   </label>
-  <label class="input-checkbox">
-	  <input type=checkbox bind:checked={split}>
-	    SPLIT
-  </label>
-  <label class="input-checkbox">
-	  <input type=checkbox bind:checked={wipe}>
-	    Wipe table?
-  </label>
+
+  <div class="row-flex">
+    <label class="input-checkbox">
+      <input type=checkbox bind:checked={split}>
+        Split
+    </label>
+    <label class="input-checkbox wipe">
+      <input type=checkbox bind:checked={wipe}>
+        Wipe table?
+    </label>
+  </div>
+
 </div>
 

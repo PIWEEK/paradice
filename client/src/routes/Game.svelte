@@ -207,7 +207,6 @@
 
     .sidebar-content {
       margin-top: auto;
-      max-height: 50vh;
       max-width: 100%;
     }
 
