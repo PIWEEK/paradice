@@ -68,19 +68,35 @@
 
   function showModule(choice) {
     if (choice == 'latestrolls'){
+      if (showMobileLatestRolls){
+      showMobileLatestRolls = false;
+
+      }
+      else{
       showMobileLatestRolls = true;
       showMobileDiceInput = false;
       showMobileRollLog = false;
     }
+    }
     if (choice == 'inputdice'){
+      if (showMobileDiceInput){
+        showMobileDiceInput = false;
+      }
+      else{
       showMobileLatestRolls = false;
       showMobileDiceInput = true;
       showMobileRollLog = false;
     }
+    }
     if (choice == 'rolllog'){
+      if (showMobileRollLog){
+        showMobileRollLog = false;
+      }
+      else{
       showMobileLatestRolls = false;
       showMobileDiceInput = false;
       showMobileRollLog = true;
+    }
     }
   }
 
@@ -92,6 +108,9 @@
 
   function roll() {
     visibleBanner = false;
+    showMobileLatestRolls = false;
+    showMobileDiceInput = false;
+    showMobileRollLog = false;
     socket.emit("roll", diceandmodinput);
     
   }

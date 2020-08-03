@@ -156,10 +156,11 @@
 
     var sw = SCREEN_WIDTH;
     var sh = SCREEN_HEIGHT;
+    var mobileThreshold = 480;
     console.log(sw);
-    if (sw <= 480) {
+    if (sw <= mobileThreshold) {
     createBoundary(12, 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
-    createBoundary(0, 0, 5, 5, 50, 5);
+    createBoundary(0, 0, 17, 5, 50, 5);
     createBoundary(-12, 0, 0, 5, 15, 20); //dirty hack until we solve proper mobile support
     createBoundary(0, 0, -20, 30, 50, 5);
     }
