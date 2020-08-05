@@ -60,8 +60,10 @@
   let showMobileLatestRolls, showMobileRollLog = true;
   let showMobileDiceInput = true;
   var mobileThreshold = 480;
+  var weAreMobile = false;
 
   if (SCREEN_WIDTH <= mobileThreshold){
+    weAreMobile = true;
   showMobileLatestRolls, showMobileRollLog = false;
   }
   
@@ -108,9 +110,11 @@
 
   function roll() {
     visibleBanner = false;
+    if (weAreMobile){
     showMobileLatestRolls = false;
     showMobileDiceInput = false;
     showMobileRollLog = false;
+    }
     socket.emit("roll", diceandmodinput);
     
   }
