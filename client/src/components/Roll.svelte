@@ -26,6 +26,16 @@
     dice = [],
     diceResults = [],
     diceValues = [];
+    var SCREEN_WIDTH = window.innerWidth,
+      SCREEN_HEIGHT = window.innerHeight;
+    var sw = SCREEN_WIDTH;
+    var sh = SCREEN_HEIGHT;
+    var mobileThreshold = 480;
+    var weAreMobile = false;
+
+    if (sw <= mobileThreshold) {
+     weAreMobile = true;
+    }
 
   export function initRollDice() {
     // SCENE
@@ -33,8 +43,7 @@
     scene.name = "ESCENA";
 
     // CAMERA
-    var SCREEN_WIDTH = window.innerWidth,
-      SCREEN_HEIGHT = window.innerHeight;
+    
     var VIEW_ANGLE = 45,
       ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
       NEAR = 1,
@@ -154,15 +163,14 @@
 
     };
 
-    var sw = SCREEN_WIDTH;
-    var sh = SCREEN_HEIGHT;
-    var mobileThreshold = 480;
-    console.log(sw);
+
+ 
+
     if (sw <= mobileThreshold) {
-    createBoundary(12, 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
-    createBoundary(0, 0, 17, 5, 50, 5);
-    createBoundary(-12, 0, 0, 5, 15, 20); //dirty hack until we solve proper mobile support
-    createBoundary(0, 0, -20, 30, 50, 5);
+      createBoundary(12, 0, 0, 5, 50, 30); //dirty hack until we solve proper mobile support
+      createBoundary(0, 0, Math.min(13,sh/70), 5, 50, 5);
+      createBoundary(-12, 0, 0, 5, 15, 20); //dirty hack until we solve proper mobile support
+      createBoundary(0, 0, -20, 30, 50, 5);
     }
     else {
     console.log("no mobile");
@@ -212,6 +220,23 @@
 
         scene.add(die.getObject());
         dice.push(die);
+
+        if (weAreMobile){
+        let yRand = Math.random() * 20
+        let zPosRand = Math.random() * 10
+        let xPosRand = Math.random() * 5
+        die.getObject().position.x =  -5 + (i % 3) * 1.5 + xPosRand;
+        die.getObject().position.y = 13 + Math.floor(i / 3) * 1.5;
+        die.getObject().position.z =  -5 + (i % 3) * 1.5  - zPosRand;
+        die.getObject().quaternion.x = (Math.random()*90-45) * Math.PI / 180;
+        die.getObject().quaternion.z = (Math.random()*90-45) * Math.PI / 180;
+        die.updateBodyFromMesh();
+        let rand = Math.random() * 5;
+        die.getObject().body.velocity.set(40 + rand,  yRand, 10 + rand);
+        die.getObject().body.angularVelocity.set(120 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
+        }
+        else{
+
         let yRand = Math.random() * 20
         let zPosRand = Math.random() * 10
         let xPosRand = Math.random() * 5
@@ -224,6 +249,7 @@
         let rand = Math.random() * 5;
         die.getObject().body.velocity.set(160 + rand,  yRand, 80 + rand);
         die.getObject().body.angularVelocity.set(20 * Math.random() -10, 20 * Math.random() -10, 20 * Math.random() -10);
+        }
 
         diceValues.push({dice: die, value: diceIt.result[i]});
       });
@@ -257,7 +283,6 @@
   }
 
   export function changeTexture(texturepath) {
-    console.log("changeTexture", texturepath);
     var texture = TABLE_TEXTURES.find((texture) => texture.path == texturepath);
     var repeats = texture.repeats;
     var index = 0;

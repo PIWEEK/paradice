@@ -128,7 +128,6 @@
   }
 
   function handleTableTextureUpdated(event) {
-    console.log("handleTableTextureUpdated", event)
     tabletexture = event.detail.tabletexture;
     // initRollDice();
     changeTexture(tabletexture);

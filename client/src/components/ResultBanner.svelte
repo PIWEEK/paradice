@@ -13,7 +13,6 @@
     latestRoll && latestRoll.dice
       .filter(element => element.qty > 0)
       .forEach(element => {
-        console.log("-->",element);
 
 
         result.push(`${element.label}[${element.result.map(e => e*element.factor  + latestRoll.modifier).join(',')}]`);
